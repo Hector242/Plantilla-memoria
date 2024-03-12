@@ -101,13 +101,19 @@ El trabajo no incluye:
 
 \section{Estado del arte}
 
-Si estás familiarizado con \LaTeX{}, entonces podés explorar la estructura de directorios de esta plantilla y proceder a personalizarla agregando tu información en el bloque \emph{INFORMACIÓN DE LA PORTADA} en el archivo \file{memoria.tex}.  
+El presente trabajo contiene distintos algoritmos que integrados logran tomar los datos deseados. Es por este motivo, que para determinar el estado del arte es necesario desglosar cada algoritmo y evaluarlo individualmente como se hace acontinuación.
 
-Se puede continuar luego modificando el resto de los archivos siguiendo los lineamientos que se describen en la sección \ref{sec:FillingFile} en la página \pageref{sec:FillingFile}.
+\subsection{Medición de la vareta}
 
-Debés asegurarte de leer el capítulo \ref{Chapter2} acerca de las convenciones utilizadas para las Memoria de los Trabajos Finales de la \degreename.
+En la actualidad, se han desarrollado algoritmos que pueden determinar el tamaño de distintos objetos a través de imágenes usando visión por computadora, muchos parten de encontrar un objeto de referencia al cual se le conocen sus dimensiones (alto y ancho). Este objeto de referencia, normalmente se selecciona por ser fácil de detectar, por conocer sus dimensiones y por ser un objeto único. El procedimiento habitual para su detección, es pasar la imagen a escala de grises, aplicar filtros gaussianos para eliminar el ruido, utilizar detección de bordes y por ultimo utilizar detección de contornos, tal y como se realiza en el trabajo \textbf{Measuring Size of an Object using Computer Vision} \cite{ARTICLE:2}. Cabe destacar que usualmente el fondo es de un color blanco facilitando la detección.
 
-Si sos nuevo en \LaTeX{}, se recomienda que continúes leyendo el documento ya que contiene información básica para aprovechar el potencial de esta herramienta.
+En el presente trabajo se tienen imágenes con fondos de color naranja en su mayoría, el objeto de refencia a veces se encuentra ocluido, las imágenes se encuentran en horizontal o vertical, el objeto de referencia no simpre tiene la misma posición, etc. Por estos motivos, se utilizó un metodo de detección más complejo con un modelo de detección de objetos que se conoce como \textit{YOLOv8} y se concidera el estado del arte a la fecha.
+
+\subsection{Detección de los estados fenológicos de la flor de duraznero}
+
+
+
+
 
 
 %----------------------------------------------------------------------------------------
