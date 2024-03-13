@@ -55,9 +55,9 @@ El presente trabajo permitirá automatizar la toma de datos de varetas de durazn
 		\begin{enumerate}
 			\item El sistema tomará como entrada imágenes de varetas de durazneros en formato JPG.			
 			\item El algoritmo debe detectar la presencia de las varetas de los durazneros e identificar el tipo de flor que posee.			        
-			\item El algoritmo debe identificar el estado fenológico de cada flor de duraznero en la vareta. Este estado puede ser F de flor abierta, E de flor cerrada o G de flor sin pétalos. 
+			\item El algoritmo debe identificar el estado fenológico de cada flor de duraznero en la vareta. Este estado se clasificará como  \textit{flor abierta}, \textit{flor cerrada}, \textit{flor sinpetalos}, \textit{incierto}.
 			\item El algoritmo debe determinar la cantidad de flores por centímetro de vareta.
-			\item El sistema debe entregar como resultado un archivo en formato JSON con los datos detectados por el algoritmo y una imagen donde se puedan visualizar las detecciones.
+			\item El sistema debe entregar como resultado un archivo en formato CSV con los datos detectados por el algoritmo y una imagen donde se puedan visualizar las detecciones.
 			\item El sistema debe funcionar en una computadora local.
 		\end{enumerate}
 	\item Requerimientos de diseño e implementación
@@ -68,12 +68,12 @@ El presente trabajo permitirá automatizar la toma de datos de varetas de durazn
 	\item Requerimiento de evaluación y prueba
 	\begin{enumerate}
 			\item El modelo se evaluará con imágenes provenientes del mismo dataset de imágenes entregado por el cliente.
-			 \item Las métricas que se utilizarán para la evaluación del modelo serán: \textit{mean average precision} (mAP), matriz de confusión, \textit{precision}, \textit{recall}, \textit{F1}, \textit{accuracy}.
+			 \item La métrica que se utilizará para la evaluación del modelo de detección será \textit{mean average precision} (mAP) y para el clasificador se tomarán en cuenta las métricas \textit{accuracy}, \textit{precision} y \textit{recall}.
 		\end{enumerate}
 	\item Requerimientos de documentación
 	\begin{enumerate}
 			\item El funcionamiento del sistema debe estar correctamente explicado y documentado.
-			 \item El código en la notebook estará correctamente comentado como parte de buenas prácticas del desarrollo de software.
+			 \item El código estará correctamente comentado como parte de buenas prácticas del desarrollo de software.
 			 \item Inclusión de documentación en un repositorio, mediante un archivo README.md (opcional).
 		\end{enumerate}
 \end{enumerate}
@@ -110,6 +110,12 @@ En la actualidad, se han desarrollado algoritmos que pueden determinar el tamañ
 En el presente trabajo se tienen imágenes con fondos de color naranja en su mayoría, el objeto de refencia a veces se encuentra ocluido, las imágenes se encuentran en horizontal o vertical, el objeto de referencia no simpre tiene la misma posición, etc. Por estos motivos, se utilizó un metodo de detección más complejo con un modelo de detección de objetos que se conoce como \textit{YOLOv8} y se concidera el estado del arte a la fecha.
 
 \subsection{Detección de los estados fenológicos de la flor de duraznero}
+ 
+La detección de flores a sido estudiada con diferentes enfoques y arquitecturas de \textit{deep learning}, como por ejemplo \cite{ARTICLE:3} que exploró la viabilidad de detección de estados fenológico de las rosas con técnicas del contraste del color y comparando con el modelo de detección \textit{Faster-RCNN}. Sin embargo, no utilizo ninguna arquitectura de una etapa para la detección, lo cual podría ser más eficiente. Por otro lado, se tienen trabajos que si utilizaron la arquitectura de una etapa, en especifico de \textit{YOLO} en sus versiones 4 y 5 como se presenta en \cite{ARTICLE:4} \cite{ARTICLE:5}, pero su enfoque fue basado para las flores de kiwi.
+
+El presente trabajo, busca en especifico los estado fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, uno que tiene una arquitectura de dos etapas y otro que tiene una arquitectura de una etapa. Con esto, se hace uso de \textit{YOLO} en su version 8 para la realización efectiva y eficiente de esta tarea, el cual representa el estado del arte en la actualidad.
+
+\subsection{Conteo de flores}
 
 
 
