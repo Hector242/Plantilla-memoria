@@ -25,35 +25,35 @@ En este capítulo se presenta la problemática y la motivación que llevaron a l
 
 \section{Descripción de la problemática}
 
-La fenómica hace referencia a la obtención de un gran caudal de datos de las características de las plantas, lo que se denomina el fenotipo de la planta. Esta disciplina está en auge en la actualidad debido a sus aplicaciones potenciales. Por un lado, habilita el mejoramiento a gran escala debido a que es necesario vincular una gran cantidad de datos genéticos con datos fenotípicos para identificar la función de los genes. Por otro lado, si se incluyen otros conjuntos de datos como son los climáticos, permite realizar predicciones precisas sobre el comportamiento de las variedades, el cual es necesario para implementar lo que se conoce como agricultura de precisión. Sin embargo, la fruticultura no ha dado el salto hacia la fenómica.
+La fenómica hace referencia a la obtención de un gran caudal de datos de las características de las plantas, lo que se denomina el fenotipo de la planta. Esta disciplina está en auge en la actualidad debido a sus aplicaciones potenciales. Por un lado, habilita el mejoramiento a gran escala debido a que es necesario vincular una gran cantidad de datos genéticos con datos fenotípicos para identificar la función de los genes. Por otro lado, si se incluyen otros conjuntos de datos como son los climáticos, permite realizar predicciones precisas sobre el comportamiento de las variedades, necesario para implementar lo que se conoce como agricultura de precisión. Sin embargo, la fruticultura no ha dado el salto hacia la fenómica.
 
-En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secuenciar el ADN de más de 250 variedades de duraznero Aballay et al \cite{ARTICLE:1} disponiendo de una base de datos genómica de 75 gigabases (Gb) de ADN. Esta base permite identificar genes que controlan características del duraznero mediante algoritmos de inteligencia artificial (IA). Además, se dispone de datos climáticos diarios que se toman de forma automática que incluyen: las temperaturas medias, precipitaciones, horas de frío, radiación, etc. Esta información se combina con los datos genómicos y posteriormente, con modelos de IA se predice el comportamiento de las variedades en escenarios climáticos futuros. En la figura \ref{fig:genotipado}, se observa el proceso para obtener los datos genómicos.
+En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secuenciar el ADN de más de 250 variedades de duraznero \cite{ARTICLE:1} y se dispone de una base de datos genómica de 75 gigabases (Gb) de ADN. Esta base permite identificar genes que controlan características del duraznero mediante algoritmos de inteligencia artificial (IA). Además, se dispone de datos climáticos diarios que se toman de forma automática que incluyen: las temperaturas medias, precipitaciones, horas de frío, radiación, etc. Esta información se combina con los datos genómicos y posteriormente, con modelos de IA se predice el comportamiento de las variedades en escenarios climáticos futuros. En la figura \ref{fig:genotipado}, se observa el proceso para obtener los datos genómicos.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.2]{./Figures/genotipado.png}
+	\includegraphics[scale=.3]{./Figures/genotipado.png}
 	\caption{Proceso para obtener los datos genómicos \cite{ARTICLE:1}.}
 	\label{fig:genotipado}
 \end{figure}
 
-En la actualidad, las heladas primaverales son el mayor problema de los frutales a nivel mundial. Este fenómeno ocurre cuando las flores abiertas se someten a temperaturas cercanas a los -2.5 °C. Las heladas primaverales, tienen una temparatura parecida a cualquier otra helada que se puede presentar en la temporada de invierno. Sin embargo, estas heladas suelen presentarse despues del invierno, creando un gran impacto contra las flores y los frutos de los frutales. Los productores de frutas en general, se ven altamente afectados pagando un alto precio por estas inesperadas heladas tardías. En la figura \ref{fig:helada}, se puede observar como este fenomeno meteorológico afecta a los frutales.
+En la actualidad, las heladas primaverales son el mayor problema de los frutales a nivel mundial. Este fenómeno ocurre cuando las flores abiertas se someten a temperaturas cercanas a los -2.5 °C. Las heladas primaverales tienen una temperatura parecida a cualquier otra helada que se puede presentar en la temporada de invierno. Sin embargo, estas heladas suelen presentarse después del invierno, creando un gran impacto contra las flores y los frutos. Los productores de frutas, en general, se ven altamente afectados pagando un alto precio por estas inesperadas heladas tardías. En la figura \ref{fig:helada}, se puede observar cómo este fenómeno meteorológico afecta a los frutales.
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[scale=.4]{./Figures/heladas3.jpeg}
+	\includegraphics[scale=.3]{./Figures/heladas3.jpeg}
 	\caption{Frutales afectados por las heladas primaverales \cite{WEBSITE:1}.}
 	\label{fig:helada}
 \end{figure}
 
 \section{Motivación}
 
-Por este motivo, es del interés del Instituto Nacional de Tecnología Agropecuaria (INTA) determinar el estado fenológico a campo y mejorar para la tolerancia a heladas.
+Por lo explicado anteriormente, es del interés del Instituto Nacional de Tecnología Agropecuaria (INTA) determinar el estado fenológico a campo y mejorar para la tolerancia a heladas.
 
-Para determinar el estado fenológico a campo, es necesario conocer el número de flores que se encuentran en estado vulnerable ante un pronóstico de heladas primaverales, así también como la densidad de flores.
+Para determinar el estado fenológico a campo, es necesario conocer el número de flores que se encuentran en estado vulnerable ante un pronóstico de heladas primaverales, así como también la densidad de flores.
 
 En cuanto al mejoramiento, se ha realizado una caracterización a gran escala de la tolerancia a heladas de la colección de duraznero con el objetivo de identificar los genes responsables. Parte de ese experimento consistió en registrar el estado fenológico mediante fotos.
 
-El presente trabajo permitirá automatizar la toma de datos de varetas de duraznero, a partir de fotos para aumentar el caudal de datos y mejorar los modelos de IA.
+El presente trabajo permitirá automatizar la toma de datos de varetas de duraznero a partir de fotos para aumentar el caudal de datos y mejorar los modelos de IA.
 
 \section{Requerimientos}
 
@@ -108,25 +108,25 @@ El trabajo no incluye:
 
 \section{Estado del arte}
 
-El presente trabajo contiene distintos algoritmos que integrados logran tomar los datos deseados. Es por este motivo, que para determinar el estado del arte es necesario desglosar cada algoritmo y evaluarlos individualmente como se hace acontinuación.
+El presente trabajo contiene distintos algoritmos que, integrados, logran tomar los datos deseados. Es por este motivo que para determinar el estado del arte es necesario desglosar cada algoritmo y evaluarlo individualmente como se hace a continuación.
 
 \subsection{Medición de la vareta}
 
-En la actualidad, se han desarrollado algoritmos que pueden determinar el tamaño de distintos objetos a través de imágenes usando visión por computadora, muchos parten de encontrar un objeto de referencia al cual se le conocen sus dimensiones (alto y ancho). Este objeto de referencia, normalmente se selecciona por ser fácil de detectar, por conocer sus dimensiones y por ser un objeto único. El procedimiento habitual para su detección, es pasar la imagen a escala de grises, aplicar filtros gaussianos para eliminar el ruido, utilizar detección de bordes y por ultimo utilizar detección de contornos, tal y como se realiza en el trabajo \cite{ARTICLE:2}. Cabe destacar que usualmente el fondo es de un color blanco facilitando la detección.
+En la actualidad, se han desarrollado algoritmos que pueden determinar el tamaño de distintos objetos a través de imágenes usando visión por computadora. Muchos parten de encontrar un objeto de referencia al que se le conocen sus dimensiones (alto y ancho). Este objeto de referencia, normalmente se selecciona por ser fácil de detectar, por conocer sus dimensiones y por ser un objeto único. El procedimiento habitual para su detección, es pasar la imagen a escala de grises, aplicar filtros gaussianos para eliminar el ruido, utilizar detección de bordes y por último utilizar detección de contornos, tal y como se realiza en el trabajo \cite{ARTICLE:2}. Cabe destacar que usualmente el fondo es de un color blanco lo que facilita la detección.
 
-En el presente trabajo se tienen imágenes con fondos de color naranja en su mayoría, el objeto de refencia a veces se encuentra ocluido, las imágenes se encuentran en horizontal o vertical, el objeto de referencia no simpre tiene la misma posición, etc. Por estos motivos, se utilizó un metodo de detección más complejo con un modelo de detección de objetos que se conoce como \textit{YOLOv8} y se concidera el estado del arte a la fecha.
+En el presente trabajo se tienen imágenes con fondos de color naranja en su mayoría, el objeto de referencia a veces se encuentra ocluido, las imágenes se encuentran en horizontal o vertical, el objeto de referencia no siempre tiene la misma posición, etc. Por estos motivos, se utilizó un método de detección más complejo con un modelo de detección de objetos que se conoce como \textit{YOLOv8} y se considera el estado del arte a la fecha.
 
 \subsection{Detección de los estados fenológicos de la flor de duraznero}
  
-La detección de flores a sido estudiada con diferentes enfoques y arquitecturas de \textit{deep learning}, como por ejemplo el estudio \cite{ARTICLE:3} que exploró la viabilidad de detección de estados fenológico de las rosas con técnicas del contraste del color y comparando con el modelo de detección \textit{Faster-RCNN}. Sin embargo, no utilizo ninguna arquitectura de una etapa para la detección, lo cual podría ser más eficiente. Por otro lado, se tienen trabajos que si utilizaron la arquitectura de una etapa, en especifico de \textit{YOLO} en sus versiones 4 y 5 como se presenta en \cite{ARTICLE:4} \cite{ARTICLE:5}, pero su enfoque fue basado para las flores de kiwi.
+La detección de flores ha sido estudiada con diferentes enfoques y arquitecturas de \textit{deep learning}, como por ejemplo el estudio \cite{ARTICLE:3} que exploró la viabilidad de detección de estados fenológicos de las rosas con técnicas del contraste del color y comparando con el modelo de detección \textit{Faster-RCNN}. Sin embargo, no utilizó ninguna arquitectura de una etapa para la detección, lo que podría ser más eficiente. Por otro lado, se tienen trabajos que sí utilizaron la arquitectura de una etapa, en específico de \textit{YOLO} en sus versiones 4 y 5 como se presenta en \cite{ARTICLE:4} \cite{ARTICLE:5}, pero su enfoque fue basado para las flores de kiwi.
 
-La presente memoria, busca en especifico los estado fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. El detector de una etapa sería la arquitectura de \textit{YOLO} en su version 8, la cual se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
+La presente memoria busca en particular los estado fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. El detector de una etapa sería la arquitectura de \textit{YOLO} en su version 8, la cual se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
 
 \subsection{Conteo de flores}
 
-El conteo de objetos en imágenes a través de visión por computadora es otro campo que ha sido muy estudiado y tiene muchos enfoques tanto simples como complejos. Como es el caso de \cite{ARTICLE:6} donde se utilizaron redes convolucionales para predecir mapas de densidad y de esta forma pudieron hacer un conteo de objetos en imágenes que contenían muchos objetos. Así mismo se tiene el trabajo de Tian et al \cite{ARTICLE:7} con el uso de transformers con el mismo proposito.
+El conteo de objetos en imágenes a través de visión por computadora es otro campo que ha sido altamente estudiado y tiene muchos enfoques tanto simples como complejos. De esta forma, se expone el caso \cite{ARTICLE:6}, donde, se hace uso de redes convolucionales para predecir mapas de densidad que permiten hacer un conteo preciso de objetos en imágenes de alta densidad. Así como también se tiene el trabajo \cite{ARTICLE:7} que utiliza \textit{transformers} con el mismo propósito.
 
-Por otro lado, este trabajo propone una combinación entre el uso del modelo de detección de objetos y metodos de visión por computadora tradicionales para el conteo de las flores de duraznero.
+Por otro lado, este trabajo propone una combinación entre el uso del modelo de detección de objetos y métodos de visión por computadora tradicionales para el conteo de las flores de duraznero.
 
 
 
