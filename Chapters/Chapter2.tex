@@ -43,7 +43,7 @@ Algunos ejemplos de detección de objetos con \textit{machine learning} clásico
 	\label{fig:tempMatch}
 \end{figure}
 
-Por otro lado, se tienen métodos de \textit{deep learning} para detección de objetos más avanzados que involucran detectores de dos etapas y de una etapa como son \textit{R-CNN}, \textit{Faster-RCNN}, \textit{SSD}, \textit{YOLO}, entre otros.
+Por otro lado, se tienen métodos de \textit{deep learning} para detección de objetos más avanzados que involucran detectores de dos etapas y de una etapa como son \textit{R-CNN}, \textit{Faster R-CNN}, \textit{SSD}, \textit{YOLO}, entre otros.
 
 \subsection{Detectores de dos etapas}
 
@@ -55,18 +55,35 @@ En la figura \ref{fig:rcnn}, se puede observar la arquitectura de una red neuron
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.2]{./Figures/R-CNN.png}
+	\includegraphics[scale=.25]{./Figures/R-CNN.png}
 	\caption{Ejemplo de arquitectura de red neuronal de dos etapas \textit{R-CNN} \cite{WEBSITE:6}.}
 	\label{fig:rcnn}
 \end{figure}
 
-\subsubsection{Detección de objetos con Faster-RCNN}
+\subsubsection{Detección de objetos con \textit{Fast R-CNN}}
 
-El modelo \textit{Faster-RCNN}
+Las mejoras adicionadas en \textit{Fast R-CNN} incluyen una nueva capa llamada \textit{ROI Pooling} que se encarga de extraer vectores de características de igual longitud de todas las regiones de interés propuestas. Por otro lado, en comparación con \textit{R-CNN} que tiene etapas como generación de región propuesta, extracción de características y clasificación usando SVM, \textit{Fast R-CNN} crea una red neuronal que tiene una etapa. Además, este modelo comparte cálculos computacionales a través de todas las ROIs propuestas en vez de hacerlo una a una de manera independiente. Por ultimo, \textit{Fast R-CNN} no guarda en cache las características, lo que reduce el uso de disco de memoria \cite{ARTICLE:10}.
+
+\subsubsection{Detección de objetos con \textit{Faster R-CNN}}
+
+El modelo \textit{Faster R-CNN} fue diseñado para superar muchos de los errores encontrados en sus predecesores como \textit{Fast R-CNN} y \textit{R-CNN}, en general como su nombre en ingles sugiere, sus mejoras van relacionadas a la rapidez en comparación a las otras variantes.
+
+\textit{Faster R-CNN} mejora con respecto a \textit{Fast R-CNN} incorporando la red de región propuesta o por sus siglas en ingles RPN, que es una red completamente convolucional que produce propuestas con diferentes escalas y relaciones de aspecto. La RPN aplica la terminologia de redes neuronales con atención para indicar al modelo a donde mirar.
+
+En \textit{Faster R-CNN} se introduce el concepto de \textit{anchor boxes}, lo que permite detectar objetos en distintas escalas y relaciones de aspecto. Por ultimo, se comparten cálculos computacionales a través la RPN y \textit{Fast R-CNN}, lo que reduce el tiempo computacional \cite{ARTICLE:9}. En la figura \ref{fig:Faster-rcnn}, se muestra un ejemplo de la arquitectura de \textit{Faster R-CNN}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=1.3]{./Figures/Faster-rcnn.png}
+	\caption{Ejemplo de arquitectura de red neuronal de dos etapas \textit{Faster R-CNN} \cite{ARTICLE:11}.}
+	\label{fig:Faster-rcnn}
+\end{figure}
+
+ 
 
 \subsection{Detectores de una etapa}
 
-\subsubsection{Detección de objetos con YOLO}
+\subsubsection{Detección de objetos con \textit{YOLO}}
 
 \section{Clasificación de objetos}
 %\subsection{Uso de mayúscula inicial para los título de secciones}
