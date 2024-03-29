@@ -30,7 +30,7 @@ En la figura \ref{fig:cnn}, se puede observar un ejemplo de como se estructuran 
 
 \section{Detección de objetos}
 
-La detección de objetos es una técnica utilizada en visión por computadora para localizar e identificar uno o varios objetos en una imagen o vídeo. A diferencia de otras técnicas de \textit{machine learning}, como es el caso de la clasificación o reconocimiento de imágenes, la detección busca localizar el lugar exacto donde se encuentra el objeto de interés y lo delimita con un rectángulo también llamado caja delimitadora o \textit{bounding box} por su termino en ingles. Por otro lado, una vez delimitada la figura se clasifica entre las categorías con las que fue entrenado el modelo \cite{WEBSITE:5}.
+La detección de objetos es una técnica utilizada en visión por computadora para localizar e identificar uno o varios objetos en una imagen o vídeo. A diferencia de otras técnicas de \textit{machine learning}, como es el caso de la clasificación o reconocimiento de imágenes, la detección busca localizar el lugar exacto donde se encuentra el objeto de interés y lo delimita con un rectángulo también llamado caja delimitadora o \textit{bounding box} por su termino en ingles. Por otro lado, una vez delimitado el objeto se clasifica entre las categorías disponibles \cite{WEBSITE:5}.
 
 La detección de objetos se puede implementar utilizando métodos de \textit{machine learning} clásicos o de \textit{deep learning} dependiendo del problema a resolver\cite{WEBSITE:6}. El uso de \textit{deep learning} es más eficaz cuando se requiere tratar imágenes con muchas etiquetas, es decir, muchos objetos a detectar y las imágenes tienen otras variaciones como cambio de brillo, rotaciones, cambio de escala, etc. Por otro lado, el uso de \textit{machine learning} clásico es favorable cuando no se tienen altas capacidades de procesamiento y el número de etiquetas distintas a identificar es menor.
 
@@ -47,9 +47,9 @@ Por otro lado, se tienen métodos de \textit{deep learning} para detección de o
 
 \subsection{Detectores de dos etapas}
 
-Los detectores de dos etapas, como \textit{R-CNN} y sus variantes, durante la primera parte se extrae las características de la imagen y se propone la región de interés (ROI). El ROI, consiste en un \textit{bounding box} donde se presume que se encuentra el objeto a buscar. Luego, en la segunda etapa, se analiza las características encontradas en conjunto con el ROI, para seleccionar los \textit{bounding boxes} finales y calcular las probabilidades de que el objeto en las regiones pertenezca a una clase especifica \cite{ARTICLE:8}. 
+Los detectores de dos etapas, como \textit{R-CNN} y sus variantes, primero extraen las características de la imagen y se propone la región de interés (ROI). El ROI, consiste en un \textit{bounding box} donde se presume que se encuentra el objeto a buscar. Luego, en la segunda etapa, se analiza las características encontradas en conjunto con el ROI, para seleccionar los \textit{bounding boxes} finales y calcular las probabilidades de que el objeto en las regiones pertenezca a una clase especifica \cite{ARTICLE:8}. 
 
-Las redes neuronales de dos etapas son muy precisas al momento de detectar un objeto, sin embargo, son redes que son consideradas lentas durante la inferencia.
+Las redes neuronales de dos etapas son muy precisas al momento de detectar un objeto, sin embargo, son redes que son consideradas lentas durante la inferencia. Esta desventaja llevo a mejorar los modelos iniciales como \textit{R-CNN} a sus variantes \textit{Fast R-CNN} y \textit{Faster R-CNN}.
 
 En la figura \ref{fig:rcnn}, se puede observar la arquitectura de una red neuronal de dos etapas \textit{R-CNN}.
 
