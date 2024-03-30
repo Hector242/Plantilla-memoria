@@ -79,9 +79,9 @@ En \textit{Faster R-CNN} se introduce el concepto de \textit{anchor boxes}, lo q
 	\label{fig:Faster-rcnn}
 \end{figure}
 
- 
-
 \subsection{Detectores de una etapa}
+
+Los detectores de una etapa son modelos que omiten la etapa de RPN y ejecutan la detección directamente en un muestreo denso de ubicaciones. Estos modelos hacen uso de \textit{grid-box} y \textit{anchor box} para localizar la región de detección y delimitar al objeto de interés. En general, se consideran estos detectores más rápidos que los detectores de dos etapas, sin embargo, son menos precisos \cite{ARTICLE:12}.
 
 \subsubsection{Detección de objetos con \textit{YOLO}}
 
