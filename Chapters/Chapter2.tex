@@ -91,9 +91,16 @@ Algunos ejemplos de detectores de una etapa son las arquitecturas \textit{YOLO},
 
 El modelo funciona basado en el uso de bloques residuales, \textit{bounding boxes} por regresión, \textit{Intersection Over Unions} (\textit{IoU}) y \textit{Non-Maximum Suppression}.
 
+El primer paso es el uso de bloques residuales que consiste en dividir la imagen original en celdas cuadriculadas de NxN de igual dimensión. Cada celda en la cuadricula es responsable de localizar y predecir la clase de objeto que cubre con su respectivo valor de confianza. Luego, se determinan los \textit{bounding boxes} con los atributos que \textit{YOLO} obtiene usando un modulo de regresión lineal. La respuesta que se recibe de este modulo es una representación vectorial de las coordenadas para cada \textit{bounding boxes}.
 
+Por otro lado, un mismo objeto puede tener múltiples cuadriculas candidatas en la predicción, donde, no todas son relevantes. \textit{IoU} ayuda a descartar aquellas predicciones no relevantes dándole un valor entre 0 y 1 a cada una. Para esto, \textit{IoU} establece un umbral y posteriormente \textit{YOLO} calcula para cada cuadricula el \textit{IoU} y si es menor al umbral establecido, descarta dicha predicción. Por ultimo, se aplica \textit{Non-Maximum Suppression} para preservar solo aquellas predicciones que tengan un valor de confianza alto \cite{WEBSITE:7}.
+
+\textit{YOLO} ha tenido muchas versiones donde se ha ido mejorando la velocidad, la precisión, el uso de recursos, entre otros. Estas versiones van desde la uno a la nueve. Siendo la ocho la usada en la presente memoria.
 
 \section{Clasificación de objetos}
+
+
+
 %\subsection{Uso de mayúscula inicial para los título de secciones}
 %
 %Si en el texto se hace alusión a diferentes partes del trabajo referirse a ellas como capítulo, sección o subsección según corresponda. Por ejemplo: ``En el capítulo \ref{Chapter1} se explica tal cosa'', o ``En la sección \ref{sec:ejemplo} se presenta lo que sea'', o ``En la subsección \ref{subsec:ejemplo} se discute otra cosa''.
