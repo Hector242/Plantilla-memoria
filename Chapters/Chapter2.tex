@@ -81,9 +81,17 @@ En \textit{Faster R-CNN} se introduce el concepto de \textit{anchor boxes}, lo q
 
 \subsection{Detectores de una etapa}
 
-Los detectores de una etapa son modelos que omiten la etapa de RPN y ejecutan la detección directamente en un muestreo denso de ubicaciones. Estos modelos hacen uso de \textit{grid-box} y \textit{anchor box} para localizar la región de detección y delimitar al objeto de interés. En general, se consideran estos detectores más rápidos que los detectores de dos etapas, sin embargo, son menos precisos \cite{ARTICLE:12}.
+Los detectores de una etapa son modelos que omiten la etapa de RPN y ejecutan la detección directamente en un muestreo denso de ubicaciones. Estos modelos hacen uso de \textit{grid-box} y \textit{anchor box} para localizar la región de detección y delimitar al objeto de interés. En general, se consideran más rápidos que los detectores de dos etapas, sin embargo, son menos precisos \cite{ARTICLE:12}.
+
+Algunos ejemplos de detectores de una etapa son las arquitecturas \textit{YOLO}, \textit{SSD}, \textit{RetinaNet}, \textit{SqueezeDet} y \textit{DetectNet}. 
 
 \subsubsection{Detección de objetos con \textit{YOLO}}
+
+\textit{You Only Look Once} (\textit{YOLO}) es considerado el estado del arte para la detección en tiempo real y fue introducido en el año 2015. En el paper \cite{ARTICLE:13}, los autores trataron la detección de objetos como un problema de regresión simple en vez de hacerlo como un problema de clasificación, donde se separa espacialmente los \textit{bounding boxes} y se les asocia una probabilidad a cada detección en la imagen usando una red neuronal convolucional.
+
+El modelo funciona basado en el uso de bloques residuales, \textit{bounding boxes} por regresión, \textit{Intersection Over Unions} (\textit{IoU}) y \textit{Non-Maximum Suppression}.
+
+
 
 \section{Clasificación de objetos}
 %\subsection{Uso de mayúscula inicial para los título de secciones}
