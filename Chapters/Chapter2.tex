@@ -105,7 +105,15 @@ La clasificación en imágenes se trabaja a nivel de píxeles, el proceso involu
 
 La clasificación se puede hacer por métodos de \textit{machine learning} clásico o utilizando \textit{deep learning}. El uso de deep learning para esta tarea a demostrado un buen rendimiento incluso cuando se presentan imágenes con cambios de iluminación, rotación, deformación y oclusión.
 
-La arquitectura de red neuronal que se utiliza para esta tarea es la red convolucional. El proceso consiste en pasar la imagen por la capa de entrada donde es preprocesada la imagen y posteriormente enviada a la capa convolucional, donde, se le aplican filtros a la imagen para extraer sus características y a la salida se obtiene un mapa de características que indica la presencia o ausencia de ciertos atributos. Luego, la imagen se reduce en la capa de agrupación preservando la información importante extraída y se pasa por una capa de activación no lineal, en general, es una capa \textit{ReLU}. Por ultimo, se pasa el resultado por una capa totalmente conectada para obtener las probabilidades de que la imagen pertenezca a una de las clases preestablecidas. 
+La arquitectura de red neuronal que se utiliza para esta tarea es la red convolucional. El proceso consiste en pasar la imagen por la capa de entrada donde es preprocesada la imagen y posteriormente enviada a la capa convolucional, donde, se le aplican filtros a la imagen para extraer sus características y a la salida se obtiene un mapa de características que indica la presencia o ausencia de ciertos atributos. Luego, la imagen se reduce en la capa de agrupación preservando la información importante extraída y se pasa por una capa de activación no lineal, en general, es una capa \textit{ReLU}. Por ultimo, se pasa el resultado por una capa totalmente conectada para obtener las probabilidades de que la imagen pertenezca a una de las clases preestablecidas. En la figura \ref{fig:clasificación}, se puede observar un ejemplo de clasificación de imágenes con \textit{deep learning}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=.32]{./Figures/image_classification.png}
+	\caption{Clasificación de imagenes con \textit{deep learning} \cite{ARTICLE:11}.}
+	\label{fig:clasificación}
+\end{figure}
+
 
 
 %\subsection{Uso de mayúscula inicial para los título de secciones}
