@@ -27,9 +27,9 @@ En este capítulo se presenta la problemática y la motivación que llevaron a l
 
 La fenómica hace referencia a la obtención de un gran caudal de datos de las características de las plantas, lo que se denomina el fenotipo de la planta. Esta disciplina está en auge en la actualidad debido a sus aplicaciones potenciales. Por un lado, habilita el mejoramiento a gran escala debido a que es necesario vincular una gran cantidad de datos genéticos con datos fenotípicos para identificar la función de los genes. Por otro lado, si se incluyen otros conjuntos de datos como son los climáticos, permite realizar predicciones precisas sobre el comportamiento de las variedades, necesario para implementar lo que se conoce como agricultura de precisión. Sin embargo, la fruticultura no ha dado el salto hacia la fenómica.
 
-En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secuenciar el ADN de más de 250 variedades de duraznero \cite{ARTICLE:1} y se dispone de una base de datos genómica de 75 gigabases (Gb) de ADN. Esta base permite identificar genes que controlan características del duraznero mediante algoritmos de inteligencia artificial (IA). Además, se dispone de datos climáticos diarios que se toman de forma automática que incluyen: las temperaturas medias, precipitaciones, horas de frío, radiación, etc. Esta información se combina con los datos genómicos y posteriormente, con modelos de IA se predice el comportamiento de las variedades en escenarios climáticos futuros. En la figura \ref{fig:genotipado}, se observa el proceso para obtener los datos genómicos.
+En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secuenciar el ADN de más de 250 variedades de duraznero \cite{ARTICLE:1} y se dispone de una base de datos genómica de 75 gigabases (Gb) de ADN. Esta base permite identificar genes que controlan características del duraznero mediante algoritmos de inteligencia artificial (IA). Además, se dispone de datos climáticos diarios que se toman de forma automática que incluyen: las temperaturas medias, precipitaciones, horas de frío, radiación, etc. Esta información se combina con los datos genómicos y posteriormente, con modelos de IA, se predice el comportamiento de las variedades en escenarios climáticos futuros. En la figura \ref{fig:genotipado}, se observa el proceso para obtener los datos genómicos.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=.3]{./Figures/genotipado.png}
 	\caption{Proceso para obtener los datos genómicos \cite{ARTICLE:1}.}
@@ -47,7 +47,7 @@ En la actualidad, las heladas primaverales son el mayor problema de los frutales
 
 \section{Motivación}
 
-Por lo explicado anteriormente, es del interés del Instituto Nacional de Tecnología Agropecuaria (INTA) determinar el estado fenológico a campo y mejorar para la tolerancia a heladas.
+Por lo explicado anteriormente, es del interés del Instituto Nacional de Tecnología Agropecuaria (INTA) determinar el estado fenológico a campo y mejorar la tolerancia a heladas primaverales.
 
 Para determinar el estado fenológico a campo, es necesario conocer el número de flores que se encuentran en estado vulnerable ante un pronóstico de heladas primaverales, así como también la densidad de flores.
 
@@ -112,7 +112,7 @@ El presente trabajo contiene distintos algoritmos que, integrados, logran tomar 
 
 \subsection{Medición de la vareta}
 
-En la actualidad, se han desarrollado algoritmos que pueden determinar el tamaño de distintos objetos a través de imágenes usando visión por computadora. Muchos parten de encontrar un objeto de referencia al que se le conocen sus dimensiones (alto y ancho). Este objeto de referencia, normalmente se selecciona por ser fácil de detectar, por conocer sus dimensiones y por ser un objeto único. El procedimiento habitual para su detección, es pasar la imagen a escala de grises, aplicar filtros gaussianos para eliminar el ruido, utilizar detección de bordes y por último utilizar detección de contornos, tal y como se realiza en el trabajo \cite{ARTICLE:2}. Cabe destacar que usualmente el fondo es de un color blanco lo que facilita la detección.
+En la actualidad, se han desarrollado algoritmos que pueden determinar el tamaño de distintos objetos a través de imágenes usando visión por computadora. Muchos parten de encontrar un objeto de referencia al que se le conocen sus dimensiones (alto y ancho). Este objeto de referencia, normalmente se selecciona por ser fácil de detectar, por conocer sus dimensiones y por ser un objeto único. El procedimiento habitual para su detección, es pasar la imagen a escala de grises, aplicar filtros gaussianos para eliminar el ruido, utilizar detección de bordes y por último utilizar detección de contornos, tal y como se realiza en el trabajo \cite{ARTICLE:2}. Cabe destacar que usualmente el fondo es de un color blanco, lo que facilita la detección.
 
 En el presente trabajo se tienen imágenes con fondos de color naranja en su mayoría, el objeto de referencia a veces se encuentra ocluido, las imágenes se encuentran en horizontal o vertical, el objeto de referencia no siempre tiene la misma posición, etc. Por estos motivos, se utilizó un método de detección más complejo con un modelo de detección de objetos que se conoce como \textit{YOLOv8} y se considera el estado del arte a la fecha.
 
@@ -120,7 +120,7 @@ En el presente trabajo se tienen imágenes con fondos de color naranja en su may
  
 La detección de flores ha sido estudiada con diferentes enfoques y arquitecturas de \textit{deep learning}, como por ejemplo el estudio \cite{ARTICLE:3} que exploró la viabilidad de detección de estados fenológicos de las rosas con técnicas del contraste del color y comparando con el modelo de detección \textit{Faster R-CNN}. Sin embargo, no utilizó ninguna arquitectura de una etapa para la detección, lo que podría ser más eficiente. Por otro lado, se tienen trabajos que sí utilizaron la arquitectura de una etapa, en específico de \textit{YOLO} en sus versiones 4 y 5 como se presenta en \cite{ARTICLE:4} \cite{ARTICLE:5}, pero su enfoque fue basado para las flores de kiwi.
 
-La presente memoria busca en particular los estado fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. El detector de una etapa sería la arquitectura de \textit{YOLO} en su version 8, la cual se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
+La presente memoria busca en particular los estados fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. El detector de una etapa sería la arquitectura de \textit{YOLO} en su version 8, la cual se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
 
 \subsection{Conteo de flores}
 
