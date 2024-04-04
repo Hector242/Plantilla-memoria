@@ -26,7 +26,15 @@ Este modulo se detalla más a profundidad en este mismo capítulo.
 	\label{fig:varetaSize}
 \end{figure}
 
-La arquitectura del modulo de detección y procesamiento se presenta en la figura.
+La arquitectura del modulo de detección y procesamiento se presenta en la figura \ref{fig:densidadDeFlores}. La entrada a este modulo es la imagen original donde se le aplica un preprocesamiento y posteriormente se pasa por un modelo que detecta los estados fenológicos de las flores de duraznero y sus varetas. Luego, se realiza un postprocesamiento de los resultados para conocer el número de flores totales que se encuentran en la imagen y un conteo de flores por vareta 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=.35]{./Figures/DetecciónFlor.drawio.png}
+	\caption{Modulo de estimación de detección y procesamiento.}
+	\label{fig:densidadDeFlores}
+\end{figure}
+
 %\definecolor{mygreen}{rgb}{0,0.6,0}
 %\definecolor{mygray}{rgb}{0.5,0.5,0.5}
 %\definecolor{mymauve}{rgb}{0.58,0,0.82}
