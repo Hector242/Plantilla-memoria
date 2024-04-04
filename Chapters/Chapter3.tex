@@ -26,14 +26,20 @@ Este modulo se detalla más a profundidad en este mismo capítulo.
 	\label{fig:varetaSize}
 \end{figure}
 
-La arquitectura del modulo de detección y procesamiento se presenta en la figura \ref{fig:densidadDeFlores}. La entrada a este modulo es la imagen original donde se le aplica un preprocesamiento y posteriormente se pasa por un modelo que detecta los estados fenológicos de las flores de duraznero y sus varetas. Luego, se realiza un postprocesamiento de los resultados para conocer el número de flores totales que se encuentran en la imagen y un conteo de flores por vareta 
+La arquitectura del modulo de detección y procesamiento se presenta en la figura \ref{fig:densidadDeFlores}. La entrada a este modulo es la imagen original donde se le aplica un preprocesamiento y posteriormente se pasa por un modelo que detecta los estados fenológicos de las flores de duraznero y sus varetas. Luego, se realiza un postprocesamiento de los resultados para conocer el número de flores totales que se encuentran en la imagen y un conteo de las mismas por vareta. Por último, se extraen las flores detectadas por vareta y son enviadas al clasificador para determinar su tipo.
 
-\begin{figure}[htpb]
+Más adelante en este mismo capítulo se dará más información detallada de este modulo y de otros bloques del sistema que cumplen una función importante para generar los resultados deseados.
+
+Cabe destacar que la realización de este sistema se llevo a cabo en el lenguaje de programación \textit{Python} y esta diseñado para funcionar en una computadora local bajo un ambiente virtualizado. 
+
+\begin{figure}[htp]
 	\centering
 	\includegraphics[scale=.35]{./Figures/DetecciónFlor.drawio.png}
 	\caption{Modulo de estimación de detección y procesamiento.}
 	\label{fig:densidadDeFlores}
 \end{figure}
+
+\section{Preparación de los datos}
 
 %\definecolor{mygreen}{rgb}{0,0.6,0}
 %\definecolor{mygray}{rgb}{0.5,0.5,0.5}
