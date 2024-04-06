@@ -6,7 +6,7 @@ En este capítulo se describe el diseño e implementación del sistema desarroll
 
 \section{Arquitectura del sistema}
 
-El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero y posteriormente esta imagen pasará por dos módulos de forma secuencial. El primer modulo, es el encargado de medir la longitud de la vareta y el segundo modulo se encarga de detectar el estado fenológico, la cantidad de flores y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos modulos es presentado por pantalla al usuario y con la posibilidad de descargarlos en formato CSV.
+El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero y posteriormente esta imagen pasará por dos módulos de forma secuencial. El primer módulo, es el encargado de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad de flores y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario y con la posibilidad de descargarlos en formato CSV.
 
 \begin{figure}[ht]
 	\centering
@@ -15,27 +15,27 @@ El sistema general implementado en este trabajo se presenta en la figura \ref{fi
 	\label{fig:sistemaGeneral}
 \end{figure}
 
-La arquitectura del modulo que estima la longitud de la vareta se puede observar en la figura \ref{fig:varetaSize}. Este modulo toma y preprocesa la imagen de entrada, posteriormente detecta la regla que es el objeto de referencia y procede a tomar las mediciones en píxeles de dicho elemento. Luego, se hace una conversión de píxeles a centímetros. Una vez finalizada la conversión, se detecta las varetas presentes en la imagen y se calculan sus dimensiones, se revisa la orientación de la foto y se toma la longitud de cada vareta en píxeles. Finalmente, con la conversión anterior se pasa a centímetros las mediciones de las varetas y se anotan los resultados en una tabla y son enviados al siguiente modulo. Por otro lado, la imagen con las mediciones se muestra por pantalla.
+La arquitectura del módulo que estima la longitud de la vareta se puede observar en la figura \ref{fig:varetaSize}. Este módulo toma y preprocesa la imagen de entrada, posteriormente detecta la regla que es el objeto de referencia y procede a tomar las mediciones en píxeles de dicho elemento. Luego, se hace una conversión de píxeles a centímetros. Una vez finalizada la conversión, se detectan las varetas presentes en la imagen y se calculan sus dimensiones, se revisa la orientación de la foto y se toma la longitud de cada vareta en píxeles. Finalmente, con la conversión anterior se pasa a centímetros las mediciones de las varetas, se anotan los resultados en una tabla y son enviados al siguiente modulo. Por otro lado, la imagen con las mediciones se muestra por pantalla.
 
-Este modulo se detalla más a profundidad en este mismo capítulo.
+Este módulo se detalla con más a profundidad en este mismo capítulo.
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[scale=.4]{./Figures/medicionVareta.drawio.png}
-	\caption{Modulo de estimación de longitud.}
+	\caption{Módulo de estimación de longitud.}
 	\label{fig:varetaSize}
 \end{figure}
 
-La arquitectura del modulo de detección y procesamiento se presenta en la figura \ref{fig:densidadDeFlores}. La entrada a este modulo es la imagen original donde se le aplica un preprocesamiento y posteriormente se pasa por un modelo que detecta los estados fenológicos de las flores de duraznero y sus varetas. Luego, se realiza un postprocesamiento de los resultados para conocer el número de flores totales que se encuentran en la imagen y un conteo de las mismas por vareta. Por último, se extraen las flores detectadas por vareta y son enviadas al clasificador para determinar su tipo.
+La arquitectura del módulo de detección y procesamiento se presenta en la figura \ref{fig:densidadDeFlores}. La entrada a este módulo es la imagen original donde se le aplica un preprocesamiento y posteriormente se pasa por un modelo que detecta los estados fenológicos de las flores de duraznero y sus varetas. Luego, se realiza un postprocesamiento de los resultados para conocer el número de flores totales que se encuentran en la imagen y un conteo de las mismas por vareta. Por último, se extraen las flores detectadas por vareta y son enviadas al clasificador para determinar su tipo.
 
-Más adelante en este mismo capítulo se dará más información detallada de este modulo y de otros bloques del sistema que cumplen una función importante para generar los resultados deseados.
+Más adelante en este mismo capítulo se dará más información detallada de este módulo y de otros bloques del sistema que cumplen una función importante para generar los resultados deseados.
 
-Cabe destacar que la realización de este sistema se llevo a cabo en el lenguaje de programación \textit{Python} y esta diseñado para funcionar en una computadora local bajo un ambiente virtualizado. 
+Cabe destacar que la realización de este sistema se llevó a cabo en el lenguaje de programación \textit{Python} y se encuentra diseñado para funcionar en una computadora local bajo un ambiente virtualizado. 
 
 \begin{figure}[htp]
 	\centering
 	\includegraphics[scale=.35]{./Figures/DetecciónFlor.drawio.png}
-	\caption{Modulo de detección y procesamiento.}
+	\caption{Módulo de detección y procesamiento.}
 	\label{fig:densidadDeFlores}
 \end{figure}
 

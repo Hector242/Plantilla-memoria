@@ -83,7 +83,7 @@ En \textit{Faster R-CNN} se introduce el concepto de \textit{anchor boxes}, lo q
 
 Los detectores de una etapa son modelos que omiten la etapa de RPN y ejecutan la detección directamente en un muestreo denso de ubicaciones. Estos modelos hacen uso de \textit{grid-box} y \textit{anchor box} para localizar la región de detección y delimitar al objeto de interés. En general, se consideran más rápidos que los detectores de dos etapas, sin embargo, son menos precisos \cite{ARTICLE:12}.
 
-Algunos ejemplos de detectores de una etapa son las arquitecturas \textit{YOLO}, \textit{SSD}, \textit{RetinaNet}, \textit{SqueezeDet} y \textit{DetectNet}. 
+Algunos ejemplos de detectores de una etapa son las arquitecturas \textit{YOLO} \cite{ARTICLE:13}, \textit{SSD} \cite{ARTICLE:14}, \textit{RetinaNet} \cite{ARTICLE:15} y \textit{SqueezeDet} \cite{ARTICLE:16}. 
 
 \subsubsection{Detección de objetos con \textit{YOLO}}
 
@@ -91,9 +91,9 @@ Algunos ejemplos de detectores de una etapa son las arquitecturas \textit{YOLO},
 
 El algoritmo se basa en el uso de bloques residuales, \textit{bounding boxes} por regresión, \textit{Intersection Over Unions} (\textit{IoU}) y \textit{Non-Maximum Suppression}.
 
-El primer paso es el uso de bloques residuales que consiste en dividir la imagen original en celdas cuadriculadas de NxN de igual dimensión. Cada celda en la cuadricula es responsable de localizar y predecir la clase de objeto que cubre con su respectivo valor de confianza. Luego, se determinan los \textit{bounding boxes} con los atributos que \textit{YOLO} obtiene usando un modulo de regresión lineal. La respuesta que se recibe de este modulo es una representación vectorial de las coordenadas para cada \textit{bounding box}.
+El primer paso es el uso de bloques residuales que consiste en dividir la imagen original en celdas cuadriculadas de NxN de igual dimensión. Cada celda en la cuadrícula es responsable de localizar y predecir la clase de objeto que cubre con su respectivo valor de confianza. Luego, se determinan los \textit{bounding boxes} con los atributos que \textit{YOLO} obtiene usando un módulo de regresión lineal. La respuesta que se recibe de este módulo es una representación vectorial de las coordenadas para cada \textit{bounding box}.
 
-Por otro lado, un mismo objeto puede tener múltiples detecciones durante la predicción y no todas serán relevantes. Por este motivo, se usa \textit{Intersection Over Unions} que ayuda a descartar aquellas predicciones no relevantes, dándole un valor entre 0 y 1. En este proceso, se establece un umbral para el \textit{Intersection Over Unions}, que posteriormente, se compara con el calculo generado por \textit{YOLO} para cada cuadricula y si el resultado es menor al umbral establecido, se descarta dicha predicción. Por ultimo, se aplica \textit{Non-Maximum Suppression} para preservar solo aquellas predicciones que tengan un valor de confianza alto \cite{WEBSITE:7}.
+Por otro lado, un mismo objeto puede tener múltiples detecciones durante la predicción y no todas serán relevantes. Por este motivo, se usa \textit{Intersection Over Unions} que ayuda a descartar aquellas predicciones no relevantes, dándoles un valor entre 0 y 1. En este proceso, se establece un umbral para el \textit{Intersection Over Unions}, que posteriormente, se compara con el calculo generado por \textit{YOLO} para cada cuadrícula y si el resultado es menor al umbral establecido, se descarta dicha predicción. Por último, se aplica \textit{Non-Maximum Suppression} para preservar solo aquellas predicciones que tengan un valor de confianza alto \cite{WEBSITE:7}.
 
 \textit{YOLO} cuenta con varias versiones desde su lanzamiento donde se ha mejorado su velocidad, precisión y el uso de recursos. Estas versiones, van desde la uno a la nueve, siendo la ocho la usada en la presente memoria.
 
