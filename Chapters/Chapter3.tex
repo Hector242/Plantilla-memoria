@@ -41,6 +41,33 @@ Cabe destacar que la realización de este sistema se llevó a cabo en el lenguaj
 
 \section{Preparación de los datos}
 
+La preparación de los datos es una de las partes más criticas durante el desarrollo de un modelo de aprendizaje. Esto debido a que si los datos no se encuentran en las condiciones adecuadas para su uso en un modelo de IA, el modelo no tendrá un buen rendimiento. 
+
+El presente trabajo requirió la generación de distintos etiquetados para el \textit{dataset} original, debido a la cantidad de modelos utilizados durante su desarrollo.
+
+\subsection{Análisis exploratorio}
+El \textit{dataset} original provisto por el INTA contiene las características que se indican en la tabla \ref{tab:flores}. En general, las fotos presentan distintas dimensiones y orientaciones (vertical u horizontal). Por otro lado, se desconoce el tipo de cámara utilizada y el ángulo siempre es cenital.
+
+
+\begin{table}[h]
+	\centering
+	\caption[caption corto]{Características de las fotos de duraznos}
+	\begin{tabular}{c c c l}    
+		\toprule
+		\textbf{Formato}     & \textbf{Cantidad} & \textbf{Resolución} & \textbf{Observaciones}\\
+		\midrule
+		JPG                  & 288               &  Variable &  Cuatro varetas por foto.\\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:flores}
+\end{table}
+ 
+Las imágenes tienen un fondo naranja y en ocasiones contienen partes grises. Esto debido a que las varetas de duraznero fueron posadas sobre una cartulina color naranja y a veces por las dimensiones de las varetas, estás sobresalen de la cartulina tomando parte de la mesa color gris.
+
+Por otro lado, las fotos presentan cambios de brillo e iluminación, generando distintas tonalidades de los colores de fondo y de flores. 
+
+Los elementos que se observan generalmente en las fotos provistas por el cliente contienen
 %\definecolor{mygreen}{rgb}{0,0.6,0}
 %\definecolor{mygray}{rgb}{0.5,0.5,0.5}
 %\definecolor{mymauve}{rgb}{0.58,0,0.82}
