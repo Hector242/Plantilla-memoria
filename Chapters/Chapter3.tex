@@ -6,7 +6,7 @@ En este capítulo se describe el diseño e implementación del sistema desarroll
 
 \section{Arquitectura del sistema}
 
-El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero y posteriormente esta imagen pasará por dos módulos de forma secuencial. El primer módulo, es el encargado de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad de flores y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario y con la posibilidad de descargarlos en formato CSV.
+El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero que posteriormente pasará por dos módulos de forma secuencial. El primer módulo, es el encargado de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad de flores y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario que tiene la posibilidad de descargarlos en formato CSV.
 
 \begin{figure}[ht]
 	\centering
@@ -15,7 +15,7 @@ El sistema general implementado en este trabajo se presenta en la figura \ref{fi
 	\label{fig:sistemaGeneral}
 \end{figure}
 
-La arquitectura del módulo que estima la longitud de la vareta se puede observar en la figura \ref{fig:varetaSize}. Este módulo toma y preprocesa la imagen de entrada, posteriormente detecta la regla que es el objeto de referencia y procede a tomar las mediciones en píxeles de dicho elemento. Luego, se hace una conversión de píxeles a centímetros. Una vez finalizada la conversión, se detectan las varetas presentes en la imagen y se calculan sus dimensiones, se revisa la orientación de la foto y se toma la longitud de cada vareta en píxeles. Finalmente, con la conversión anterior se pasa a centímetros las mediciones de las varetas, se anotan los resultados en una tabla y son enviados al siguiente modulo. Por otro lado, la imagen con las mediciones se muestra por pantalla.
+La arquitectura del módulo que estima la longitud de la vareta se puede observar en la figura \ref{fig:varetaSize}. Este módulo toma y preprocesa la imagen de entrada, posteriormente detecta la regla que es el objeto de referencia y procede a tomar las mediciones en píxeles de dicho elemento. Luego, se hace una conversión de píxeles a centímetros. Una vez finalizada la conversión, se detectan las varetas presentes en la imagen y se calculan sus dimensiones, se revisa la orientación de la foto y se toma la longitud de cada vareta en píxeles. Finalmente, con la conversión anterior se pasa a centímetros las mediciones de las varetas, se anotan los resultados en una tabla y son enviados al siguiente módulo. Por otro lado, la imagen con las mediciones se muestra por pantalla.
 
 Este módulo se detalla con más a profundidad en este mismo capítulo.
 
