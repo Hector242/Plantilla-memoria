@@ -154,7 +154,33 @@ El \textit{dataset} cuenta con un total de 286 imágenes en total, donde, 57 im�
 
 \subsection{Etiquetado del \textit{dataset}}
 
+El conjunto de datos dado por el cliente fue etiquetado utilizando una herramienta llamada \textit{Roboflow}. El etiquetado con \textit{Roboflow} es simple y se puede utilizar para múltiples tareas relacionadas a visión por computadora. Por otro lado, el presente trabajo requirió varios etiquetados del mismo \textit{dataset}, debido a, los distintos modelos que se entrenaron para su realización.
 
+Todos los modelos utilizados exceptuando el clasificador, utilizaron un etiquetado del tipo de detección de objetos, donde se delimitan los objetos de interés con \textit{bounding boxes}. El etiquetado por modelo se detalla en la siguiente lista:
+
+\begin{enumerate}
+	\item Detección de estados fenológicos: las etiquetas para el entrenamiento de este modelo fueron cinco y representan cada estado fenológico de la flor de duraznero. Estas etiquetas son: flor abierta, flor cerrada, flor sin pétalos, incierto y vareta. El tipo de etiquetado fue de detección de objetos.
+	\item Detección de regla: para este etiquetado se utilizó el mismo \textit{dataset}, pero solo se tomó en cuenta la regla, por lo tanto, solo cuenta con esta única etiqueta y el tipo de etiquetado es de detección de objetos.
+	\item Detección de vareta: solo se etiquetaron las varetas, el motivo del porque se vuelve a hacer un etiquetado para este objeto se explica en secciones más adelante.
+\end{enumerate}
+
+El conjunto de datos utilizado para entrenar el clasificador de flores se generó y etiquetó mediante un algoritmo, que emplea el modelo que detecta los estados fenológicos, y posteriormente recorta cada flor detectada. Luego para distinguir entre las flores rosáceas y campanuláceas, se procesaron imágenes de ejemplares de cada tipo por separado, almacenando los resultados en archivos distintos clasificados por categoría.
+
+Finalmente, por motivos de tiempo no se lograron etiquetar las 286 imágenes para cada caso. Los detalles de la cantidad de imágenes etiquetadas por conjunto de datos se encuentra en la tabla \ref{tab:etiquetado}. 
+
+\begin{table}[h]
+	\centering
+	\caption[caption corto]{Cantidad de fotos etiquetadas por modelo}
+	\begin{tabular}{c c c c}    
+		\toprule
+		\textbf{Modelo}     & \textbf{Cantidad de imágenes etiquetadas} \\
+		\midrule
+		Detector de estados fenológicos.                  & 140 \\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:etiquetado}
+\end{table} 
  
 %\definecolor{mygreen}{rgb}{0,0.6,0}
 %\definecolor{mygray}{rgb}{0.5,0.5,0.5}
