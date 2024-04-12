@@ -43,15 +43,15 @@ Cabe destacar que la realización de este sistema se llevó a cabo en el lenguaj
 
 La preparación de los datos es una de las partes más criticas durante el desarrollo de un modelo de aprendizaje. Esto debido a que si los datos no se encuentran en las condiciones adecuadas para su uso en un modelo de IA, el modelo no tendrá un buen rendimiento. 
 
-El presente trabajo requirió la generación de distintos etiquetados para el \textit{dataset} original, debido a la cantidad de modelos utilizados durante su desarrollo.
+El presente trabajo requirió la generación de distintos etiquetados para el conjunto de datos original, debido a la cantidad de modelos utilizados durante su desarrollo.
 
 \subsection{Análisis exploratorio}
-El \textit{dataset} original provisto por el INTA contiene las características que se indican en la tabla \ref{tab:flores}. En general, las fotos presentan distintas dimensiones y orientaciones (vertical u horizontal). Por otro lado, se desconoce el tipo de cámara utilizada y el ángulo siempre es cenital.
+El conjunto de datos original provisto por el INTA contiene las características que se indican en la tabla \ref{tab:flores}. En general, las fotos presentan distintas dimensiones y orientaciones (vertical u horizontal). Por otro lado, se desconoce el tipo de cámara utilizada y el ángulo siempre es cenital.
 
 
 \begin{table}[h]
 	\centering
-	\caption[caption corto]{Características de las fotos de duraznos}
+	\caption{Características de las fotos de duraznos}
 	\begin{tabular}{c c c l}    
 		\toprule
 		\textbf{Formato}     & \textbf{Cantidad} & \textbf{Resolución} & \textbf{Observaciones}\\
@@ -148,13 +148,13 @@ Cabe destacar que en una foto de varetas de duraznero, se encuentran varias flor
         \label{fig:estadoFeno}
 \end{figure}
 
-\subsubsection{Balanceo del \textit{dataset} antes del etiquetado}
+\subsubsection{Balanceo del conjunto de datos antes del etiquetado}
 
-El \textit{dataset} cuenta con un total de 286 imágenes en total, donde, 57 imágenes contienen varetas con flores del tipo campanuláceas, y 229 contienen varetas con flores del tipo rosáceas. Por lo tanto, se considera que el conjunto de datos se encuentra desbalanceado con respecto al tipo de flor. 
+El conjunto de datos cuenta con un total de 286 imágenes en total, donde, 57 imágenes contienen varetas con flores del tipo campanuláceas, y 229 contienen varetas con flores del tipo rosáceas. Por lo tanto, se considera que el conjunto de datos se encuentra desbalanceado con respecto al tipo de flor. 
 
-\subsection{Etiquetado del \textit{dataset}}
+\subsection{Etiquetado del conjunto de datos}
 
-El conjunto de datos dado por el cliente fue etiquetado utilizando una herramienta llamada \textit{Roboflow}. El etiquetado con \textit{Roboflow} es simple y se puede utilizar para múltiples tareas relacionadas a visión por computadora. Por otro lado, el presente trabajo requirió varios etiquetados del mismo \textit{dataset}, debido a, los distintos modelos que se entrenaron para su realización.
+El conjunto de datos dado por el cliente fue etiquetado utilizando una herramienta llamada \textit{Roboflow}. El etiquetado con \textit{Roboflow} es simple y se puede utilizar para múltiples tareas relacionadas a visión por computadora. Por otro lado, el presente trabajo requirió varios etiquetados del mismo conjunto de datos, debido a, los distintos modelos que se entrenaron para su realización.
 
 Todos los modelos utilizados exceptuando el clasificador, utilizaron un etiquetado del tipo de detección de objetos, donde se delimitan los objetos de interés con \textit{bounding boxes}. El etiquetado por modelo se detalla en la siguiente lista:
 
@@ -170,18 +170,43 @@ Finalmente, por motivos de tiempo no se lograron etiquetar las 286 imágenes par
 
 \begin{table}[h]
 	\centering
-	\caption[caption corto]{Cantidad de fotos etiquetadas por modelo}
-	\begin{tabular}{c c c c}    
+	\caption{Cantidad de fotos etiquetadas por modelo}
+	\begin{tabular}{l c }    
 		\toprule
 		\textbf{Modelo}     & \textbf{Cantidad de imágenes etiquetadas} \\
 		\midrule
-		Detector de estados fenológicos.                  & 140 \\		
+		Detector de estados fenológicos.                  & 140 \\
+		Detector de regla.                  & 131 \\
+		Detector de vareta.                  & 101 \\		
 		\bottomrule
 		\hline
 	\end{tabular}
 	\label{tab:etiquetado}
-\end{table} 
- 
+\end{table}
+
+\subsubsection{Balanceo del conjunto de datos después del etiquetado}
+
+El conjunto de datos para el detector de los estados fenológicos de la flor, tiene un desbalance que se puede observar en la figura \ref{fig:desbalanceoDeteccion}. Donde, la clase mayoritaria es el estado fenológico con más presencia en las 140 fotos etiquetadas, que en este caso sería la clase flor abierta. Las consecuencias y la solución a este problema de desbalanceo para el detector de estados fenológicos se explica más delante en la presente memoria.
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[scale=.6]{./Figures/desbalanceo_detector.png}
+	\caption{Desbalanceo de clases para el detector de estados fenológicos de la flor de duraznero.}
+	\label{fig:desbalanceoDeteccion}
+\end{figure}
+\newpage
+
+Por otro lado, el conjunto de datos para el clasificador de flores cuenta con un desbalance, entre la cantidad de flores rosáceas y campanuláceas. Este desbalanceo se puede observar en la figura \ref{fig:desbalanceoClass}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.5\textwidth, height=0.5\textwidth]{./Figures/tipodeflor_desbalance.png}
+	\caption{Desbalanceo de clases para el clasificador de flores de duraznero.}
+	\label{fig:desbalanceoClass}
+\end{figure}
+
+\subsection{Aumento de los datos}
+
 %\definecolor{mygreen}{rgb}{0,0.6,0}
 %\definecolor{mygray}{rgb}{0.5,0.5,0.5}
 %\definecolor{mymauve}{rgb}{0.58,0,0.82}
