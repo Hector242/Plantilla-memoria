@@ -10,7 +10,7 @@ El sistema general implementado en este trabajo se presenta en la figura \ref{fi
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.4]{./Figures/arq1.drawio.png}
+	\includegraphics[scale=.35]{./Figures/arq1.drawio.png}
 	\caption{Arquitectura general del sistema.}
 	\label{fig:sistemaGeneral}
 \end{figure}
@@ -21,7 +21,7 @@ Este módulo se detalla con más a profundidad en este mismo capítulo.
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[scale=.4]{./Figures/medicionVareta.drawio.png}
+	\includegraphics[scale=.35]{./Figures/medicionVareta.drawio.png}
 	\caption{Módulo de estimación de longitud.}
 	\label{fig:varetaSize}
 \end{figure}
@@ -34,7 +34,7 @@ Cabe destacar que la realización de este sistema se llevó a cabo en el lenguaj
 
 \begin{figure}[htp]
 	\centering
-	\includegraphics[scale=.35]{./Figures/DetecciónFlor.drawio.png}
+	\includegraphics[scale=.3]{./Figures/DetecciónFlor.drawio.png}
 	\caption{Módulo de detección y procesamiento.}
 	\label{fig:densidadDeFlores}
 \end{figure}
@@ -71,7 +71,7 @@ Los elementos que se observan generalmente en las fotos provistas por el cliente
 
 En la figura \ref{fig:three graphs}, se puede observar algunos ejemplos de fotos con las características que se describieron anteriormente.
 
-\begin{figure}[!htpb]
+\begin{figure}[ht]
      \centering
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
@@ -103,14 +103,14 @@ Es importante mencionar que, las fotos de varetas tomadas por el cliente, están
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[scale=.15]{./Figures/flor_rosacea.jpg}
+         \includegraphics[scale=.13]{./Figures/flor_rosacea.jpg}
          \caption{Foto de varetas con flores rosáceas.}
          \label{fig:1de23}
      \end{subfigure}
      \hfill
-     \begin{subfigure}[b]{0.4\textwidth}
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
-         \includegraphics[scale=.15]{./Figures/flor_camp.jpg}
+         \includegraphics[scale=.13]{./Figures/flor_camp.jpg}
          \caption{Foto de varetas con flores campanuláceas.}
          \label{fig:2de23}
      \end{subfigure}
@@ -206,6 +206,28 @@ Por otro lado, el conjunto de datos para el clasificador de flores cuenta con un
 \end{figure}
 
 \subsection{Aumento de los datos}
+
+Se utilizó \textit{data augmentation} para incrementar la cantidad de imágenes para el conjunto de datos destinados al modelo de detección de los estados fenológicos, además las transformaciones de imágenes aplicadas buscan que el modelo sea capaz de generalizar mejor a pesar de encontrar cambios de brillo, iluminación, rotaciones, etc. Por otro lado, también se hizo uso de esta técnica para intentar balancear el conjunto de datos destinado al clasificador de flores.
+
+Para el detector de estados fenológico de las flores de duraznero se implementaron las siguientes transformaciones:
+
+\begin{enumerate}
+	\item 90 grados de rotación en sentido horario y anti horario.
+	\item Cambio de brillo entre un -25\% y 25\%. 
+	\item Desenfoque un 1 px.
+	\item Cambio de brillo por \textit{bounding box}.
+\end{enumerate}
+
+El total de imágenes aumento a 336. Sin embargo, es de tener en cuenta que el número de imágenes disponible sigue siendo inferior al recomendado para el entrenamiento y validación de los distintos modelos de aprendizaje utilizados en la presente memoria. Por otro lado, con esta técnica no se pudo resolver el desbalance de datos observado en la figura \ref{fig:desbalanceoClass}, debido a que no hay una transformación directa de la imagen que permita la eliminación de las clases mayoritarias presentes en la detección, más adelante en la presente memoria se explica el método implementado para mitigar el desbalanceo en este caso. 
+
+Para el clasificador de flores se aplicaron transformaciones que involucraban giros o rotaciones aleatorias de 0 a 180 grados. Esto se hizo tres veces para incrementar el número de flores campanuláceas e igualar la cantidad de muestras de las flores rosáceas.
+
+\section{Entrenamiento de modelos}
+
+
+
+
+
 
 %\definecolor{mygreen}{rgb}{0,0.6,0}
 %\definecolor{mygray}{rgb}{0.5,0.5,0.5}
