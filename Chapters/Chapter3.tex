@@ -5,6 +5,7 @@
 En este capítulo se describe el diseño e implementación del sistema desarrollado que automatiza la toma de datos de las flores de duraznero a través de fotos de varetas.
 
 \section{Arquitectura del sistema}
+\label{section3.1}
 
 El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero que posteriormente pasará por dos módulos de forma secuencial. El primer módulo, es el encargado de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad de flores y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario que tiene la posibilidad de descargarlos en formato CSV.
 
@@ -38,7 +39,7 @@ Cabe destacar que la realización de este sistema se llevó a cabo en el lenguaj
 	\caption{Módulo de detección y procesamiento.}
 	\label{fig:densidadDeFlores}
 \end{figure}
-
+\newpage
 \section{Preparación de los datos}
 
 La preparación de los datos es una de las partes más criticas durante el desarrollo de un modelo de aprendizaje. Esto debido a que si los datos no se encuentran en las condiciones adecuadas para su uso en un modelo de IA, el modelo no tendrá un buen rendimiento. 
@@ -46,6 +47,7 @@ La preparación de los datos es una de las partes más criticas durante el desar
 El presente trabajo requirió la generación de distintos etiquetados para el conjunto de datos original, debido a la cantidad de modelos utilizados durante su desarrollo.
 
 \subsection{Análisis exploratorio}
+\label{section3.2.1}
 El conjunto de datos original provisto por el INTA contiene las características que se indican en la tabla \ref{tab:flores}. En general, las fotos presentan distintas dimensiones y orientaciones (vertical u horizontal). Por otro lado, se desconoce el tipo de cámara utilizada y el ángulo siempre es cenital.
 
 
@@ -99,7 +101,7 @@ En la figura \ref{fig:three graphs}, se puede observar algunos ejemplos de fotos
 
 Es importante mencionar que, las fotos de varetas tomadas por el cliente, están clasificadas por el tipo de flor que poseen las varetas. Es decir, una foto solo va a contener varetas con flores del tipo rosáceas o campanuláceas, pero no ambos tipos de flor en una misma imagen. En la figura \ref{fig:two graphs} se muestran dos fotos de varetas, una que contiene flores rosáceas y otra que contiene flores campanuláceas.
 
-\begin{figure}[!htp]
+\begin{figure}[ht]
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
@@ -186,25 +188,25 @@ Finalmente, por motivos de tiempo no se lograron etiquetar las 286 imágenes par
 
 \subsubsection{Balanceo del conjunto de datos después del etiquetado}
 
-El conjunto de datos para el detector de los estados fenológicos de la flor, tiene un desbalance que se puede observar en la figura \ref{fig:desbalanceoDeteccion}. Donde, la clase mayoritaria es el estado fenológico con más presencia en las 140 fotos etiquetadas, que en este caso sería la clase flor abierta. Las consecuencias y la solución a este problema de desbalanceo para el detector de estados fenológicos se explica más delante en la presente memoria.
+El conjunto de datos para el detector de los estados fenológicos de la flor tenía un desbalance que se puede observar en la figura \ref{fig:desbalanceoDeteccion}. La clase mayoritaria vendría siendo flor abierta que es el estado fenológico con más presencia en las 140 fotos etiquetadas. Las consecuencias y la solución a este problema de desbalanceo para el detector de estados fenológicos se explica más delante en la presente memoria.
 
-\begin{figure}[htp]
+\begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.6]{./Figures/desbalanceo_detector.png}
+	\includegraphics[scale=.65]{./Figures/desbalanceo_detector.png}
 	\caption{Desbalanceo de clases para el detector de estados fenológicos de la flor de duraznero.}
 	\label{fig:desbalanceoDeteccion}
 \end{figure}
 \newpage
 
-Por otro lado, el conjunto de datos para el clasificador de flores cuenta con un desbalance, entre la cantidad de flores rosáceas y campanuláceas. Este desbalanceo se puede observar en la figura \ref{fig:desbalanceoClass}.
+Por otro lado, el conjunto de datos para el clasificador de flores contaba con un desbalance, entre la cantidad de flores rosáceas y campanuláceas. Este desbalance se observa en la figura \ref{fig:desbalanceoClass}.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.5\textwidth, height=0.5\textwidth]{./Figures/tipodeflor_desbalance.png}
+	\includegraphics[scale=.53]{./Figures/tipodeflor_desbalance.png}
 	\caption{Desbalanceo de clases para el clasificador de flores de duraznero.}
 	\label{fig:desbalanceoClass}
 \end{figure}
-
+\newpage
 \subsection{Aumento de los datos}
 
 Se utilizó \textit{data augmentation} para incrementar la cantidad de imágenes para el conjunto de datos destinados al modelo de detección de los estados fenológicos, además las transformaciones de imágenes aplicadas buscan que el modelo sea capaz de generalizar mejor a pesar de encontrar cambios de brillo, iluminación, rotaciones, etc. Por otro lado, también se hizo uso de esta técnica para intentar balancear el conjunto de datos destinado al clasificador de flores.
@@ -222,9 +224,15 @@ El total de imágenes aumento a 336. Sin embargo, es de tener en cuenta que el n
 
 Para el clasificador de flores se aplicaron transformaciones que involucraban giros o rotaciones aleatorias de 0 a 180 grados. Esto se hizo tres veces para incrementar el número de flores campanuláceas e igualar la cantidad de muestras de las flores rosáceas.
 
-\section{Entrenamiento de modelos}
+\section{Módulo de estimación de longitud}
 
+El objetivo de este módulo es estimar la longitud de las varetas de duraznero presentes en la imagen. Para esto, se utilizó el enfoque de encontrar un objeto de referencia al que se le conocen sus dimensiones en centímetros y, en base a estas dimensiones, se calculan las del objeto objetivo que, en este caso serían las varetas. 
 
+En las fotos provistas por el INTA, como se menciona en la sección \ref{section3.2.1}, contienen una regla de 30 centímetros de largo y 5 de ancho. Esta regla se utilizó como objeto de referencia para la estimación de longitud de las varetas. Por otro lado, para su detección se tuvo que entrenar un modelo con \textit{transfer learning}. El modelo base utilizado era YOLOv8n de Ultralytics que fue preentrenado con el conjunto de datos de COCO.
+
+%Este módulo como se explica en la sección \ref{section3.1}, toma como entrada una foto de vareta de duraznero y aplica un redimensionamiento, donde se reducen las dimensiones de la imagen original a una resolución de 640x640. Este primer paso es requerido, debido a que, los modelos de detección usados en esta sección, fueron preentrenados con imágenes de dichas dimensiones.
+%
+%El primer modelo que toma la imagen es el detector de regla. Este modelo es un YOLOv8n de Ultralytics que fue preentrenado con el conjunto de datos de COCO. Para lograr un buen rendimiento con este modelo se 
 
 
 
