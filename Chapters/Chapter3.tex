@@ -228,15 +228,15 @@ Para el clasificador de flores se aplicaron transformaciones que involucraban gi
 
 El objetivo de este módulo es estimar la longitud de las varetas de duraznero presentes en la imagen. Para esto, se utilizó el enfoque de encontrar un objeto de referencia al que se le conocen sus dimensiones en centímetros y, en base a estas dimensiones, se calculan las del objeto objetivo que en este caso serían las varetas. 
 
-En las fotos provistas por el INTA, como se menciona en la sección \ref{section3.2.1}, contienen una regla de 30 centímetros de largo y 5 de ancho. Esta regla se utilizó como objeto de referencia para la estimación de longitud de las varetas. Para su detección, se tuvo que entrenar un modelo con \textit{transfer learning}. El modelo base utilizado es YOLOv8n de Ultralytics que fue preentrenado con el conjunto de datos de COCO.
+En las fotos provistas por el INTA, como se menciona en la sección \ref{section3.2.1}, contienen una regla de 30 centímetros de largo y 5 de ancho. Esta regla se utilizó como objeto de referencia para la estimación de longitud de las varetas. Para su detección, se tuvo que aplicar \textit{transfer learning} y \textit{fine tunning} a un modelo de detección. El modelo base utilizado fue \textit{YOLOv8n} de Ultralytics que fue preentrenado con el conjunto de datos de COCO.
 
 Una vez detectada la regla, se toman las dimensiones del \textit{bounding box} y se calcula su perímetro en píxeles. Luego, sabiendo que el perímetro en centímetros es 70, se hace una división del perímetro en píxeles entre el perímetro en centímetros, lo que termina dando como resultado, la razón matemática que representa la cantidad de píxeles en la imagen que representan 1 centímetro. Con esto, se obtuvo la conversión para poder aplicarla a los demás objetos en la imagen.
 
-Posteriormente, se realiza la detección de las varetas y para esto, se entrenó un modelo YOLOv8n de Ultralytics preentrenado que en este caso al igual que para el detector de regla, el \textit{bounding box} proporcionado durante el etiquetado, es lo más preciso con el contorno real del objeto, debido a que las dimensiones de este delimitador son fundamentales para la estimación de longitud que se desea obtener. 
+Posteriormente, se realiza la detección de las varetas y para esto, se entrenó un modelo \textit{YOLOv8n} de Ultralytics preentrenado que en este caso al igual que para el detector de regla, el \textit{bounding box} proporcionado durante el etiquetado, es lo más preciso con el contorno real del objeto, debido a que las dimensiones de este delimitador son fundamentales para la estimación de longitud que se desea obtener. 
 
 Cuando se detectan las varetas, se hace la conversión de píxeles a centímetros tomando los anchos y altos de los \textit{bounding boxes} y dividiendolos entre la razón matemática obtenida anteriormente. El resultado obtenido es la estimación en centímetros del alto y ancho de los \textit{bounding boxes}. Con este dato, se toman en cuenta dos cosas. Si el ancho es más grande que el alto en los \textit{bounding boxes}, entonces, la imagen tiene una orientación horizontal. Por lo tanto, el ancho en este caso es la estimación de longitud tanto para la regla como para las varetas. En caso contrario, la imagen se encuentra en orientación vertical y el alto es efectivamente la estimación de longitud de los objetos.
 
-Por otro lado, cabe destacar que las detecciones de las varetas se organiza de menor a mayor recorriendo la imagen en el eje X (izquierda a derecha), si la imagen es vertical. En el caso contrario, se hace de la misma forma, pero sobre el eje Y. Con esta técnica es posible identificar las varetas que se detectan y su respectiva estimación de longitud.
+Por otro lado, cabe destacar que las detecciones de las varetas se organizan de menor a mayor recorriendo la imagen en el eje X (izquierda a derecha), si la imagen es vertical. En el caso contrario, se hace de la misma forma, pero sobre el eje Y. Con esta técnica es posible identificar las varetas que se detectan y su respectiva estimación de longitud.
 
 Por último, se imprime por pantalla la imagen con las detecciones y las mediciones, además se muestra una tabla con los resultados obtenidos en este módulo. Esta tabla posteriormente se une con el resultado del módulo de detección y procesamiento. En la figura \ref{fig:modulo1} se observa un ejemplo del resultado obtenido por pantalla.
 
@@ -267,6 +267,27 @@ Por último, se imprime por pantalla la imagen con las detecciones y las medicio
 \end{figure}
 
 \section{Módulo de detección y procesamiento}
+
+El propósito de este módulo es detectar los estados fenológicos de la flores de duraznero, hacer un conteo total de la cantidad de flores presentes y por vareta, y por último clasificar si las flores por vareta son campanuláceas o rosáceas.
+
+\subsection{Detección de estados fenológicos}
+
+Para la detección de los estados fenológicos se utilizó el modelo de detección \textit{YOLOv8n} de Ultralytics, preentrenado con el conjunto de datos de COCO. Se le aplicó \textit{fine tunning} para ajustarlo a este caso de uso y como parte de la búsqueda del mejor modelo para realizar dicha detección, se probó contra \textit{Faster R-CNN} que es un detector de dos etapas. Al final de las pruebas se seleccionó el modelo con mejores métricas de \textit{mAP}, que en este caso fue \textit{YOLOv8n}. En el siguiente capítulo se detallarán dichas pruebas.
+
+Los resultados de esta detección incluyen no solo la localización e identificación de cada estado fenológico de cada flor, sino también la detección de la vareta. El motivo para detectar nuevamente la vareta va relacionado a la toma de regiones de interés que serán de utilidad más adelante en este mismo módulo.  
+
+En la figura \ref{fig:deteccionEjem}, se pueden observar los resultados que se obtienen del detector de estados fenológicos de la flor de duraznero.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=.35]{./Figures/detección.jpeg}
+	\caption{Imagen de salida del detector de estados fenológicos.}
+	\label{fig:deteccionEjem}
+\end{figure}
+
+\subsection{Conteo de flores}
+
+
 
 %Este módulo como se explica en la sección \ref{section3.1}, toma como entrada una foto de vareta de duraznero y aplica un redimensionamiento, donde se reducen las dimensiones de la imagen original a una resolución de 640x640. Este primer paso es requerido, debido a que, los modelos de detección usados en esta sección, fueron preentrenados con imágenes de dichas dimensiones.
 %
