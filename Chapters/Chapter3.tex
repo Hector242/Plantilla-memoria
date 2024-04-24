@@ -274,7 +274,7 @@ El propósito de este módulo es detectar los estados fenológicos de la flores 
 
 Para la detección de los estados fenológicos se utilizó el modelo de detección \textit{YOLOv8n} de Ultralytics, preentrenado con el conjunto de datos de COCO. Se le aplicó \textit{fine tunning} para ajustarlo a este caso de uso y como parte de la búsqueda del mejor modelo para realizar dicha detección, se probó contra \textit{Faster R-CNN} que es un detector de dos etapas. Al final de las pruebas se seleccionó el modelo con mejores métricas de \textit{mAP}, que en este caso fue \textit{YOLOv8n}. En el siguiente capítulo se detallarán dichas pruebas.
 
-Los resultados de esta detección incluyen no solo la localización e identificación de cada estado fenológico de cada flor, sino también la detección de la vareta. El motivo para detectar nuevamente la vareta va relacionado a la toma de regiones de interés que serán de utilidad más adelante en este mismo módulo.  
+Los resultados de esta detección no solo incluyen la localización e identificación de cada estado fenológico de cada flor, sino también la detección de la vareta. El motivo para detectar nuevamente la vareta va relacionado a la toma de regiones de interés que serán de utilidad más adelante en este mismo módulo.  
 
 En la figura \ref{fig:deteccionEjem}, se pueden observar los resultados que se obtienen del detector de estados fenológicos de la flor de duraznero.
 
@@ -286,6 +286,8 @@ En la figura \ref{fig:deteccionEjem}, se pueden observar los resultados que se o
 \end{figure}
 
 \subsection{Conteo de flores}
+
+Para realizar el conteo total de flores por imagen, primero se posprocesaron las detecciones obtenidas del detector de estados fenológicos, donde se buscaron las centroides de cada \textit{bounding box} y se filtró por los \textit{bounding boxes} que representarán algunas de las siguientes clases: flor abierta, flor cerrada, flor sin petalos e incierto. Luego, a través de un script, se creó una lista de flores detectadas y se utilizaron las centroides tomadas anteriormente para evitar la toma de detecciones que tengan una misma posición. De esta  forma, no se toman en cuenta los duplicados.
 
 
 
