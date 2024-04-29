@@ -289,11 +289,36 @@ En la figura \ref{fig:deteccionEjem}, se pueden observar los resultados que se o
 
 Para realizar el conteo total de flores por imagen, primero se posprocesan las detecciones obtenidas del detector de estados fenológicos. Luego, se buscan las centroides de cada \textit{bounding box} y se filtran las detecciones pertenecientes a algunas de las siguientes clases: flor abierta, flor cerrada, flor sin petalos e incierto. Posteriormente, a través de un script, se crea una lista de flores detectadas y se utilizan las centroides tomadas anteriormente para evitar la toma de detecciones que tuvieran una misma posición. De esta  forma, no se toman en cuenta las detecciones duplicadas.
 
-Para realizar el conteo de flores por vareta se requirió de otro posprocesamiento de los resultados obtenidos del detector de estados fenológicos. En este caso, se toma en cuenta las detecciones pertenecientes a la clase vareta y, al igual que el módulo que estima la longitud de las varetas, se busca el ancho y el alto de los \textit{bounding boxes} de esta clase para, posteriormente, identificar si la imagen posee una orientación horizontal o en vertical. El dato de la orientación de la imagen es importante para conocer como se tiene que recorrer la foto, de forma que se mantenga el mismo identificador de vareta que se utiliza en el módulo de estimación de longitudes.
+Para realizar el conteo de flores por vareta, se requirió de otro posprocesamiento de los resultados obtenidos del detector de estados fenológicos. En este caso, se toma en cuenta las detecciones pertenecientes a la clase vareta y, al igual que el módulo que estima la longitud de las varetas, se busca el ancho y el alto de los \textit{bounding boxes} de esta clase para, posteriormente, identificar si la imagen posee una orientación horizontal o en vertical. El dato de la orientación de la imagen es importante para conocer como se tiene que recorrer la foto, de forma que se mantenga el mismo identificador de vareta que se utiliza en el módulo de estimación de longitudes.
 
-Una vez se conoce la orientación de la imagen, se ordenan las detecciones de las varetas y se empieza a recorrer la imagen en el eje X si es vertical o en el eje Y si es horizontal. En cada iteración se crea un identificador para cada vareta encontrada. Durante estás iteraciones, para aislar cada vareta de forma de poder contar sus flores, se tuvo que utilizar el enfoque de buscar y crear regiones de interés.
+Una vez se conoce la orientación de la imagen, se ordenan las detecciones de las varetas y se empieza a recorrer la foto en el eje X si es vertical o en el eje Y si es horizontal. En cada iteración se crea un identificador para cada vareta encontrada. Durante estás iteraciones, para aislar cada vareta de forma de poder contar sus flores, se tuvo que utilizar el enfoque de buscar y crear regiones de interés.
 
+La región de interés se genera a partir de las coordenadas del \textit{bounding box} perteneciente a la clase vareta. Una vez se obtienen dichas coordenadas, se oscurece la imagen pasando cada píxel a cero y se encienden los píxeles dentro de la región de interés. Posteriormente, se realiza una operación \textit{bitwise and} entre la imagen con la región de interés y la original, dando como resultado, la imagen oscurecida con solo una vareta iluminada. Este procedimiento lo realiza el script por cada vareta encontrada y en el orden mencionado anteriormente.
 
+Adicionalmente, por cada región de interés, se procede a filtrar las centroides pertenecientes a dicha región. De esta forma, se genera una lista con las flores encontradas que representa la cantidad de flores por vareta. En la figura \ref{fig:regionInte}, se puede observar un ejemplo del resultado de esta operación. 
+
+\begin{figure}[ht]
+     \centering
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[scale=0.13]{./Figures/original.jpeg}
+         \caption{imagen original.}
+         \label{fig:1de34}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[scale=0.25]{./Figures/1stCount.jpeg}
+         \caption{Primera región de interés.}
+         \label{fig:2de34}
+     \end{subfigure}
+        \caption{Ejemplo de conteo de flores por vareta con regiones de interés.}
+        \label{fig:regionInte}
+\end{figure}
+
+Cabe destacar que para que este procedimiento sea efectivo, es necesario que cada vareta tenga una distancia apropiada entre si. Bajo esta condición, se evita tomar las flores pertenecientes a una vareta vecina. 
+
+\subsection{Clasificador de flores}
 
 %Este módulo como se explica en la sección \ref{section3.1}, toma como entrada una foto de vareta de duraznero y aplica un redimensionamiento, donde se reducen las dimensiones de la imagen original a una resolución de 640x640. Este primer paso es requerido, debido a que, los modelos de detección usados en esta sección, fueron preentrenados con imágenes de dichas dimensiones.
 %
