@@ -320,14 +320,14 @@ Cabe destacar que para que este procedimiento sea efectivo, es necesario que cad
 
 \subsection{Clasificador de flores}
 
-El clasificador de flores de duraznero es la última fase que recorre el sistema antes de finalizar el proceso. El desarrollo de este componente requirió diseñar una red neuronal convolucional para hacer distinción entre flores del tipo rosáceas o campanuláceas. En este caso, no se realizó \textit{transfer learning} dado que la clasificación no era muy compleja y se tenía una gran cantidad de muestras para el entrenamiento. En la tabla \ref{tab:FlowerCNN}, se puede observar la arquitectura de esta red neuronal convolucional.
+El clasificador de flores de duraznero es la última fase que recorre el sistema antes de finalizar el proceso y generar la tabla final de resultados. El desarrollo de este componente requirió diseñar una red neuronal convolucional para hacer distinción entre flores del tipo rosáceas o campanuláceas. En este caso, no se realizó \textit{transfer learning} dado que la clasificación no era muy compleja y se tenía una gran cantidad de muestras para el entrenamiento. En la tabla \ref{tab:FlowerCNN}, se puede observar la arquitectura de esta red neuronal convolucional.
 
 \begin{table}[h]
 	\centering
 	\caption{Arquitectura de CNN para clasifiación de flores de duraznero.}
 	\begin{tabular}{l c c}    
 		\toprule
-		\textbf{Layer}     & \textbf{Output shape} & \textbf{Param} \\
+		\textbf{Capaz}     & \textbf{Dimensiones de salida} & \textbf{Parámetros} \\
 		\midrule
 		Conv2d-1.          & [-1, 16, 25, 25] &  448\\
 		MaxPool2d-2.       & [-1, 16, 12, 12] & 0\\
@@ -344,7 +344,17 @@ El clasificador de flores de duraznero es la última fase que recorre el sistema
 	\label{tab:FlowerCNN}
 \end{table}  
 
-Esta red convolucional cuenta con un total de...
+Esta red convolucional cuenta con un total de 97.698 parámetros entrenables. Por otro lado, se le tuvo que aplicar métodos como regulación \textit{L2} y \textit{DropOut} para disminuir el sobre ajuste. Las pruebas del rendimiento de este modelo y el sobre ajuste se explicarán con más detalle en el capítulo siguiente.
+
+Este modelo se integra y se ejecuta luego de encontrar y delimitar la región de interés en cada vareta. Al momento de tomar la región de interés y contar la cantidad de flores en dicha región, se filtra por aquellas detecciones que representan a las clases flor abierta y flor cerrada, para posteriormente recortar dicha detección utilizando sus coordenadas provistas por el \textit{bounding box}. Una vez recortada la imagen de la flor, se redimensiona a una resolución de 25 x 25 y se envía al clasificador. Finalmente, el clasificador a través de su última capa totalmente conectada, produce una probabilidad para cada clase, donde se selecciona la clase con la probabilidad más alta. Este proceso se repite por cada flor abierta y cerrada encontrada en la vareta. 
+
+Al final, cuando se clasificaron todas las flores abiertas y cerradas de una misma vareta, se guarda el resultado en un arreglo de datos y se toma la categoría con mayor aparición en dicho arreglo. Es decir, este arreglo permite que si el clasificador se equivoca categorizando una flor, se pueda emendar dicho error con un proceso de votación. Este paso es importante porque una misma vareta no puede tener más de una clase. 
+
+Por otro lado, este proceso iterativo de recorrer la imagen y clasificar cada vareta con un tipo de flor, permite que en el futuro, se pueda tener una imagen que contenga varetas con distintas categorías.
+\newpage
+\section{Integración de módulos y generación de resultado}
+
+
 
 %Este módulo como se explica en la sección \ref{section3.1}, toma como entrada una foto de vareta de duraznero y aplica un redimensionamiento, donde se reducen las dimensiones de la imagen original a una resolución de 640x640. Este primer paso es requerido, debido a que, los modelos de detección usados en esta sección, fueron preentrenados con imágenes de dichas dimensiones.
 %
