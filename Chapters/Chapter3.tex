@@ -390,6 +390,12 @@ En la figura \ref{fig:TablaResultados3}, se muestra un ejemplo de ambas tablas u
 \newpage
 \section{Interfaz de usuario}
 
+La interfaz gráfica del programa fue realizada con \textit{Streamlit}, que es una herramienta que permite compartir aplicaciones \textit{web}, utilizando \textit{Python}. Adicionalmente, Esta herramienta no requiere ningún conocimiento previo en desarrollo de \textit{front end}. 
+
+Para el desarrollo del \textit{front end} con \textit{Streamlit} y para ejecutar el proyecto en un entorno local, fue necesario crear una estructura de directorios que contuviesen los modelos de IA, los \textit{scripts} de \textit{Python} para ejecutar cada módulo, los \textit{logs} generados por el sistema y por último, para tener un conocimiento de los experimentos realizados, un directorio para guardar las \textit{notebooks} utilizadas. Para su ejecución, se creó un entorno virtual con \textit{Python}, que contiene todas las bibliotecas y dependencias necesarias.
+
+Los \textit{scripts} de \textit{Python} son cuatro en total, donde dos ellos llamados \textit{densidad vareta.py} y \textit{vareta size.py} representan los módulos de detección y procesamiento, y estimación de longitud respectivamente. El \textit{script} de \textit{flower classifier.py} contiene la red neuronal convolucional desarrollada para el clasificador de flores. Por último, se tiene el \textit{script} principal que ejecuta la interfaz de usuario con \textit{Streamlit} y orquestra los módulos del sistema.
+
 %Este módulo como se explica en la sección \ref{section3.1}, toma como entrada una foto de vareta de duraznero y aplica un redimensionamiento, donde se reducen las dimensiones de la imagen original a una resolución de 640x640. Este primer paso es requerido, debido a que, los modelos de detección usados en esta sección, fueron preentrenados con imágenes de dichas dimensiones.
 %
 %El primer modelo que toma la imagen es el detector de regla. Este modelo es un YOLOv8n de Ultralytics que fue preentrenado con el conjunto de datos de COCO. Para lograr un buen rendimiento con este modelo se 
