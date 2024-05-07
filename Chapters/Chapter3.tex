@@ -394,8 +394,55 @@ La interfaz gráfica del programa fue realizada con \textit{Streamlit}, que es u
 
 Para el desarrollo del \textit{front end} con \textit{Streamlit} y para ejecutar el proyecto en un entorno local, fue necesario crear una estructura de directorios que contuviesen los modelos de IA, los \textit{scripts} de \textit{Python} para ejecutar cada módulo, los \textit{logs} generados por el sistema y por último, para tener un conocimiento de los experimentos realizados, un directorio para guardar las \textit{notebooks} utilizadas. Para su ejecución, se creó un entorno virtual con \textit{Python}, que contiene todas las bibliotecas y dependencias necesarias.
 
-Los \textit{scripts} de \textit{Python} son cuatro en total, donde dos ellos llamados \textit{densidad vareta.py} y \textit{vareta size.py} representan los módulos de detección y procesamiento, y estimación de longitud respectivamente. El \textit{script} de \textit{flower classifier.py} contiene la red neuronal convolucional desarrollada para el clasificador de flores. Por último, se tiene el \textit{script} principal que ejecuta la interfaz de usuario con \textit{Streamlit} y orquestra los módulos del sistema.
+Los \textit{scripts} de \textit{Python} son cuatro en total, donde dos ellos llamados \textit{densidad vareta.py} y \textit{vareta size.py} representan los módulos de detección y procesamiento, y estimación de longitud respectivamente. El \textit{script} de \textit{flower classifier.py} contiene la red neuronal convolucional desarrollada para el clasificador de flores. Por último, se tiene el \textit{script} principal que ejecuta la interfaz de usuario con \textit{Streamlit} y orquesta los módulos del sistema.
 
+La interfaz de usuario cuenta con una página de presentación, donde se observa el titulo del proyecto, las tecnologías utilizadas y el propósito del mismo. En la figura \ref{fig:pantallaInicio}, se muestra un ejemplo de esta pantalla de inicio.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.13]{./Figures/pantallaInicio.png}
+	\caption{Pantalla de inicio del programa.}
+	\label{fig:pantallaInicio}
+\end{figure}
+
+Como el programa se ejecuta en un entorno local, \textit{Streamlit}, utiliza el \textit{localhost} y el puerto 8501 por defecto para desplegar el sitio \textit{web}.
+
+En el panel izquierdo se puede observar un desplegable que permite seleccionar el tipo de actividad. Para este desarrollo solo existe la detección de objetos. Al seleccionar detección de objetos, se muestra la siguiente página, donde se pedirá insertar una foto de máximo 200 MB en los formatos JPG, PNG o JPEG. La imagen se puede arrastrar directamente hasta el rectángulo de carga o se puede presionar directamente el botón de \textit{Browse files}. En la figura \ref{fig:pantalla2}, se presenta un ejemplo de esta segunda página destinada para subir la foto.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.13]{./Figures/pantalla2.png}
+	\caption{Página para cargar imagen.}
+	\label{fig:pantalla2}
+\end{figure}
+
+Al subir una imagen, se muestra la imagen subida y se habilita una barra que modifica el parámetro de nivel de confianza (que va de un intervalo de 0 a 1) del algoritmo que detecta las varetas para el módulo de estimación de longitud y luego se habilita otra barra con el mismo propósito pero para el segundo módulo. El objetivo de estas barras es darle al INTA la flexibilidad de hacer que el algoritmo sea más estricto con las detecciones o más flexible. Por otro lado, cada barra inicia en un valor por defecto, en el caso del módulo de estimación de longitud, este valor es de 0.6 y el módulo de detección y procesamiento es de 0.4. Se seleccionaron estos valores por defecto porque son los valores donde ambos módulos en general tienen un buen rendimiento.
+
+Las figuras \ref{fig:barra1} y \ref{fig:barra2}, se muestran dichas barras con una foto de vareta de prueba.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.13]{./Figures/barra1.png}
+	\caption{Barra de confianza para el módulo de estimación de longitud.}
+	\label{fig:barra1}
+\end{figure}
+
+\newpage
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.13]{./Figures/barra2.png}
+	\caption{Barra de confianza para el módulo de detección y procesamiento.}
+	\label{fig:barra2}
+\end{figure}
+
+Por último, al final de toda la ejecución como se mencionó anteriormente, se presentan dos botones que permiten descargar los resultados en los formatos CSV y \textit{Excel} respectivamente. En la figura \ref{fig:botonesinf}, se pueden observar dichos botones.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.13]{./Figures/botonesinf.png}
+	\caption{Botones de descarga de resultados.}
+	\label{fig:botonesinf}
+\end{figure}
 %Este módulo como se explica en la sección \ref{section3.1}, toma como entrada una foto de vareta de duraznero y aplica un redimensionamiento, donde se reducen las dimensiones de la imagen original a una resolución de 640x640. Este primer paso es requerido, debido a que, los modelos de detección usados en esta sección, fueron preentrenados con imágenes de dichas dimensiones.
 %
 %El primer modelo que toma la imagen es el detector de regla. Este modelo es un YOLOv8n de Ultralytics que fue preentrenado con el conjunto de datos de COCO. Para lograr un buen rendimiento con este modelo se 
