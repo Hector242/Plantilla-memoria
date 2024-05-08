@@ -7,8 +7,65 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
+En este capítulo se describen los ensayos realizados y se presentan y comparan los resultados obtenidos.
 
-\section{Pruebas funcionales del hardware}
+\section{Banco de pruebas}
 \label{sec:pruebasHW}
 
-La idea de esta sección es explicar cómo se hicieron los ensayos, qué resultados se obtuvieron y analizarlos.
+Para el desarrollo del presente proyecto se utilizaron 3 bancos de pruebas, con las siguientes especificaciones técnicas:
+
+\begin{itemize}
+\item Banco de pruebas \textit{Laptop} \textit{MacBook Pro} - \textit{hardware} disponible:
+	\begin{itemize}
+	\item \textbf{OS}: \textit{MacOS Sonoma} 14.
+	\item \textbf{CPU}: Apple M1 Pro.
+	\item \textbf{RAM}: 32 GB.
+	\item \textbf{GPU}: No contiene.
+	\end{itemize}
+\item Banco de pruebas \textit{Laptop} \textit{ASUS TUF GAMING F15} - \textit{hardware} disponible:
+	\begin{itemize}
+	\item \textbf{OS}: \textit{Windows} 11.
+	\item \textbf{CPU}: \textit{Intel(R) Core(TM)} i5-11260H.
+	\item \textbf{RAM}: 16 GB.
+	\item \textbf{GPU}: \textit{NVIDIA GeForce RTX} 3050.
+	\end{itemize}
+\item Banco de pruebas \textit{Google Colab Pro} - \textit{hardware} disponible:
+	\begin{itemize}
+	\item \textbf{OS}: desconocido.
+	\item \textbf{CPU}: desconocido.
+	\item \textbf{RAM}: 12,5 GB.
+	\item \textbf{GPU}: T4.
+	\end{itemize}
+\end{itemize}
+
+\section{Desempeño de modelos}
+\label{sec:desempeñoMod}
+
+Para medir el desempeño de los modelos de AI utilizados durante la ejecución de este proyecto, se decidió emplear la métrica \textit{mAP}. Esta métrica evalúa tanto la clasificación del objeto como la ubicación del \textit{bounding box} a través del \textit{Avarage Precision} (\textit{AP}) que se representa en la ecuación \ref{eq:AP}.
+
+\begin{equation}
+    \label{eq:AP}
+    \text{AP} = \frac{1}{n} \sum_{k=1}^n \text{Precisión en } k \times \text{Rel}_{k}
+\end{equation}
+
+Siendo
+\begin{itemize}
+    \item \( n \) el número total de elementos recuperados.
+    \item \(\text{Precision at } k\) la precisión en el \( k \)-ésimo punto de recuperación.
+    \item \(\text{Rel}_{k}\) un indicador binario que denota si el elemento en el \( k \)-ésimo punto de recuperación es relevante (\( \text{Rel}_{k} = 1 \)) o no relevante (\( \text{Rel}_{k} = 0 \)).
+\end{itemize}
+
+Luego, al promediar los valores de \textit{AP} entre todas las clases, se obtiene respectivamente el \textit{mAP} y la ecuación quedaría como se muestra en \ref{eq:mAP}.
+
+\begin{equation}
+    \label{eq:mAP}
+    \text{mAP} = \frac{1}{C} \sum_{c=1}^C \text{AP}_c
+\end{equation}
+
+Donde 
+\begin{itemize}
+	\item \( C \) es el número total de clases o consultas.
+    \item \( AP \) es el Average Precision calculado para la clase o consulta.
+\end{itemize}
+
+
