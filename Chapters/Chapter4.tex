@@ -68,4 +68,36 @@ Donde
     \item \( AP \) es el Average Precision calculado para la clase o consulta.
 \end{itemize}
 
+\subsection{Desempeño del detector de regla}
 
+El detector de la regla como se mencionó en el capítulo anterior, cumple una función fundamental para la estimación de la longitud de la vareta. Por otro lado, el entrenamiento de este modelo se realizó con los siguientes hiperparámetros:
+
+\begin{itemize}
+	\item Epocas: 100.
+    \item Tamaño de imagen de entrada: 640 x 640.
+    \item \textit{Batch}: 16.
+    \item \textit{Learning rate}: 0.01.
+\end{itemize}
+
+Los resultados obtenidos para la detección de este elemento contra el conjunto de datos de prueba se observan en la tabla \ref{tab:resultadosRegla}.
+
+\begin{table}[h]
+	\centering
+	\caption{Métricas de detección para el detector de regla.}
+	\begin{tabular}{c c c c c c c}    
+		\toprule
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{Muestras}&\textbf{Precision} &\textbf{Recall}&\textbf{mAP 50}&\textbf{mAP 50-95}\\
+		\midrule
+		Todas & 13 & 13 & 0.996 & 1.0 & 0.995 & 0.995\\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:resultadosRegla}
+\end{table}
+
+Los resultados fueron muy buenos en general. El modelo puede detectar la regla sin dificultad en el 99\% de los casos.
+
+\subsection{Desempeño del detector de vareta}
+
+\section{Desempeño de módulos}
+\label{sec:desempeñoModulos}
