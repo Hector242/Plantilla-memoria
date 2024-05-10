@@ -208,7 +208,7 @@ Por otro lado, el conjunto de datos para el clasificador de flores contaba con u
 \end{figure}
 \newpage
 \subsection{Aumento de los datos}
-
+\label{aumentoDatos}
 Se utilizó \textit{data augmentation} para incrementar la cantidad de imágenes para el conjunto de datos destinados al modelo de detección de los estados fenológicos, además las transformaciones de imágenes aplicadas buscan que el modelo sea capaz de generalizar mejor a pesar de encontrar cambios de brillo, iluminación, rotaciones, etc. Por otro lado, también se hizo uso de esta técnica para intentar balancear el conjunto de datos destinado al clasificador de flores.
 
 Para el detector de estados fenológico de las flores de duraznero se implementaron las siguientes transformaciones:
@@ -220,7 +220,16 @@ Para el detector de estados fenológico de las flores de duraznero se implementa
 	\item Cambio de brillo por \textit{bounding box}.
 \end{enumerate}
 
-El total de imágenes aumento a 336. Sin embargo, es de tener en cuenta que el número de imágenes disponible sigue siendo inferior al recomendado para el entrenamiento y validación de los distintos modelos de aprendizaje utilizados en la presente memoria. Por otro lado, con esta técnica no se pudo resolver el desbalance de datos observado en la figura \ref{fig:desbalanceoClass}, debido a que no hay una transformación directa de la imagen que permita la eliminación de las clases mayoritarias presentes en la detección, más adelante en la presente memoria se explica el método implementado para mitigar el desbalanceo en este caso. 
+El total de imágenes aumento a 336. Sin embargo, es de tener en cuenta que el número de imágenes disponible sigue siendo inferior al recomendado para el entrenamiento y validación de los distintos modelos de aprendizaje utilizados en la presente memoria. Por otro lado, con esta técnica no se pudo resolver el desbalance de datos observado en la figura \ref{fig:desbalanceoClass}, debido a que no hay una transformación directa de la imagen que permita la eliminación de las clases mayoritarias presentes en la detección, más adelante en la presente memoria se explica el método implementado para mitigar el desbalanceo en este caso.
+
+El detector de vareta también contó con un aumento de los datos para mejorar el rendimiento del modelo de detección utilizado y para incrementar la cantidad de muestras que se tenían a un total de 243 imágenes. Las transformaciones utilizadas fueron:
+
+\begin{enumerate}
+	\item Rotación horizontal.
+	\item Cambio de brillo entre un -15\% y 15\%. 
+	\item Desenfoque un 1 px.
+	\item Ruido hasta un 0.1\% en píxeles.
+\end{enumerate}
 
 Para el clasificador de flores se aplicaron transformaciones que involucraban giros o rotaciones aleatorias de 0 a 180 grados. Esto se hizo tres veces para incrementar el número de flores campanuláceas e igualar la cantidad de muestras de las flores rosáceas.
 
@@ -265,6 +274,7 @@ Por último, se imprime por pantalla la imagen con las detecciones y las medicio
         \caption{Resultados del módulo de estimación de longitud.}
         \label{fig:modulo1}
 \end{figure}
+\newpage
 
 \section{Módulo de detección y procesamiento}
 
@@ -343,7 +353,7 @@ El clasificador de flores de duraznero es la última fase que recorre el sistema
 	\end{tabular}
 	\label{tab:FlowerCNN}
 \end{table}  
-
+\newpage
 Esta red convolucional cuenta con un total de 97.698 parámetros entrenables. Por otro lado, se le tuvo que aplicar métodos como regulación \textit{L2} y \textit{DropOut} para disminuir el sobre ajuste. Las pruebas del rendimiento de este modelo y el sobre ajuste se explicarán con más detalle en el capítulo siguiente.
 
 Este modelo se integra y se ejecuta luego de encontrar y delimitar la región de interés en cada vareta. Al momento de tomar la región de interés y contar la cantidad de flores en dicha región, se filtra por aquellas detecciones que representan a las clases flor abierta y flor cerrada, para posteriormente recortar dicha detección utilizando sus coordenadas provistas por el \textit{bounding box}. Una vez recortada la imagen de la flor, se redimensiona a una resolución de 25 x 25 y se envía al clasificador. Finalmente, el clasificador a través de su última capa totalmente conectada, produce una probabilidad para cada clase, donde se selecciona la clase con la probabilidad más alta. Este proceso se repite por cada flor abierta y cerrada encontrada en la vareta. 
