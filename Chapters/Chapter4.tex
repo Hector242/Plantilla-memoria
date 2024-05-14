@@ -88,7 +88,7 @@ Los resultados obtenidos para la detección de este elemento contra el conjunto 
 		\toprule
 		\textbf{Clase}&\textbf{Imágenes}&\textbf{Objetos encontrados}&\textbf{Precision} &\textbf{Recall}&\textbf{mAP 50}&\textbf{mAP 50-95}\\
 		\midrule
-		Todas & 13 & 13 & 0.996 & 1.0 & 0.995 & 0.995\\		
+		Regla & 13 & 13 & 0.996 & 1.0 & 0.995 & 0.995\\		
 		\bottomrule
 		\hline
 	\end{tabular}
@@ -99,7 +99,7 @@ Los resultados fueron muy buenos en general. El modelo puede detectar la regla s
 
 \subsection{Desempeño del detector de vareta}
 
-El detector de vareta destinado para el módulo de estimación de longitud, tiene como modelo base un \textit{YOLOv8n} y se entreno bajo los siguientes hiperparámetros:
+El detector de vareta destinado para el módulo de estimación de longitud, tiene como modelo base un \textit{YOLOv8n} entrenado bajo los siguientes hiperparámetros:
 
 \begin{itemize}
 	\item Epocas: 100.
@@ -119,14 +119,14 @@ Los resultados obtenidos contra el conjunto de datos de pruebas para el modelo s
 		\toprule
 		\textbf{Clase}&\textbf{Imágenes}&\textbf{Objetos encontrados}&\textbf{Precision} &\textbf{Recall}&\textbf{mAP 50}&\textbf{mAP 50-95}\\
 		\midrule
-		Todas & 10 & 40 & 1.0 & 0.923 & 0.983 & 0.574\\		
+		Vareta & 10 & 40 & 1.0 & 0.923 & 0.983 & 0.574\\		
 		\bottomrule
 		\hline
 	\end{tabular}
 	\label{tab:resultadosVareta}
 \end{table}
 
-Como se puede observar, el modelo sin aumento de datos, consigue detectar un total de 40 varetas en 10 imágenes, donde todas las detecciones fueron correctas. Por otro lado, en promedio, el modelo logra en un 98\% de los casos una alta precisión con sus detecciones cuando se requiere un nivel de confianza igual al 50\%, pero el \textit{mAP} 50-95, indica que solo un 57\% de los casos el nivel de confianza esta entre el 50\% y 95\%. Por este motivo, se decidió aplicar aumento de datos.
+Como se puede observar, el modelo sin aumento de datos, consigue detectar un total de 40 varetas en 10 imágenes, donde todas las detecciones fueron correctas. Por otro lado, el modelo logra una precisión promedio de detección del 98.3\% cuando se requiere un nivel de confianza igual al 50\%, pero el \textit{mAP} 50-95, indica que en los casos donde el nivel de confianza esta entre el 50\% y 95\%, la precisión promedio, es de un 57.4\%. Por este motivo, se decidió aplicar aumento de datos.
 
 Los resultados con aumento de datos se pueden observar en la tabla \ref{tab:resultadosVaretaConAug}.
 
@@ -137,16 +137,53 @@ Los resultados con aumento de datos se pueden observar en la tabla \ref{tab:resu
 		\toprule
 		\textbf{Clase}&\textbf{Imágenes}&\textbf{Objetos encontrados}&\textbf{Precision} &\textbf{Recall}&\textbf{mAP 50}&\textbf{mAP 50-95}\\
 		\midrule
-		Todas & 10 & 40 & 0.974 & 0.975 & 0.976 & 0.702\\		
+		Vareta & 10 & 40 & 0.974 & 0.975 & 0.976 & 0.702\\		
 		\bottomrule
 		\hline
 	\end{tabular}
 	\label{tab:resultadosVaretaConAug}
 \end{table}
 
-Se observa que con aumento de datos, el modelo mejoró la cantidad de veces que se detecta la clase vareta en un 5.1\% con respecto al modelo sin aumento de datos. Por otro lado, también se incrementó a 70\% la cantidad de casos donde se detecta de forma precisa, esta clase, con un nivel de confianza que va entre  50\% y 95\%.
+Luego de aplicar aumento de datos, se observa que, el modelo mejoró la cantidad de veces donde detecta de forma precisa a la clase vareta en un 5.2\% con respecto al modelo sin aumento de datos. Por otro lado, también se incrementó la precisión promedio al 70.2\% cuando se tiene un umbral de confianza que va entre 50\% y 95\%.
+
+Con esto se destaca que, el aumento de datos mejoró el rendimiento del modelo de forma considerable.
 
 \subsection{Desempeño del detector de estados fenológicos}
+
+La detección de estados fenológicos, como se mencionó en el capítulo anterior, fue probada con dos modelos de IA que se ajustan para este caso de uso. Por un lado, se probó con un detector de dos etapas como es \textit{Faster R-CNN} y por otro lado con un detector de una etapa como \textit{YOLOv8}. Ambos casos, se probaron con y sin el uso de aumento de datos. Los resultados fueron los siguientes:
+
+\subsubsection{Resultados con \textit{Faster R-CNN} sin aumento de datos}
+
+Los resultados por clase se muestran en la tabla \ref{tab:resultadosFasterSinAug}.
+
+\begin{table}[h]
+	\centering
+	\caption{Métricas de detección para \textit{Faster R-CNN} sin aumento de datos.}
+	\begin{tabular}{c c c c c c c}    
+		\toprule
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\midrule
+		Todas & 14 & 0.3492 & 0.5970 & 0.3605\\
+		Flor abierta & 14 & 0.4313 & - & - \\
+		Flor cerrada & 14 & 0.1525 & - & - \\
+		Flor sin pétalos & 14 & 0.3735 & - & - \\
+		Incierto & 14 & 0.0942 & - & - \\
+		Vareta & 14 & 0.6947 & - & - \\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:resultadosFasterSinAug}
+\end{table}
+\newpage
+La precisión promedio de detección entre todas las clases es de un 34.9\%, lo que significa que, el modelo tiene una precisión del 34.9\% al detectar las diferentes clases en el conjunto de datos. Además, El modelo logra una precisión de detección del 59.7\% cuando se considera un umbral de confianza igual al 50\% y para detecciones con un nivel de confianza mayor al 50\% se tiene una precisión del 36.1\%.
+
+Por otro lado, al evaluar la precisión promedio de detección por clase, se observa que la categoría \textit{vareta}, es la clase a la que el modelo detecta con mejor precisión promedio con 69.5\%, seguida por \textit{flor abierta} con 43.13\% y por \textit{flor sin pétalos} con 37.35\%. Además, se muestra que el modelo detecta con dificultad las categorías \textit{flor cerrada} con un \textit{mAP} de 12.25\% e \textit{incierto} con 9.42\%.
+
+Este bajo porcentaje de \textit{mAP} para la clase \textit{flor cerrada} con respecto a las otras categorías presentes, se debe al desbalance de datos observado en la sección \ref{desbalanceAfterLabeled} y al rendimiento del modelo al intentar detectar objetos pequeños en la imagen. Adicionalmente, para la categoría \textit{incierto} no se cuenta con una cantidad de muestras significativas y consistente a través del conjunto de datos, lo que explica la baja precisión promedio obtenida para esta clase.
+
+Para mejorar estos resultados se implementó el aumento de datos mencionado en la sección \ref{aumentoDatos}.
+
+\subsubsection{Resultados con \textit{Faster R-CNN} con aumento de datos}
 
 \section{Desempeño de módulos}
 \label{sec:desempeñoModulos}
