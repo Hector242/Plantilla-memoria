@@ -179,11 +179,34 @@ La precisión promedio de detección entre todas las clases es de un 34.9\%, lo 
 
 Por otro lado, al evaluar la precisión promedio de detección por clase, se observa que la categoría \textit{vareta}, es la clase a la que el modelo detecta con mejor precisión promedio con 69.5\%, seguida por \textit{flor abierta} con 43.13\% y por \textit{flor sin pétalos} con 37.35\%. Además, se muestra que el modelo detecta con dificultad las categorías \textit{flor cerrada} con un \textit{mAP} de 12.25\% e \textit{incierto} con 9.42\%.
 
-Este bajo porcentaje de \textit{mAP} para la clase \textit{flor cerrada} con respecto a las otras categorías presentes, se debe al desbalance de datos observado en la sección \ref{desbalanceAfterLabeled} y al rendimiento del modelo al intentar detectar objetos pequeños en la imagen. Adicionalmente, para la categoría \textit{incierto} no se cuenta con una cantidad de muestras significativas y consistente a través del conjunto de datos, lo que explica la baja precisión promedio obtenida para esta clase.
+Este bajo porcentaje de \textit{mAP} para la clase \textit{flor cerrada} con respecto a las otras categorías presentes, se puede deber al desbalance de datos observado en la sección \ref{desbalanceAfterLabeled} y al rendimiento del modelo al intentar detectar objetos pequeños en la imagen. Adicionalmente, para la categoría \textit{incierto} no se cuenta con una cantidad de muestras significativas y consistente a través del conjunto de datos, lo que explica la baja precisión promedio obtenida para esta clase.
 
 Para mejorar estos resultados se implementó el aumento de datos mencionado en la sección \ref{aumentoDatos}.
 
 \subsubsection{Resultados con \textit{Faster R-CNN} con aumento de datos}
+
+Los resultados obtenidos con \textit{Faster R-CNN} con aumento de datos se encuentran en la tabla \ref{tab:resultadosFasterConAug}. 
+
+\begin{table}[h]
+	\centering
+	\caption{Métricas de detección para \textit{Faster R-CNN} con aumento de datos.}
+	\begin{tabular}{c c c c c c c}    
+		\toprule
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\midrule
+		Todas & 14 & 0.3733 & 0.6328 & 0.3793\\
+		Flor abierta & 14 & 0.5143 & - & - \\
+		Flor cerrada & 14 & 0.2049 & - & - \\
+		Flor sin pétalos & 14 & 0.3290 & - & - \\
+		Incierto & 14 & 0.0887 & - & - \\
+		Vareta & 14 & 0.7294 & - & - \\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:resultadosFasterConAug}
+\end{table}
+
+Como se puede observar, los resultados obtenidos con el aumento de datos descrito en \ref{aumentoDatos}, se logra mejorar la precisión promedio de detección para las clases \textit{flor abierta}, \textit{flor cerrada} y \textit{vareta}. Con esto, la métrica \textit{mAP} medida entre todas las clases mejora a 37.33\%, adicionalmente también aumenta a 63.26\% cuando se configura un umbral de confianza de detección igual al 50\% y a un 37.93\% cuando el nivel de confianza en la detección es superior al 50\%.
 
 \section{Desempeño de módulos}
 \label{sec:desempeñoModulos}
