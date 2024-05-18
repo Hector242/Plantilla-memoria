@@ -152,9 +152,9 @@ Con esto se destaca que, el aumento de datos mejoró el rendimiento del modelo d
 
 La detección de estados fenológicos, como se mencionó en el capítulo anterior, fue probada con dos modelos de IA que se ajustan para este caso de uso. Por un lado, se probó con un detector de dos etapas como es \textit{Faster R-CNN} y por otro lado con un detector de una etapa como \textit{YOLOv8}. Ambos casos, se probaron con y sin el uso de aumento de datos. Los resultados fueron los siguientes:
 
-\subsubsection{Resultados con \textit{Faster R-CNN} sin aumento de datos}
+\subsubsection{\textit{Faster R-CNN} sin aumento de datos}
 
-Los resultados por clase se muestran en la tabla \ref{tab:resultadosFasterSinAug}.
+Los resultados de detección contra el conjunto de prueba se muestra en la tabla \ref{tab:resultadosFasterSinAug}.
 
 \begin{table}[h]
 	\centering
@@ -174,7 +174,7 @@ Los resultados por clase se muestran en la tabla \ref{tab:resultadosFasterSinAug
 	\end{tabular}
 	\label{tab:resultadosFasterSinAug}
 \end{table}
-\newpage
+
 La precisión promedio de detección entre todas las clases es de un 34.9\%, lo que significa que, el modelo tiene una precisión del 34.9\% al detectar las diferentes clases en el conjunto de datos. Además, El modelo logra una precisión de detección del 59.7\% cuando se considera un umbral de confianza igual al 50\% y para detecciones con un nivel de confianza mayor al 50\% se tiene una precisión del 36.1\%.
 
 Por otro lado, al evaluar la precisión promedio de detección por clase, se observa que la categoría \textit{vareta}, es la clase a la que el modelo detecta con mejor precisión promedio con 69.5\%, seguida por \textit{flor abierta} con 43.13\% y por \textit{flor sin pétalos} con 37.35\%. Además, se muestra que el modelo detecta con dificultad las categorías \textit{flor cerrada} con un \textit{mAP} de 12.25\% e \textit{incierto} con 9.42\%.
@@ -183,9 +183,9 @@ Este bajo porcentaje de \textit{mAP} para la clase \textit{flor cerrada} con res
 
 Para mejorar estos resultados se implementó el aumento de datos mencionado en la sección \ref{aumentoDatos}.
 
-\subsubsection{Resultados con \textit{Faster R-CNN} con aumento de datos}
+\subsubsection{\textit{Faster R-CNN} con aumento de datos}
 
-Los resultados obtenidos con \textit{Faster R-CNN} con aumento de datos se encuentran en la tabla \ref{tab:resultadosFasterConAug}. 
+El rendimiento del modelo basado en la métrica \textit{mAP}, se puede observar en la tabla \ref{tab:resultadosFasterConAug}. 
 
 \begin{table}[h]
 	\centering
@@ -205,8 +205,14 @@ Los resultados obtenidos con \textit{Faster R-CNN} con aumento de datos se encue
 	\end{tabular}
 	\label{tab:resultadosFasterConAug}
 \end{table}
+\newpage
+Como se puede observar, se logra mejorar la precisión promedio de detección para las clases \textit{flor abierta}, \textit{flor cerrada} y \textit{vareta}. Con esto, la métrica \textit{mAP} medida entre todas las clases mejora a 37.33\%, adicionalmente también aumenta a 63.26\% cuando se fija un umbral de confianza de detección igual al 50\% y a un 37.93\% cuando el nivel de confianza en la detección es superior al 50\%.
 
-Como se puede observar, los resultados obtenidos con el aumento de datos descrito en \ref{aumentoDatos}, se logra mejorar la precisión promedio de detección para las clases \textit{flor abierta}, \textit{flor cerrada} y \textit{vareta}. Con esto, la métrica \textit{mAP} medida entre todas las clases mejora a 37.33\%, adicionalmente también aumenta a 63.26\% cuando se configura un umbral de confianza de detección igual al 50\% y a un 37.93\% cuando el nivel de confianza en la detección es superior al 50\%.
+Se puede concluir que el modelo \textit{Faster R-CNN} con y sin aumento de datos es bueno para detectar la vareta y las flores en estado abierto. Este comportamiento se puede deber al tamaño de estos objetos en la imagen en comparación con el resto de las categorías que se busca en la detección. Además, la clase \textit{flor abierta} es la clase más predominante en todas las imágenes según el estudio de los datos realizado en la sección \ref{desbalanceAfterLabeled}, lo que permite que el modelo pueda aprender y reconocer con mayor precisión sus características debido a la abundancia de ejemplos representativos durante el entrenamiento.
+
+\subsubsection{\textit{YOLOv8n} sin aumento de datos}
+
+
 
 \section{Desempeño de módulos}
 \label{sec:desempeñoModulos}
