@@ -154,6 +154,18 @@ La detección de estados fenológicos, como se mencionó en el capítulo anterio
 
 \subsubsection{\textit{Faster R-CNN} sin aumento de datos}
 
+El entrenamiento del modelo se hizo bajo los siguientes hiperparámentros:
+
+\begin{itemize}
+	\item Epocas: 100.
+    \item Tamaño de imagen de entrada: 640 x 640.
+    \item \textit{Batch}: 4.
+    \item \textit{Learning rate}: 0.001.
+    \item \textit{Momentum}: 0.9.
+    \item \textit{Weight decay}: 0.0005.
+    \item \textit{Optimizer}: \textit{Stochastic gradient descent}.
+\end{itemize}
+
 Los resultados de detección contra el conjunto de prueba se muestra en la tabla \ref{tab:resultadosFasterSinAug}.
 
 \begin{table}[h]
@@ -212,7 +224,39 @@ Se puede concluir que el modelo \textit{Faster R-CNN} con y sin aumento de datos
 
 \subsubsection{\textit{YOLOv8n} sin aumento de datos}
 
+El resultado obtenido con \textit{YOLOv8n} sin aumento de datos, con 14 imágenes del conjunto de pruebas y bajo los siguientes parámetros de entrenamiento:
 
+\begin{itemize}
+	\item Epocas: 100.
+    \item Tamaño de imagen de entrada: 640 x 640.
+    \item \textit{Batch}: 16.
+    \item \textit{Learning rate}: 0.01.
+\end{itemize}
+
+Se puede observar en la tabla \ref{tab:resultadosYoloSinAug}.
+
+\begin{table}[h]
+	\centering
+	\caption{Métricas de detección para \textit{YOLOv8n} sin aumento de datos.}
+	\begin{tabular}{c c c c c c c}    
+		\toprule
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\midrule
+		Todas & 14 & 0.645 & 0.418\\
+		Flor abierta & 14 & 0.905 & 0.611 \\
+		Flor cerrada & 14 & 0.614 & 0.251 \\
+		Flor sin pétalos & 14 & 0.588 & 0.363 \\
+		Incierto & 14 & 0.122 & 0.065 \\
+		Vareta & 14 & 0.994 & 0.802 \\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:resultadosYoloSinAug}
+\end{table}
+
+Se puede observar que \textit{YOLOv8n} tiene una precisión promedio, entre todas las clases, cuando se fija un umbral del 50\% de 64.5\%, que supera al \textit{mAP} 50 obtenido con el modelo \textit{Faster R-CNN} con y sin aumento de datos.
+
+Las clases que este modelo detecta con más precisión son vareta, flor abierta y flor cerrada. La diferencia y mejora contra \textit{Faster R-CNN} es notable, ya que, la métrica \textit{mAP} donde este modelo se desempeño mejor fue en la clase \textit{vareta} con un 69.5\% y, con \textit{YOLOv8n}, esta misma clase que también fue la mejor para este modelo tuvo 99.4\% que representa una mejora del 29.9\%.
 
 \section{Desempeño de módulos}
 \label{sec:desempeñoModulos}
