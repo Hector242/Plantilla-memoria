@@ -256,7 +256,20 @@ Se puede observar en la tabla \ref{tab:resultadosYoloSinAug}.
 
 Se puede observar que \textit{YOLOv8n} tiene una precisión promedio, entre todas las clases, cuando se fija un umbral del 50\% de 64.5\%, que supera al \textit{mAP} 50 obtenido con el modelo \textit{Faster R-CNN} con y sin aumento de datos.
 
-Las clases que este modelo detecta con más precisión son vareta, flor abierta y flor cerrada. La diferencia y mejora contra \textit{Faster R-CNN} es notable, ya que, la métrica \textit{mAP} donde este modelo se desempeño mejor fue en la clase \textit{vareta} con un 69.5\% y, con \textit{YOLOv8n}, esta misma clase que también fue la mejor para este modelo tuvo 99.4\% que representa una mejora del 29.9\%.
+Las clases que este modelo detecta con más precisión son: vareta, flor abierta y flor cerrada. La diferencia y mejora contra \textit{Faster R-CNN} se puede observar también al comparar la métrica \textit{mAP} obtenida para todas las clases donde este modelo se desempeño mejor. Como ejemplo se tiene la clase \textit{vareta} donde se obtuvo un 69.5\% y, con \textit{YOLOv8n}, esta misma clase que también fue la mejor para este modelo tuvo 99.4\% que representa una mejora del 29.9\%.
+
+Por otro lado la clase \textit{vareta}, en general, ambos modelos la logran detectar con alta precisión y esto se puede deber al tamaño de este objeto en la imagen. Además, es seguida por la clase \textit{flor abierta} que, como se mencionó anteriormente, contiene una cantidad de muestras representativas que ayudan al modelo a reconocer los patrones de esta clase. Por último, se destaca la categoría \textit{incierto}, que tanto este modelo como \textit{Faster R-CNN} no logran reconocer durante la detección en su totalidad.
+
+La matriz de confusión normalizada mostrada en la figura \ref{fig:cfmatriznorm}, indica que muchas de las veces que se tiene la clase \textit{incierto}, el modelo la predice como \textit{flor abierta}. Lo que demuestra que el modelo durante el entrenamiento no logró aprender correctamente los patrones que identifican dicha clase.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.52]{./Figures/CFMatrixnorm.png}
+	\caption{Matriz de confusión normalizada de \textit{YOLOv8n} para el conjunto de prueba.}
+	\label{fig:cfmatriznorm}
+\end{figure}
+
+\subsubsection{\textit{YOLOv8n} con aumento de datos}
 
 \section{Desempeño de módulos}
 \label{sec:desempeñoModulos}
