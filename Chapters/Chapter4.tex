@@ -271,5 +271,45 @@ La matriz de confusión normalizada mostrada en la figura \ref{fig:cfmatriznorm}
 
 \subsubsection{\textit{YOLOv8n} con aumento de datos}
 
+Para mejorar los resultados de \textit{YOLOv8n} se implementó el aumento de datos descrito en la sección \ref{aumentoDatos}. Los resultados obtenidos contra el conjunto de imágenes de prueba, se observa en la tabla \ref{tab:resultadosYoloConAug}.
+
+\begin{table}[h]
+	\centering
+	\caption{Métricas de detección para \textit{YOLOv8n} con aumento de datos.}
+	\begin{tabular}{c c c c c c c}    
+		\toprule
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\midrule
+		Todas & 14 & 0.655 & 0.423\\
+		Flor abierta & 14 & 0.893 & 0.611 \\
+		Flor cerrada & 14 & 0.673 & 0.266 \\
+		Flor sin pétalos & 14 & 0.603 & 0.373 \\
+		Incierto & 14 & 0.111 & 0.065 \\
+		Vareta & 14 & 0.995 & 0.802 \\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:resultadosYoloConAug}
+\end{table}
+
+La precisión promedio para un umbral de confianza igual al 50\% mejora para la clase \textit{flor cerrada} en un 5.9\% , para la clase \textit{flor sin pétalos} en un 1.5\%. Mientras que se tiene una perdida para la clase flor abierta del 1.2\%. Quedando el \textit{mAP} 50 entre todas las clases con un aumento del 1\%.
+
+Se observa que el entrenamiento del modelo con aumento de datos ayudó a mejorar el reconocimiento de las clases más difíciles de detectar como son \textit{flor cerrada} y \textit{flor sin pétalos}. Además, mantiene el buen rendimiento para las clases \textit{flor abierta} y \textit{vareta}.
+
+Al comparar todos los experimentos realizados para la detección de los estados fenológicos de las flores de duraznero, el modelo con mejor rendimiento basado en la métrica \textit{mAP} para dicha tarea es \textit{YOLOv8n} con aumento de datos. Por este motivo, se seleccionó este modelo para desempeñar dicha tarea.
+
+Por último, se aplicó \textit{Eigen-CAM} \cite{ARTICLE:17} para crear mapas de calor que permitan explicar los resultados obtenidos por el modelo. Este mapa de calor se implementó en la capa convolucional \textit{C2f}. En la figura \ref{fig:EigenCam}, se observa un ejemplo de los mapas de calor generados por \textit{Eigen-CAM} en una foto perteneciente al conjunto de pruebas utilizando \textit{YOLOv8n} con aumento de datos.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.55]{./Figures/EigenCamEj.png}
+	\caption{Mapa de calor con \textit{Eigen-CAM} en la capa \textit{C2f} del modelo \textit{YOLOv8n}.}
+	\label{fig:EigenCam}
+\end{figure}
+\newpage
+
+Se observa que los mapas de activación están enfocados en las varetas para la capa convolucional seleccionada, lo que sugiere que el modelo pone mayor atención en este objeto al realizar la detección.   
+
+
 \section{Desempeño de módulos}
 \label{sec:desempeñoModulos}
