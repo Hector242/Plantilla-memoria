@@ -316,3 +316,23 @@ Se observa que los mapas de activación están enfocados en las varetas para la 
 El sistema como se mencionó en secciones anteriores, cuenta con dos módulos, y para estimar su desempeño se utiliza un método visual. Este método implica la introducción de una imagen o fotografía en el sistema, permitiendo que esta transite a través de cada módulo de manera secuencial. Posteriormente, se realiza una observación de la salida generada por cada módulo de forma individual y se toman conclusiones de su funcionamiento. Esta aproximación no solo facilita la medición del rendimiento del sistema en su totalidad, sino que también permite un examen detallado de las contribuciones y funcionalidades específicas de cada uno de sus componentes modulares.
 
 \subsection{Desempeño del módulo de estimación de longitud}
+
+El funcionamiento y precisión del módulo de estimación de longitud esta relacionado a la calidad de las imágenes que recibe a la entrada. Estas imágenes tienen que contar con la regla de 30 centímetros como objeto de referencia y con condiciones similares a las que se presentaron en el entrenamiento del modelo (ejemplo: fondo, separación entre varetas, etc).
+
+Por otro lado, en esta prueba de desempeño, se toma en cuenta la medición del objeto de interés y visualmente se compara la medición de la vareta más cercana a la regla, donde se podrá observar si su longitud visual es parecida a la estimada por el algoritmo. Además, se destaca que la medida se presenta en centímetros.
+
+En la figura \ref{fig:DempeñoEstimacionLongitud}, se observa la prueba realizada para conocer el desempeño de este módulo.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{./Figures/DesempeñoMod1 (1).png}
+	\caption{Desempeño del módulo de estimación de longitud.}
+	\label{fig:DempeñoEstimacionLongitud}
+\end{figure}
+\newpage
+
+Como se puede observar, la vareta con la etiqueta número cuatro, mide 26.27 centímetros según el algoritmo. Sin embargo, visualmente aparenta medir 27 centímetros aproximadamente, dando un error de medición de 0.73 centímetros. Adicionalmente, si se observa la vareta con la etiqueta número tres, su longitud según el algoritmo, es de 29.60 centímetros que por medición visual se aproxima a 30 centímetros, dando un error de medición de 0.4 centímetros. 
+
+Con este resultado se puede concluir que, el módulo aproxima la longitud de las varetas a valores muy cercanos a los que se obtienen visualmente. Sin embargo, al no poder medir con exactitud la longitud real de ambas varetas no se puede obtener con precisión el rendimiento de este módulo. Además, cabe destacar que esta medida se obtiene de forma lineal y no se cuentan las curvaturas de las varetas, lo que implica que esta medida no es exacta.
+
+\subsection{Desempeño del módulo de detección y procesamiento}
