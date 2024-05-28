@@ -336,3 +336,36 @@ Como se puede observar, la vareta con la etiqueta número cuatro, mide 26.27 cen
 Con este resultado se puede concluir que, el módulo aproxima la longitud de las varetas a valores muy cercanos a los que se obtienen visualmente. Sin embargo, al no poder medir con exactitud la longitud real de ambas varetas no se puede obtener con precisión el rendimiento de este módulo. Además, cabe destacar que esta medida se obtiene de forma lineal y no se cuentan las curvaturas de las varetas, lo que implica que esta medida no es exacta.
 
 \subsection{Desempeño del módulo de detección y procesamiento}
+
+Este módulo como se mencionó en la sección anterior, realiza múltiples operaciones donde detecta los estados fenológicos, hace un conteo de la cantidad de flores en la imagen y por vareta, cuenta la cantidad de varetas y determina por vareta la cantidad de flores que se tienen en un estado o en otro.
+
+En la figura \ref{fig:DesempeñoMod2}, se muestra una foto de varetas con las centroides pertenecientes a las detecciones realizadas. De este forma, es más simple realizar el conteo de flores de forma visual y compararlo con los resultados obtenidos por el algoritmo que se detallan en la tabla.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{./Figures/centroids3.jpeg}
+	\caption{Desempeño del módulo de detección y procesamiento con el uso de centroides con flores Campanuláceas.}
+	\label{fig:DesempeñoMod2}
+\end{figure}
+
+\begin{table}[h]
+	\centering
+	\caption{Tabla de resultados del módulo de detección y procesamiento para la imagen de muestra.}
+	\begin{tabular}{c c c c c c c}    
+		\toprule
+		\textbf{Id}&\textbf{N° flores}&\textbf{Abiertas}&\textbf{Cerradas}&\textbf{Sin pétalos}&\textbf{Incierto} &\textbf{Tipo de flor}\\
+		\midrule
+		1 & 7 & 6 & 1 & 0 & 0 & Flor Campanulácea\\
+		2 & 15 & 13 & 2 & 0 & 0 & Flor Campanulácea\\
+		3 & 12 & 9 & 2 & 0 & 1 & Flor Campanulácea\\
+		4 & 11 & 6 & 5 & 0 & 0 & Flor Campanulácea\\
+		Total & 45 & - & - & - & - & - \\
+		N° varetas & 4 & - & - & - & - & - \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:resultadosFasterConAug}
+\end{table}
+\newpage
+
+Se observa 
