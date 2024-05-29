@@ -270,6 +270,7 @@ La matriz de confusión normalizada mostrada en la figura \ref{fig:cfmatriznorm}
 \end{figure}
 
 \subsubsection{\textit{YOLOv8n} con aumento de datos}
+\label{YOLOv8n con aumento de dato}
 
 Para mejorar los resultados de \textit{YOLOv8n} se implementó el aumento de datos descrito en la sección \ref{aumentoDatos}. Los resultados obtenidos contra el conjunto de imágenes de prueba, se observa en la tabla \ref{tab:resultadosYoloConAug}.
 
@@ -296,7 +297,7 @@ La precisión promedio para un umbral de confianza igual al 50\% mejora para la 
 
 Se observa que el entrenamiento del modelo con aumento de datos ayudó a mejorar el reconocimiento de las clases más difíciles de detectar como son \textit{flor cerrada} y \textit{flor sin pétalos}. Además, mantiene el buen rendimiento para las clases \textit{flor abierta} y \textit{vareta}.
 
-Al comparar todos los experimentos realizados para la detección de los estados fenológicos de las flores de duraznero, el modelo con mejor rendimiento basado en la métrica \textit{mAP} para dicha tarea es \textit{YOLOv8n} con aumento de datos. Por este motivo, se seleccionó este modelo para desempeñar dicha tarea.
+Al comparar todos los experimentos realizados para la detección de los estados fenológicos de las flores de duraznero, el modelo con mejor rendimiento basado en la métrica \textit{mAP} para dicha tarea es \textit{YOLOv8n} con aumento de datos. Por este motivo, se seleccionó este modelo para desempeñar dicha tarea. Adicionalmente, este modelo es capaz de mitigar el desbalanceo de clases por su mecanismo interno al hacer uso del \textit{Focal Loss} \cite{ARTICLE:15}, que automáticamente asigna mayor peso a las clases menos frecuentes. 
 
 Por último, se aplicó \textit{Eigen-CAM} \cite{ARTICLE:17} para crear mapas de calor que permitan explicar los resultados obtenidos por el modelo. Este mapa de calor se implementó en la capa convolucional \textit{C2f}. En la figura \ref{fig:EigenCam}, se observa un ejemplo de los mapas de calor generados por \textit{Eigen-CAM} en una foto perteneciente al conjunto de pruebas utilizando \textit{YOLOv8n} con aumento de datos.
 
@@ -339,7 +340,7 @@ Con este resultado se puede concluir que, el módulo aproxima la longitud de las
 
 Este módulo como se mencionó en la sección anterior, realiza múltiples operaciones donde detecta los estados fenológicos, hace un conteo de la cantidad de flores en la imagen y por vareta, cuenta la cantidad de varetas y determina por vareta la cantidad de flores que se tienen en un estado o en otro.
 
-En la figura \ref{fig:DesempeñoMod2}, se muestra una foto de varetas con las centroides pertenecientes a las detecciones realizadas. De este forma, es más simple realizar el conteo de flores de forma visual y compararlo con los resultados obtenidos por el algoritmo que se detallan en la tabla.
+En la figura \ref{fig:DesempeñoMod2}, se muestra una foto de varetas con las centroides pertenecientes a las detecciones realizadas. De este forma, es más simple evaluar y realizar el conteo de flores de forma visual, luego compararlo con los resultados obtenidos por el algoritmo que se detallan en la tabla \ref{tab:resultadosmod2}.
 
 \begin{figure}[ht]
 	\centering
@@ -347,6 +348,7 @@ En la figura \ref{fig:DesempeñoMod2}, se muestra una foto de varetas con las ce
 	\caption{Desempeño del módulo de detección y procesamiento con el uso de centroides con flores Campanuláceas.}
 	\label{fig:DesempeñoMod2}
 \end{figure}
+\newpage
 
 \begin{table}[h]
 	\centering
@@ -364,8 +366,10 @@ En la figura \ref{fig:DesempeñoMod2}, se muestra una foto de varetas con las ce
 		\bottomrule
 		\hline
 	\end{tabular}
-	\label{tab:resultadosFasterConAug}
+	\label{tab:resultadosmod2}
 \end{table}
-\newpage
 
-Se observa 
+
+Se toma como muestra la vareta con el identificador número cuatro, donde el algoritmo indica que existen un total de once flores. Luego, al realizar el conteo visual, se encuentran un total de trece flores. De estas trece flores, las dos flores que no pudo detectar el algoritmo con sus valores por defecto (nivel de confianza igual a 0.4) son flores cerradas. Por otro lado, el algoritmo señala que de las once flores, hay seis abiertas y cinco cerradas. Visualmente se detectan seis flores abiertas (como menciona el algoritmo) y siete flores cerradas. Con esto, se puede concluir y corroborar que la detección y las tareas derivadas que ejecuta este módulo son impactadas por el rendimiento del modelo base detallado en la sección \ref{YOLOv8n con aumento de dato}, donde se observa que el modelo tiene una alta precisión para detectar las flores en estado abierto, pero la precisión es menor para las demás clases relacionadas a los otros estados fenológicos.
+
+Además, de los resultados se destaca, que para cada vareta el tipo de flor encontrada por el clasificador fue del tipo Campanulácea, lo que coincide con lo observable en la imagen de muestra. Igualmente se remarca el buen funcionamiento del módulo en la detección de las cuatro varetas encontradas en la imagen.
