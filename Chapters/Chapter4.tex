@@ -95,7 +95,7 @@ Los resultados obtenidos para la detección de este elemento contra el conjunto 
 	\label{tab:resultadosRegla}
 \end{table}
 
-Los resultados fueron muy buenos en general. El modelo puede detectar la regla sin dificultad en el 99\% de los casos.
+Los resultados fueron muy buenos en general. El modelo puede detectar la regla sin dificultad en el 99\% de los casos. Por este motivo, se tomó directamente este modelo para desempeñar la tarea y no requirió de aumentos de datos o alguna otra técnica de \textit{machine learning}.
 
 \subsection{Desempeño del detector de vareta}
 
@@ -217,7 +217,7 @@ El rendimiento del modelo basado en la métrica \textit{mAP}, se puede observar 
 	\end{tabular}
 	\label{tab:resultadosFasterConAug}
 \end{table}
-\newpage
+
 Como se puede observar, se logra mejorar la precisión promedio de detección para las clases \textit{flor abierta}, \textit{flor cerrada} y \textit{vareta}. Con esto, la métrica \textit{mAP} medida entre todas las clases mejora a 37.33\%, adicionalmente también aumenta a 63.26\% cuando se fija un umbral de confianza de detección igual al 50\% y a un 37.93\% cuando el nivel de confianza en la detección es superior al 50\%.
 
 Se puede concluir que el modelo \textit{Faster R-CNN} con y sin aumento de datos es bueno para detectar la vareta y las flores en estado abierto. Este comportamiento se puede deber al tamaño de estos objetos en la imagen en comparación con el resto de las categorías que se busca en la detección. Además, la clase \textit{flor abierta} es la clase más predominante en todas las imágenes según el estudio de los datos realizado en la sección \ref{desbalanceAfterLabeled}, lo que permite que el modelo pueda aprender y reconocer con mayor precisión sus características debido a la abundancia de ejemplos representativos durante el entrenamiento.
@@ -253,7 +253,7 @@ Se puede observar en la tabla \ref{tab:resultadosYoloSinAug}.
 	\end{tabular}
 	\label{tab:resultadosYoloSinAug}
 \end{table}
-
+\newpage
 Se puede observar que \textit{YOLOv8n} tiene una precisión promedio, entre todas las clases, cuando se fija un umbral del 50\% de 64.5\%, que supera al \textit{mAP} 50 obtenido con el modelo \textit{Faster R-CNN} con y sin aumento de datos.
 
 Las clases que este modelo detecta con más precisión son: vareta, flor abierta y flor cerrada. La diferencia y mejora contra \textit{Faster R-CNN} se puede observar también al comparar la métrica \textit{mAP} obtenida para todas las clases donde este modelo se desempeño mejor. Como ejemplo se tiene la clase \textit{vareta} donde se obtuvo un 69.5\% y, con \textit{YOLOv8n}, esta misma clase que también fue la mejor para este modelo tuvo 99.4\% que representa una mejora del 29.9\%.
@@ -268,7 +268,7 @@ La matriz de confusión normalizada mostrada en la figura \ref{fig:cfmatriznorm}
 	\caption{Matriz de confusión normalizada de \textit{YOLOv8n} para el conjunto de prueba.}
 	\label{fig:cfmatriznorm}
 \end{figure}
-
+\newpage
 \subsubsection{\textit{YOLOv8n} con aumento de datos}
 \label{YOLOv8n con aumento de dato}
 
@@ -307,7 +307,6 @@ Por último, se aplicó \textit{Eigen-CAM} \cite{ARTICLE:17} para crear mapas de
 	\caption{Mapa de calor con \textit{Eigen-CAM} en la capa \textit{C2f} del modelo \textit{YOLOv8n}.}
 	\label{fig:EigenCam}
 \end{figure}
-\newpage
 
 Se observa que los mapas de activación están enfocados en las varetas para la capa convolucional seleccionada, lo que sugiere que el modelo pone mayor atención en este objeto al momento de realizar la detección.   
 
@@ -330,7 +329,7 @@ En la figura \ref{fig:DempeñoEstimacionLongitud}, se observa la prueba realizad
 	\caption{Desempeño del módulo de estimación de longitud.}
 	\label{fig:DempeñoEstimacionLongitud}
 \end{figure}
-\newpage
+
 
 Como se puede observar, la vareta con la etiqueta número cuatro, mide 26.27 centímetros según el algoritmo. Sin embargo, visualmente aparenta medir 27 centímetros aproximadamente, dando un error de medición de 0.73 centímetros. Adicionalmente, si se observa la vareta con la etiqueta número tres, su longitud según el algoritmo, es de 29.60 centímetros que por medición visual se aproxima a 30 centímetros, dando un error de medición de 0.4 centímetros. 
 
@@ -348,7 +347,7 @@ En la figura \ref{fig:DesempeñoMod2}, se muestra una foto de varetas con las ce
 	\caption{Desempeño del módulo de detección y procesamiento con el uso de centroides con flores Campanuláceas.}
 	\label{fig:DesempeñoMod2}
 \end{figure}
-\newpage
+
 
 \begin{table}[h]
 	\centering
