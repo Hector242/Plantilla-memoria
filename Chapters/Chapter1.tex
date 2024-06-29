@@ -27,7 +27,7 @@ En este capítulo se presenta la problemática y la motivación que llevaron a l
 
 La fenómica hace referencia a la obtención de un gran caudal de datos de las características de las plantas, lo que se denomina el fenotipo de la planta. Esta disciplina está en auge en la actualidad debido a sus aplicaciones potenciales. Por un lado, habilita el mejoramiento a gran escala debido a que es necesario vincular una gran cantidad de datos genéticos con datos fenotípicos para identificar la función de los genes. Por otro lado, si se incluyen otros conjuntos de datos como son los climáticos, permite realizar predicciones precisas sobre el comportamiento de las variedades, lo que es necesario para implementar lo que se conoce como agricultura de precisión. Sin embargo, la fruticultura no ha dado el salto hacia la fenómica.
 
-En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secuenciar el ADN de más de 250 variedades de duraznero \cite{ARTICLE:1} y se dispone de una base de datos genómica de 75 gigabases (Gb) de ADN. Esta base permite identificar genes que controlan características del duraznero mediante algoritmos de inteligencia artificial (IA). Además, se dispone de datos climáticos diarios que se toman de forma automática que incluyen: las temperaturas medias, precipitaciones, horas de frío, radiación, etc. Esta información se combina con los datos genómicos y posteriormente, con modelos de IA, se predice el comportamiento de las variedades en escenarios climáticos futuros. En la figura \ref{fig:genotipado}, se observa el proceso para obtener los datos genómicos.
+En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secuenciar el ADN de más de 250 variedades de duraznero \cite{ARTICLE:1} y se dispone de una base de datos genómica de 75 gigabases (Gb) de ADN. Esta base permite identificar genes que controlan características del duraznero mediante algoritmos de inteligencia artificial (IA). Además, se dispone de datos climáticos diarios que se toman de forma automática que incluyen: las temperaturas medias, precipitaciones, horas de frío, radiación, etc. Esta información se combina con los datos genómicos y posteriormente, con modelos de IA, se predice el comportamiento de las variedades en escenarios climáticos futuros. En la figura \ref{fig:genotipado} se observa el proceso para obtener los datos genómicos.
 
 \begin{figure}[h]
 	\centering
@@ -36,7 +36,7 @@ En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secu
 	\label{fig:genotipado}
 \end{figure}
 \newpage
-En la actualidad, las heladas primaverales son el mayor problema de los frutales a nivel mundial. Este fenómeno ocurre cuando las flores abiertas se someten a temperaturas cercanas a los -2.5 °C. Las heladas primaverales tienen una temperatura parecida a cualquier otra helada que se puede presentar en la temporada de invierno. Sin embargo, estas heladas suelen presentarse después del invierno, creando un gran impacto contra las flores y los frutos. Los productores de frutas, en general, se ven altamente afectados pagando un alto precio por estas inesperadas heladas tardías. En la figura \ref{fig:helada}, se puede observar cómo este fenómeno meteorológico afecta a los frutales.
+En la actualidad, las heladas primaverales son el mayor problema de los frutales a nivel mundial. Este fenómeno ocurre cuando las flores abiertas se someten a temperaturas cercanas a los -2,5 °C. Las heladas primaverales tienen una temperatura parecida a cualquier otra helada que se puede presentar en la temporada de invierno. Sin embargo, estas heladas suelen presentarse después del invierno, creando un gran impacto contra las flores y los frutos. Los productores de frutas, en general, se ven altamente afectados porque deben pagar un alto precio por estas inesperadas heladas tardías. En la figura \ref{fig:helada}, se puede observar cómo este fenómeno meteorológico afecta a los frutales.
 
 \begin{figure}[htpb]
 	\centering
@@ -63,7 +63,7 @@ El presente trabajo permitirá automatizar la toma de datos de varetas de durazn
 		\begin{enumerate}
 			\item El sistema tomará como entrada imágenes de varetas de durazneros en formato JPG.			
 			\item El algoritmo debe detectar la presencia de las varetas de los durazneros e identificar el tipo de flor que posee.			        
-			\item El algoritmo debe identificar el estado fenológico de cada flor de duraznero en la vareta. Este estado se clasificará como  \textit{flor abierta}, \textit{flor cerrada}, \textit{flor sinpetalos}, \textit{incierto}.
+			\item El algoritmo debe identificar el estado fenológico de cada flor de duraznero en la vareta. Este estado se clasificará como flor abierta, flor cerrada, flor sinpetalos, incierto.
 			\item El algoritmo debe determinar la cantidad de flores por centímetro de vareta.
 			\item El sistema debe entregar como resultado un archivo en formato CSV con los datos detectados por el algoritmo y una imagen donde se puedan visualizar las detecciones.
 			\item El sistema debe funcionar en una computadora local.
@@ -71,7 +71,7 @@ El presente trabajo permitirá automatizar la toma de datos de varetas de durazn
 	\item Requerimientos de diseño e implementación
 		\begin{enumerate}
 			\item El diseño debe ser modular.
-			\item El algoritmo se elaborará en una notebook de Google Colab, utilizando el lenguaje de  programación Python y bibliotecas de IA correspondientes. 
+			\item El algoritmo se elaborará en una \textit{notebook} de Google Colab, utilizando el lenguaje de  programación Python y bibliotecas de IA correspondientes. 
 		\end{enumerate}
 	\item Requerimiento de evaluación y prueba
 	\begin{enumerate}
@@ -94,7 +94,7 @@ El presente trabajo incluye:
 \begin{itemize}
 	\item El preprocesamiento de las fotos para entrenar el modelo.
 	\item La selección del modelo a entrenar.
-	\item La elaboración del notebook de pruebas en Python.
+	\item La elaboración de la \textit{notebook} de pruebas en Python.
 	\item La implementación local del modelo.
 \end{itemize}
 
@@ -121,7 +121,7 @@ En el presente trabajo se tienen imágenes con fondos de color naranja en su may
  
 La detección de flores ha sido estudiada con diferentes enfoques y arquitecturas de \textit{deep learning}, como por ejemplo el estudio \cite{ARTICLE:3} que exploró la viabilidad de detección de estados fenológicos de las rosas con técnicas del contraste del color y comparando con el modelo de detección \textit{Faster R-CNN}. Sin embargo, no utilizó ninguna arquitectura de una etapa para la detección, lo que podría ser más eficiente. Por otro lado, se tienen trabajos que sí utilizaron la arquitectura de una etapa, en específico de \textit{YOLO} en sus versiones 4 y 5 como se presenta en \cite{ARTICLE:4} \cite{ARTICLE:5}, pero su enfoque fue basado para las flores de kiwi.
 
-La presente memoria busca en particular los estados fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. El detector de una etapa sería la arquitectura de \textit{YOLO} en su version 8, la cual se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
+La presente memoria busca en particular los estados fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. Este último corresponde a una arquitectura \textit{YOLO} en su versión 8, que se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
 
 \subsection{Conteo de flores}
 
