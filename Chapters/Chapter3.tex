@@ -7,7 +7,7 @@ En este capítulo se describe el diseño e implementación del sistema desarroll
 \section{Arquitectura del sistema}
 \label{section3.1}
 
-El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero que posteriormente pasará por dos módulos de forma secuencial. El primer módulo, es el encargado de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad de flores y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario que tiene la posibilidad de descargarlos en formato CSV.
+El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero que posteriormente pasará por dos módulos de forma secuencial. El primero se ocupa de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario que tiene la posibilidad de descargarlos en formato CSV.
 
 \begin{figure}[ht]
 	\centering
@@ -18,7 +18,7 @@ El sistema general implementado en este trabajo se presenta en la figura \ref{fi
 
 La arquitectura del módulo que estima la longitud de la vareta se puede observar en la figura \ref{fig:varetaSize}. Este módulo toma y preprocesa la imagen de entrada, posteriormente detecta la regla que es el objeto de referencia y procede a tomar las mediciones en píxeles de dicho elemento. Luego, se hace una conversión de píxeles a centímetros. Una vez finalizada la conversión, se detectan las varetas presentes en la imagen y se calculan sus dimensiones, se revisa la orientación de la foto y se toma la longitud de cada vareta en píxeles. Finalmente, con la conversión anterior se pasa a centímetros las mediciones de las varetas, se anotan los resultados en una tabla y son enviados al siguiente módulo. Por otro lado, la imagen con las mediciones se muestra por pantalla.
 
-Este módulo se detalla con más a profundidad en este mismo capítulo.
+Este módulo se detalla con más profundidad en este mismo capítulo.
 
 \begin{figure}[htpb]
 	\centering
@@ -27,7 +27,7 @@ Este módulo se detalla con más a profundidad en este mismo capítulo.
 	\label{fig:varetaSize}
 \end{figure}
 
-La arquitectura del módulo de detección y procesamiento se presenta en la figura \ref{fig:densidadDeFlores}. La entrada a este módulo es la imagen original donde se le aplica un preprocesamiento y posteriormente se pasa por un modelo que detecta los estados fenológicos de las flores de duraznero y sus varetas. Luego, se realiza un postprocesamiento de los resultados para conocer el número de flores totales que se encuentran en la imagen y un conteo de las mismas por vareta. Por último, se extraen las flores detectadas por vareta y son enviadas al clasificador para determinar su tipo.
+La arquitectura del módulo de detección y procesamiento se presenta en la figura \ref{fig:densidadDeFlores}. La entrada a este módulo es la imagen original donde se le aplica un preprocesamiento y posteriormente se pasa por un modelo que detecta los estados fenológicos de las flores de duraznero y sus varetas. Luego, se realiza un postprocesamiento de los resultados para conocer el número de flores totales que se encuentran en la imagen y la cantidad por vareta. Por último, se extraen las flores detectadas por vareta y son enviadas al clasificador para determinar su tipo.
 
 Más adelante en este mismo capítulo se dará más información detallada de este módulo y de otros bloques del sistema que cumplen una función importante para generar los resultados deseados.
 
@@ -42,9 +42,9 @@ Cabe destacar que la realización de este sistema se llevó a cabo en el lenguaj
 \newpage
 \section{Preparación de los datos}
 
-La preparación de los datos es una de las partes más criticas durante el desarrollo de un modelo de aprendizaje. Esto debido a que si los datos no se encuentran en las condiciones adecuadas para su uso en un modelo de IA, el modelo no tendrá un buen rendimiento. 
+La preparación de los datos es una de las partes más críticas del desarrollo de un modelo de aprendizaje. Esto se debe a que si los datos no se encuentran en las condiciones adecuadas para su uso en un modelo de IA, el modelo no tendrá un buen rendimiento. 
 
-El presente trabajo requirió la generación de distintos etiquetados para el conjunto de datos original, debido a la cantidad de modelos utilizados durante su desarrollo.
+El presente trabajo requirió la generación de distintos etiquetados para el conjunto de datos original, por la cantidad de modelos utilizados durante su desarrollo.
 
 \subsection{Análisis exploratorio}
 \label{section3.2.1}
@@ -65,13 +65,13 @@ El conjunto de datos original provisto por el INTA contiene las características
 	\label{tab:flores}
 \end{table}
  
-Las imágenes tienen un fondo naranja y en ocasiones contienen partes grises. Esto debido a que las varetas de duraznero fueron posadas sobre una cartulina color naranja y a veces por las dimensiones de las varetas, se toma parte de la mesa de color gris.
+Las imágenes tienen un fondo naranja y en ocasiones contienen partes grises. Esto corresponde a que las varetas de duraznero fueron posadas sobre una cartulina color naranja y a veces por las dimensiones de las varetas, se toma parte de la mesa de color gris.
 
 Por otro lado, las fotos presentan cambios de brillo e iluminación, generando distintas tonalidades de los colores de fondo y de las flores. 
 
 Los elementos que se observan generalmente en las fotos provistas por el cliente incluyen: una regla, cuatro varetas, una cartulina de fondo, cuatro etiquetas que identifican las varetas y en ocasiones objetos que no forman parte de la detección o que no aportan información.
 
-En la figura \ref{fig:three graphs}, se puede observar algunos ejemplos de fotos con las características que se describieron anteriormente.
+En la figura \ref{fig:three graphs}, se pueden observar algunos ejemplos de fotos con las características que se describieron anteriormente.
 
 \begin{figure}[ht]
      \centering
@@ -99,7 +99,7 @@ En la figura \ref{fig:three graphs}, se puede observar algunos ejemplos de fotos
         \label{fig:three graphs}
 \end{figure}
 
-Es importante mencionar que, las fotos de varetas tomadas por el cliente, están clasificadas por el tipo de flor que poseen las varetas. Es decir, una foto solo va a contener varetas con flores del tipo rosáceas o campanuláceas, pero no ambos tipos de flor en una misma imagen. En la figura \ref{fig:two graphs} se muestran dos fotos de varetas, una que contiene flores rosáceas y otra que contiene flores campanuláceas.
+Es importante mencionar que las fotos de varetas tomadas por el cliente, están clasificadas por el tipo de flor que poseen las varetas. Es decir, una foto solo va a contener varetas con flores del tipo rosáceas o campanuláceas, pero no ambos tipos de flor en una misma imagen. En la figura \ref{fig:two graphs} se muestran dos fotos de varetas, una que contiene flores rosáceas y otra que contiene flores campanuláceas.
 
 \begin{figure}[ht]
      \centering
@@ -116,7 +116,7 @@ Es importante mencionar que, las fotos de varetas tomadas por el cliente, están
          \caption{Foto de varetas con flores campanuláceas.}
          \label{fig:2de23}
      \end{subfigure}
-        \caption{Fotos de varetas de duraznero con su tipo flor.}
+        \caption{Fotos de varetas de duraznero con su tipo de flor.}
         \label{fig:two graphs}
 \end{figure}
 
@@ -128,21 +128,21 @@ Cabe destacar que en una foto de varetas de duraznero, se encuentran varias flor
      \centering
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
-         \includegraphics[scale=2]{./Figures/4 (2)_cropped0.jpg}
+         \includegraphics[scale=0.4]{./Figures/flor_abierta.png}
          \caption{Flor abierta.}
          \label{fig:1de33}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.2\textwidth}
          \centering
-         \includegraphics[scale=2]{./Figures/33 (2)_cropped45.jpg}
+         \includegraphics[scale=0.5]{./Figures/flor_cer.png}
          \caption{Flor cerrada.}
          \label{fig:2de33}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[scale=2]{./Figures/39_cropped12.jpg}
+         \includegraphics[scale=0.6]{./Figures/flor_sinp.png}
          \caption{Flor sin pétalos.}
          \label{fig:3de33}
      \end{subfigure}
@@ -152,11 +152,11 @@ Cabe destacar que en una foto de varetas de duraznero, se encuentran varias flor
 
 \subsubsection{Balanceo del conjunto de datos antes del etiquetado}
 
-El conjunto de datos cuenta con un total de 286 imágenes en total, donde, 57 imágenes contienen varetas con flores del tipo campanuláceas, y 229 contienen varetas con flores del tipo rosáceas. Por lo tanto, se considera que el conjunto de datos se encuentra desbalanceado con respecto al tipo de flor. 
+El conjunto de datos cuenta con un total de 286 imágenes en total, donde 57 contienen varetas con flores del tipo campanulácea y las otras 229 con flores del tipo rosácea. Por lo tanto, se considera que el conjunto de datos se encuentra desbalanceado con respecto al tipo de flor. 
 
 \subsection{Etiquetado del conjunto de datos}
 
-El conjunto de datos dado por el cliente fue etiquetado utilizando una herramienta llamada \textit{Roboflow}. El etiquetado con \textit{Roboflow} es simple y se puede utilizar para múltiples tareas relacionadas a visión por computadora. Por otro lado, el presente trabajo requirió varios etiquetados del mismo conjunto de datos, debido a, los distintos modelos que se entrenaron para su realización.
+El conjunto de datos proporcionado por el cliente fue etiquetado utilizando una herramienta llamada \textit{Roboflow} \cite{WEBSITE:9}. El etiquetado con \textit{Roboflow} es simple y se puede utilizar para múltiples tareas relacionadas a visión por computadora. Por otro lado, el presente trabajo requirió varios etiquetados del mismo conjunto de datos, debido a los distintos modelos que se entrenaron para su realización.
 
 Todos los modelos utilizados exceptuando el clasificador, utilizaron un etiquetado del tipo de detección de objetos, donde se delimitan los objetos de interés con \textit{bounding boxes}. El etiquetado por modelo se detalla en la siguiente lista:
 
