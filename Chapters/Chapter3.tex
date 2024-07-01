@@ -189,7 +189,7 @@ Finalmente, por motivos de tiempo no se lograron etiquetar las 286 imágenes par
 \subsubsection{Balanceo del conjunto de datos después del etiquetado}
 \label{desbalanceAfterLabeled}
 
-El conjunto de datos para el detector de los estados fenológicos de la flor tenía un desbalance que se puede observar en la figura \ref{fig:desbalanceoDeteccion}. La clase mayoritaria fue la correspondiente a flor abierta que es el estado fenológico con más presencia en las 140 fotos etiquetadas. Las consecuencias y la solución a este problema de desbalanceo para el detector de estados fenológicos se explica más delante en la presente memoria.
+El conjunto de datos para el detector de los estados fenológicos de la flor tenía un desbalance que se puede observar en la figura \ref{fig:desbalanceoDeteccion}. La clase mayoritaria fue la correspondiente a flor abierta que es el estado fenológico con más presencia en las 140 fotos etiquetadas. Con esta distribución se infirió que los modelos tendrían un sesgo hacia la clase flor abierta y que la categoría que sería más difícil de detectar sería la clase incierto. La solución a este problema de desbalance para el detector de estados fenológicos se explica más delante en la presente memoria.
 
 \begin{figure}[ht]
 	\centering
@@ -199,7 +199,7 @@ El conjunto de datos para el detector de los estados fenológicos de la flor ten
 \end{figure}
 \newpage
 
-Por otro lado, el conjunto de datos para el clasificador de flores contaba con un desbalance entre la cantidad de flores rosáceas y campanuláceas. Este desbalance se observa en la figura \ref{fig:desbalanceoClass}.
+Por otro lado, el conjunto de datos para el clasificador de flores contaba con un desbalance entre la cantidad de flores rosáceas y campanuláceas. Este desbalance se observa en la figura \ref{fig:desbalanceoClass}. La consecuencia prevista a esta desproporción es un posible sesgo hacía la clase mayoritaria. Más adelante se detallarán las medidas para mitigar este problema.
 
 \begin{figure}[ht]
 	\centering
@@ -233,6 +233,12 @@ El detector de vareta también contó con un aumento de los datos para mejorar e
 \end{enumerate}
 
 Para el clasificador de flores se aplicaron transformaciones que involucraban giros o rotaciones aleatorias de 0 a 180 grados. Esto se hizo tres veces para incrementar el número de flores campanuláceas e igualar la cantidad de muestras de las flores rosáceas.
+
+\subsection{Preprocesamiento de los datos}
+
+Las fotografías fueron preprocesadas para el entrenamiento e inferencia de cada uno de los modelos. Este preprocesamiento incluyó el redimencionamiento de las imágenes a un tamaño de 640 x 640, ya que los modelos fueron preentrenados con fotos de dichas dimensiones.
+
+Por otro lado, como se utilizó la biblioteca de Pytorch para el desarrollo del modelo \textit{Faster R-CNN} y el clasificador de flores, fue necesario transformar las imágenes a un formato de tensor. Esto es un requerimiento de implementación de dicha biblioteca para manipular la imágenes y que puedan ser consumidas por los modelos. 
 
 \section{Módulo de estimación de longitud}
 
@@ -307,7 +313,7 @@ Una vez que se conoce la orientación de la imagen, se ordenan las detecciones d
 
 La región de interés se genera a partir de las coordenadas del \textit{bounding box} perteneciente a la clase vareta. Una vez obtenidas dichas coordenadas, se oscurece la imagen pasando cada píxel a cero y se encienden los píxeles dentro de la región de interés. Posteriormente, se realiza una operación \textit{bitwise and} entre la imagen con la región de interés y la original, dando como resultado la imagen oscurecida con solo una vareta iluminada. Este procedimiento lo realiza el script por cada vareta encontrada y en el orden mencionado anteriormente.
 
-Adicionalmente, por cada región de interés, se procede a filtrar las centroides pertenecientes a dicha región. De esta forma, se genera una lista con las flores encontradas que representa la cantidad de flores por vareta. En la figura \ref{fig:regionInte}, se puede observar un ejemplo del resultado de esta operación. 
+Adicionalmente, por cada región de interés, se procede a filtrar las centroides pertenecientes a dicha región. De esta forma, se genera una lista con las flores encontradas que representa la cantidad de flores por vareta. En la figura \ref{fig:regionInte} se puede observar un ejemplo del resultado de esta operación. 
 
 \begin{figure}[ht]
      \centering
@@ -372,7 +378,7 @@ En cada módulo se genera un diccionario de Python, que contiene el resultado de
 
 En un paso posterior, los resultados de cada algoritmo se transforman a un formato de \textit{dataframe} de Pandas para luego concatenarlos y presentar al usuario final una única tabla de resultados.
 
-En la figura \ref{fig:TablaResultados1} y la figura \ref{fig:TablaResultados2}, se observa un ejemplo de la tabla resultante de cada algoritmo presentada por pantalla.
+En la figura \ref{fig:TablaResultados1} y la figura \ref{fig:TablaResultados2} se observa un ejemplo de la tabla resultante de cada algoritmo presentada por pantalla.
 
 \begin{figure}[ht]
 	\centering
@@ -390,7 +396,7 @@ En la figura \ref{fig:TablaResultados1} y la figura \ref{fig:TablaResultados2}, 
 
 Cabe destacar que se generaron dos botones para obtener la tabla de resultados en dos formatos distintos. El primero genera el resultado en formato CSV y el segundo produce el resultado en formato XLSX para su correcta visualización en \textit{Excel}. 
 
-En la figura \ref{fig:TablaResultados3}, se muestra un ejemplo de ambas tablas unificadas que representan el resultado final del sistema.
+En la figura \ref{fig:TablaResultados3} se muestra un ejemplo de ambas tablas unificadas que representan el resultado final del sistema.
 
 \begin{figure}[ht]
 	\centering
