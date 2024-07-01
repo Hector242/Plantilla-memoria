@@ -86,7 +86,7 @@ Los resultados obtenidos para la detección de este elemento contra el conjunto 
 	\caption{Métricas de detección para el detector de regla.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
-		\textbf{Clase}&\textbf{Imágenes}&\textbf{Detecciones}&\textbf{\textit{Precision}} &\textbf{\textit{Recall}}&\textbf{mAP 50}&\textbf{mAP 50-95}\\
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{Detecciones}&\textbf{\textit{Precision}} &\textbf{\textit{Recall}}&\textbf{mAP50}&\textbf{mAP50-95}\\
 		\midrule
 		Regla & 13 & 13 & 0,996 & 1,0 & 0,995 & 0,995\\		
 		\bottomrule
@@ -117,7 +117,7 @@ Los resultados obtenidos contra el conjunto de datos de pruebas para el modelo s
 	\caption{Métricas de detección para el detector de varetas sin aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
-		\textbf{Clase}&\textbf{Imágenes}&\textbf{Detecciones}&\textbf{\textit{Precision}} &\textbf{\textit{Recall}}&\textbf{mAP 50}&\textbf{mAP 50-95}\\
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{Detecciones}&\textbf{\textit{Precision}} &\textbf{\textit{Recall}}&\textbf{mAP50}&\textbf{mAP50-95}\\
 		\midrule
 		Vareta & 10 & 40 & 1,0 & 0,923 & 0,983 & 0,574\\		
 		\bottomrule
@@ -135,7 +135,7 @@ Los resultados con aumento de datos se pueden observar en la tabla \ref{tab:resu
 	\caption{Métricas de detección para el detector de varetas con aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
-		\textbf{Clase}&\textbf{Imágenes}&\textbf{Detecciones}&\textbf{\textit{Precision}} &\textbf{\textit{Recall}}&\textbf{mAP 50}&\textbf{mAP 50-95}\\
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{Detecciones}&\textbf{\textit{Precision}} &\textbf{\textit{Recall}}&\textbf{mAP50}&\textbf{mAP50-95}\\
 		\midrule
 		Vareta & 10 & 40 & 0,974 & 0,975 & 0,976 & 0,702\\		
 		\bottomrule
@@ -173,7 +173,7 @@ Los resultados de detección contra el conjunto de prueba se muestra en la tabla
 	\caption{Métricas de detección para \textit{Faster R-CNN} sin aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
-		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP50}&\textbf{mAP> 50}\\
 		\midrule
 		Todas & 14 & 0,3492 & 0,5970 & 0,3605\\
 		Flor abierta & 14 & 0,4313 & - & - \\
@@ -204,7 +204,7 @@ El rendimiento del modelo basado en la métrica mAP, se puede observar en la tab
 	\caption{Métricas de detección para \textit{Faster R-CNN} con aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
-		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP50}&\textbf{mAP> 50}\\
 		\midrule
 		Todas & 14 & 0,3733 & 0,6328 & 0,3793\\
 		Flor abierta & 14 & 0,5143 & - & - \\
@@ -238,7 +238,7 @@ Se puede observar en la tabla \ref{tab:resultadosYoloSinAug} el resultado obteni
 	\caption{Métricas de detección para \textit{YOLOv8n} sin aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
-		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP50}&\textbf{mAP>50}\\
 		\midrule
 		Todas & 14 & 0,645 & 0,418\\
 		Flor abierta & 14 & 0,905 & 0,611 \\
@@ -277,7 +277,7 @@ Para mejorar los resultados de \textit{YOLOv8n} se implementó el aumento de dat
 	\caption{Métricas de detección para \textit{YOLOv8n} con aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
-		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP 50}&\textbf{mAP > 50}\\
+		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP50}&\textbf{mAP>50}\\
 		\midrule
 		Todas & 14 & 0,655 & 0,423\\
 		Flor abierta & 14 & 0,893 & 0,611 \\
