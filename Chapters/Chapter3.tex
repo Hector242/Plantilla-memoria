@@ -7,11 +7,11 @@ En este capítulo se describe el diseño e implementación del sistema desarroll
 \section{Arquitectura del sistema}
 \label{section3.1}
 
-El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un \textit{frontend} donde el usuario sube una foto de vareta de duraznero que posteriormente pasará por dos módulos de forma secuencial. El primero se ocupa de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario que tiene la posibilidad de descargarlos en formato CSV.
+El sistema general implementado en este trabajo se presenta en la figura \ref{fig:sistemaGeneral}. Este sistema cuenta con un frontend donde el usuario sube una foto de vareta de duraznero que posteriormente pasará por dos módulos de forma secuencial. El primero se ocupa de medir la longitud de la vareta y el segundo módulo se encarga de detectar el estado fenológico, la cantidad y el tipo de flores que posee la vareta. Cada uno de los resultados obtenidos por estos módulos es presentado por pantalla al usuario que tiene la posibilidad de descargarlos en formato CSV.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.3]{./Figures/arq1.drawio.png}
+	\includegraphics[scale=.32]{./Figures/Tesis.drawio.png}
 	\caption{Arquitectura general del sistema.}
 	\label{fig:sistemaGeneral}
 \end{figure}
@@ -156,7 +156,7 @@ El conjunto de datos cuenta con un total de 286 imágenes en total, donde 57 con
 
 \subsection{Etiquetado del conjunto de datos}
 
-El conjunto de datos proporcionado por el cliente fue etiquetado utilizando una herramienta llamada \textit{Roboflow} \cite{WEBSITE:9}. El etiquetado con \textit{Roboflow} es simple y se puede utilizar para múltiples tareas relacionadas a visión por computadora. Por otro lado, el presente trabajo requirió varios etiquetados del mismo conjunto de datos, debido a los distintos modelos que se entrenaron para su realización.
+El conjunto de datos proporcionado por el cliente fue etiquetado utilizando una herramienta llamada Roboflow \cite{WEBSITE:9}. El etiquetado con Roboflow es simple y se puede utilizar para múltiples tareas relacionadas a visión por computadora. Por otro lado, el presente trabajo requirió varios etiquetados del mismo conjunto de datos, debido a los distintos modelos que se entrenaron para su realización.
 
 Todos los modelos utilizados exceptuando el clasificador, utilizaron un etiquetado del tipo de detección de objetos, donde se delimitan los objetos de interés con \textit{bounding boxes}. El etiquetado por modelo se detalla en la siguiente lista:
 
@@ -193,7 +193,7 @@ El conjunto de datos para el detector de los estados fenológicos de la flor ten
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.65]{./Figures/desbalanceo_detector.png}
+	\includegraphics[scale=.7]{./Figures/desbalanceo_detector.png}
 	\caption{Desbalance de clases para el detector de estados fenológicos de la flor de duraznero.}
 	\label{fig:desbalanceoDeteccion}
 \end{figure}
@@ -201,9 +201,10 @@ El conjunto de datos para el detector de los estados fenológicos de la flor ten
 
 Por otro lado, el conjunto de datos para el clasificador de flores contaba con un desbalance entre la cantidad de flores rosáceas y campanuláceas. Este desbalance se observa en la figura \ref{fig:desbalanceoClass}. La consecuencia prevista a esta desproporción es un posible sesgo hacía la clase mayoritaria. Más adelante se detallarán las medidas para mitigar este problema.
 
+
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=.53]{./Figures/tipodeflor_desbalance.png}
+	\includegraphics[scale=.7]{./Figures/tipodeflor_desbalance.png}
 	\caption{Desbalance de clases para el clasificador de flores de duraznero.}
 	\label{fig:desbalanceoClass}
 \end{figure}
@@ -221,7 +222,7 @@ Para el detector de estados fenológicos de las flores de duraznero se implement
 	\item Cambio de brillo por \textit{bounding box}.
 \end{enumerate}
 
-El total de imágenes aumentó a 336. Sin embargo, es de tener en cuenta que el número de fotografías disponible sigue siendo inferior al recomendado para el entrenamiento y validación de los distintos modelos de aprendizaje utilizados en la presente memoria. Por otro lado, con esta técnica no se pudo resolver el desbalance de datos observado en la figura \ref{fig:desbalanceoClass}, debido a que no hay una transformación directa de la imagen que permita la eliminación de las clases mayoritarias presentes en la detección. Más adelante, en la presente memoria, se explica el método implementado para mitigar el desbalanceo en este caso.
+El total de imágenes aumentó a 336. Sin embargo, es de tener en cuenta que el número de fotografías disponible sigue siendo inferior al recomendado para el entrenamiento y validación de los distintos modelos de aprendizaje utilizados en la presente memoria. Por otro lado, con esta técnica no se pudo resolver el desbalance de datos observado en la figura \ref{fig:desbalanceoClass}, debido a que no hay una transformación directa de la imagen que permita la eliminación de las clases mayoritarias presentes en la detección. Más adelante, en la presente memoria, se explica el método implementado para mitigar el desbalance en este caso.
 
 El detector de vareta también contó con un aumento de los datos para mejorar el rendimiento del modelo de detección utilizado y para incrementar la cantidad de muestras a un total de 243 imágenes. Las transformaciones utilizadas fueron:
 
@@ -238,17 +239,17 @@ Para el clasificador de flores se aplicaron transformaciones que involucraban gi
 
 Las fotografías fueron preprocesadas para el entrenamiento e inferencia de cada uno de los modelos. Este preprocesamiento incluyó el redimencionamiento de las imágenes a un tamaño de 640 x 640, ya que los modelos fueron preentrenados con fotos de dichas dimensiones.
 
-Por otro lado, como se utilizó la biblioteca de Pytorch para el desarrollo del modelo \textit{Faster R-CNN} y el clasificador de flores, fue necesario transformar las imágenes a un formato de tensor. Esto es un requerimiento de implementación de dicha biblioteca para manipular la imágenes y que puedan ser consumidas por los modelos. 
+Por otro lado, como se utilizó la biblioteca de Pytorch para el desarrollo del modelo Faster R-CNN y el clasificador de flores, fue necesario transformar las imágenes a un formato de tensor. Esto es un requerimiento de implementación de dicha biblioteca para manipular la imágenes y que puedan ser consumidas por los modelos. 
 
 \section{Módulo de estimación de longitud}
 
 El objetivo de este módulo es estimar la longitud de las varetas de duraznero presentes en la imagen. Para esto, se utilizó el enfoque de encontrar un objeto de referencia al que se le conocen sus dimensiones en centímetros y, en base a estas dimensiones, se calculan las del elemento objetivo que en este caso son las varetas. 
 
-Las fotos provistas por el INTA, como se menciona en la sección \ref{section3.2.1}, contienen una regla de 30 centímetros de largo y 5 de ancho. Esta regla se utilizó como objeto de referencia para la estimación de longitud de las varetas. Para su detección, se tuvo que aplicar \textit{transfer learning} y \textit{fine tunning} a un modelo de detección. El modelo base utilizado fue \textit{YOLOv8n} de Ultralytics que fue preentrenado con el conjunto de datos de COCO.
+Las fotos provistas por el INTA, como se menciona en la sección \ref{section3.2.1}, contienen una regla de 30 centímetros de largo y 5 de ancho. Esta se utilizó como objeto de referencia para la estimación de longitud de las varetas. Para su localización, se tuvo que aplicar \textit{transfer learning} y \textit{fine tunning} a un modelo de detección. El modelo base utilizado fue YOLOv8n de Ultralytics y fue preentrenado con el conjunto de datos de COCO.
 
-Una vez detectada la regla, se toman las dimensiones del \textit{bounding box} y se calcula su perímetro en píxeles. Luego, sabiendo que el perímetro en centímetros es 70, se hace una división del perímetro en píxeles entre el perímetro en centímetros. Esta operación termina dando como resultado, la razón matemática que representa la cantidad de píxeles equivalentes a 1 centímetro. Con esto, se obtuvo la conversión para poder aplicarla a los demás objetos en la imagen.
+Una vez detectada la regla, se toman las dimensiones del \textit{bounding box} y se calcula su perímetro en píxeles. Luego, sabiendo que el perímetro en centímetros es 70, se hace una división del perímetro en píxeles entre el perímetro en centímetros. Esta operación da como resultado la razón matemática que representa la cantidad de píxeles equivalentes a 1 centímetro. Con esto, se obtuvo la conversión para poder aplicarla a los demás objetos en la imagen.
 
-Posteriormente, se realiza la detección de las varetas, donde se utilizó \textit{YOLOv8n} de Ultralytics preentrenado. En este caso, al igual que para el detector de regla, el \textit{bounding box} proporcionado durante el etiquetado, es lo más preciso con el contorno real del objeto. Esta condición fue necesaria, debido a que las dimensiones de este delimitador son fundamentales para la estimación de la longitud de la vareta. 
+Posteriormente, se realiza la detección de las varetas por medio de un modelo YOLOv8n preentrenado. En este caso, al igual que para el detector de regla, el \textit{bounding box} proporcionado durante el etiquetado es lo que más se aproxima al contorno real del objeto. Las dimensiones de este delimitador son fundamentales para la estimación de la longitud de la vareta. 
 
 Cuando se detectan las varetas, se hace la conversión de píxeles a centímetros tomando los anchos y altos de los \textit{bounding boxes} y dividiéndolos entre la razón matemática obtenida anteriormente. El resultado encontrado es la estimación en centímetros del alto y ancho de los \textit{bounding boxes}. Con este dato, se toman en cuenta dos cosas. Si el ancho es más grande que el alto en los \textit{bounding boxes}, entonces, la imagen tiene una orientación horizontal. Por lo tanto, el ancho en este caso es la estimación de longitud tanto para la regla como para las varetas. En caso contrario, la imagen se encuentra en orientación vertical y el alto es efectivamente la estimación de longitud de los objetos.
 
@@ -289,7 +290,7 @@ El propósito de este módulo es detectar los estados fenológicos de las flores
 
 \subsection{Detección de estados fenológicos}
 
-Para la detección de los estados fenológicos se utilizó el modelo de detección \textit{YOLOv8n} de Ultralytics, preentrenado con el conjunto de datos de COCO. Se le aplicó \textit{fine tunning} para ajustarlo a este caso de uso y como parte de la búsqueda del mejor modelo para realizar dicha detección, se probó contra \textit{Faster R-CNN} que es un detector de dos etapas. Al final de las pruebas se seleccionó el modelo con mejores métricas de \textit{mAP}, que en este caso fue \textit{YOLOv8n}. En el siguiente capítulo se detallarán dichas pruebas.
+Para la detección de los estados fenológicos se utilizó el modelo de detección YOLOv8n de Ultralytics, preentrenado con el conjunto de datos de COCO. Se le aplicó \textit{fine tunning} para ajustarlo a este caso de uso y como parte de la búsqueda del mejor modelo para realizar dicha detección, se probó contra Faster R-CNN que es un detector de dos etapas. Al final de las pruebas se seleccionó el modelo con mejores métricas de mAP, que en este caso fue YOLOv8n. En el siguiente capítulo se detallarán dichas pruebas.
 
 Los resultados de esta detección no solo incluyen la localización e identificación de cada estado fenológico de cada flor, sino también la detección de la vareta. El motivo para detectar nuevamente la vareta va relacionado a la toma de regiones de interés que serán de utilidad más adelante en este mismo módulo.  
 
@@ -301,11 +302,11 @@ En la figura \ref{fig:deteccionEjem} se pueden observar los resultados que se ob
 	\caption{Imagen de salida del detector de estados fenológicos.}
 	\label{fig:deteccionEjem}
 \end{figure}
-\newpage
+
 
 \subsection{Conteo de flores}
 
-Para realizar el conteo total de flores por imagen, primero se posprocesan las detecciones obtenidas con el detector de estados fenológicos. Luego, se buscan los centroides de cada \textit{bounding box} y se filtran las detecciones pertenecientes a algunas de las siguientes clases: flor abierta, flor cerrada, flor sin petalos e incierto. Posteriormente, a través de un script, se crea una lista de flores detectadas y se utilizan los centroides tomadas anteriormente para evitar la toma de detecciones que tuvieran una misma posición. De esta  forma, no se toman en cuenta las detecciones duplicadas.
+Para realizar el conteo total de flores por imagen, primero se posprocesan las detecciones obtenidas con el detector de estados fenológicos. Luego, se buscan los centroides de cada \textit{bounding box} y se filtran las detecciones pertenecientes a algunas de las siguientes clases: flor abierta, flor cerrada, flor sin pétalos e incierto. Posteriormente, a través de un script, se crea una lista de flores detectadas y se utilizan los centroides tomadas anteriormente para evitar la toma de detecciones que tuvieran una misma posición. De esta  forma, no se toman en cuenta las detecciones duplicadas.
 
 Para realizar el conteo de flores por vareta, se requirió de otro posprocesamiento de los resultados obtenidos del detector de estados fenológicos. En este caso, se toman en cuenta las detecciones pertenecientes a la clase vareta y, al igual que en el módulo que estima la su longitud, se busca el ancho y el alto de los \textit{bounding boxes} de esta clase para, posteriormente, identificar si la imagen posee una orientación horizontal o en vertical. El dato de la orientación de la imagen es importante para conocer como se tiene que recorrer la foto, de forma que se mantenga el mismo identificador de vareta que se utiliza en el módulo de estimación de longitudes.
 
@@ -313,7 +314,7 @@ Una vez que se conoce la orientación de la imagen, se ordenan las detecciones d
 
 La región de interés se genera a partir de las coordenadas del \textit{bounding box} perteneciente a la clase vareta. Una vez obtenidas dichas coordenadas, se oscurece la imagen pasando cada píxel a cero y se encienden los píxeles dentro de la región de interés. Posteriormente, se realiza una operación \textit{bitwise and} entre la imagen con la región de interés y la original, dando como resultado la imagen oscurecida con solo una vareta iluminada. Este procedimiento lo realiza el script por cada vareta encontrada y en el orden mencionado anteriormente.
 
-Adicionalmente, por cada región de interés, se procede a filtrar las centroides pertenecientes a dicha región. De esta forma, se genera una lista con las flores encontradas que representa la cantidad de flores por vareta. En la figura \ref{fig:regionInte} se puede observar un ejemplo del resultado de esta operación. 
+Adicionalmente, por cada región de interés, se procede a filtrar los centroides pertenecientes a dicha región. De esta forma, se genera una lista con las flores encontradas que representa la cantidad de flores por vareta. En la figura \ref{fig:regionInte} se puede observar un ejemplo del resultado de esta operación. 
 
 \begin{figure}[ht]
      \centering
@@ -333,7 +334,7 @@ Adicionalmente, por cada región de interés, se procede a filtrar las centroide
         \caption{Ejemplo de conteo de flores por vareta con regiones de interés.}
         \label{fig:regionInte}
 \end{figure}
-
+\newpage
 Cabe destacar que para que este procedimiento sea efectivo, es necesario que cada vareta tenga una distancia apropiada entre sí. Bajo esta condición, se evita tomar las flores pertenecientes a una vareta vecina. 
 
 \subsection{Clasificador de flores}
@@ -342,26 +343,26 @@ El clasificador de flores de duraznero es la última fase que recorre el sistema
 
 \begin{table}[h]
 	\centering
-	\caption{Arquitectura de CNN para clasifiación de flores de duraznero.}
+	\caption{Arquitectura de CNN para clasificación de flores de duraznero.}
 	\begin{tabular}{l c c}    
 		\toprule
-		\textbf{Capaz}     & \textbf{Dimensiones de salida} & \textbf{Parámetros} \\
+		\textbf{Capas}     & \textbf{Dimensiones de salida} & \textbf{Parámetros} \\
 		\midrule
-		Conv2d-1.          & [-1, 16, 25, 25] &  448\\
-		MaxPool2d-2.       & [-1, 16, 12, 12] & 0\\
-		Conv2d-3.          & [-1, 32, 12, 12] & 4640 \\
-		MaxPool2d-4.       & [-1, 32, 6, 6]   & 0 \\
-		Conv2d-5.          & [-1, 64, 6, 6]   & 18 496 \\
-		MaxPool2d-6.       & [-1, 64, 3, 3]   & 0 \\	
-		Linear-7.          & [-1, 128]        & 73 856 \\
-		Dropout-8.         & [-1, 128]        & 0 \\
-		Linear-9.          & [-1, 2]          & 258 \\	
+		Conv2d-1          & [-1, 16, 25, 25] &  448\\
+		MaxPool2d-2       & [-1, 16, 12, 12] & 0\\
+		Conv2d-3          & [-1, 32, 12, 12] & 4640 \\
+		MaxPool2d-4       & [-1, 32, 6, 6]   & 0 \\
+		Conv2d-5          & [-1, 64, 6, 6]   & 18 496 \\
+		MaxPool2d-6       & [-1, 64, 3, 3]   & 0 \\	
+		Linear-7          & [-1, 128]        & 73 856 \\
+		Dropout-8         & [-1, 128]        & 0 \\
+		Linear-9          & [-1, 2]          & 258 \\	
 		\bottomrule
 		\hline
 	\end{tabular}
 	\label{tab:FlowerCNN}
 \end{table}  
-\newpage
+
 Esta red convolucional cuenta con un total de 97 698 parámetros entrenables. Por otro lado, se aplicaron métodos como regulación L2 \cite{WEBSITE:10} y \textit{DropOut} \cite{ARTICLE:21} para disminuir el sobreajuste. Las pruebas del rendimiento de este modelo y el sobre ajuste se explicarán con más detalle en el capítulo siguiente.
 
 Este modelo se integra y se ejecuta luego de encontrar y delimitar la región de interés en cada vareta. Al momento de tomar la región de interés y contar la cantidad de flores en dicha región, se filtra por aquellas detecciones que representan a las clases flor abierta y flor cerrada, para posteriormente recortar dicha detección utilizando sus coordenadas provistas por el \textit{bounding box}. Una vez recortada la imagen de la flor, se redimensiona a una resolución de 25 x 25 y se envía al clasificador. Finalmente, a través de su última capa totalmente conectada, el clasificador produce, una probabilidad para cada clase y luego se selecciona la clase con la probabilidad más alta. Este proceso se repite por cada flor abierta y cerrada encontrada en la vareta. 
@@ -369,7 +370,7 @@ Este modelo se integra y se ejecuta luego de encontrar y delimitar la región de
 Al final, cuando se clasificaron todas las flores abiertas y cerradas de una misma vareta, se guarda el resultado en un arreglo de datos y se toma la categoría con mayor aparición en dicho arreglo. Es decir, este arreglo permite que si el clasificador se equivoca categorizando una flor, se pueda enmendar dicho error con un proceso de votación. Este paso es importante porque una misma vareta no puede tener más de una clase. 
 
 Por otro lado, el proceso iterativo de recorrer la imagen y clasificar cada vareta con un tipo de flor, permitirá que en el futuro se pueda tener una imagen que contenga varetas con distintas categorías.
-\newpage
+
 \section{Integración de módulos y generación de resultados}
 
 La integración de los módulos se realizó a través del lenguaje de programación Python, donde ambos componentes se ejecutan desde el script principal y de forma secuencial. De esta forma, como se mostró en la figura \ref{fig:sistemaGeneral}, el primer módulo en recibir la imagen es el de estimación de longitud y posteriormente se ejecuta el de detección y procesamiento.
@@ -389,30 +390,30 @@ En la figura \ref{fig:TablaResultados1} y la figura \ref{fig:TablaResultados2} s
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width= 13.5cm, height= 2cm]{./Figures/Tabla2.png}
+	\includegraphics[scale=0.25]{./Figures/Tabla2_2.png}
 	\caption{Ejemplo de tabla resultante del módulo de clasificación y procesamiento.}
 	\label{fig:TablaResultados2}
 \end{figure}
 
-Cabe destacar que se generaron dos botones para obtener la tabla de resultados en dos formatos distintos. El primero genera el resultado en formato CSV y el segundo produce el resultado en formato XLSX para su correcta visualización en \textit{Excel}. 
+Cabe destacar que se generaron dos botones para obtener la tabla de resultados en dos formatos distintos. El primero genera el resultado en formato CSV y el segundo produce el resultado en formato XLSX para su correcta visualización en Excel. 
 
 En la figura \ref{fig:TablaResultados3} se muestra un ejemplo de ambas tablas unificadas que representan el resultado final del sistema.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width= 13.5cm, height= 1.5cm]{./Figures/Tabla3.png}
+	\includegraphics[scale=0.24]{./Figures/Tabla3_5.png}
 	\caption{Ejemplo de tabla unificada.}
 	\label{fig:TablaResultados3}
 \end{figure}
 
-\newpage
+
 \section{Interfaz de usuario}
 
-La interfaz gráfica del programa fue realizada con Streamlit \cite{WEBSITE:11}, que es una herramienta que permite compartir aplicaciones \textit{web}, utilizando Python. Adicionalmente, Esta herramienta no requiere ningún conocimiento previo en desarrollo de \textit{front end}. 
+La interfaz gráfica del programa fue realizada con Streamlit \cite{WEBSITE:11}, que es una herramienta que permite compartir aplicaciones web, utilizando Python. Adicionalmente, Esta herramienta no requiere ningún conocimiento previo en desarrollo de frontend. 
 
-Para el desarrollo del \textit{front end} con Streamlit y para ejecutar el proyecto en un entorno local, fue necesario crear una estructura de directorios que contuviesen los modelos de IA, los \textit{scripts} de Python para ejecutar cada módulo, los \textit{logs} generados por el sistema y por último, para tener un conocimiento de los experimentos realizados, un directorio para guardar las \textit{notebooks} utilizadas. Para su ejecución, se creó un entorno virtual con Python, que contiene todas las bibliotecas y dependencias necesarias.
+Para el desarrollo del frontend con Streamlit y para ejecutar el proyecto en un entorno local, fue necesario crear una estructura de directorios que contuviesen los modelos de IA, los scripts de Python para ejecutar cada módulo, los logs generados por el sistema y por último, para tener un conocimiento de los experimentos realizados, un directorio para guardar las \textit{notebooks} utilizadas. Para su ejecución, se creó un entorno virtual con Python, que contiene todas las bibliotecas y dependencias necesarias.
 
-Los \textit{scripts} de Python son cuatro en total, donde dos ellos llamados densidad vareta.py y vareta size.py representan los módulos de detección y procesamiento, y estimación de longitud respectivamente. El \textit{script} de flower classifier.py contiene la red neuronal convolucional desarrollada para el clasificador de flores. Por último, se tiene el \textit{script} principal que ejecuta la interfaz de usuario con Streamlit y orquesta los módulos del sistema.
+Los scripts de Python son cuatro en total, donde dos ellos llamados densidad vareta.py y vareta size.py representan los módulos de detección y procesamiento, y estimación de longitud respectivamente. El script de flower classifier.py contiene la red neuronal convolucional desarrollada para el clasificador de flores. Por último, se tiene el script principal que ejecuta la interfaz de usuario con Streamlit y orquesta los módulos del sistema.
 
 La interfaz de usuario cuenta con una página de presentación, donde se observa el título del trabajo, las tecnologías utilizadas y su propósito. En la figura \ref{fig:pantallaInicio} se muestra un ejemplo de esta pantalla de inicio.
 
@@ -422,8 +423,8 @@ La interfaz de usuario cuenta con una página de presentación, donde se observa
 	\caption{Pantalla de inicio del programa.}
 	\label{fig:pantallaInicio}
 \end{figure}
-\newpage
-Como el programa se ejecuta en un entorno local, Streamlit, utiliza el \textit{localhost} y el puerto 8501 por defecto para desplegar el sitio \textit{web}.
+
+Como el programa se ejecuta en un entorno local, Streamlit, utiliza el \textit{localhost} y el puerto 8501 por defecto para desplegar el sitio web.
 
 En el panel izquierdo se puede observar un desplegable que permite seleccionar el tipo de actividad. Para este desarrollo solo existe la detección de objetos. Al seleccionar detección de objetos, se muestra la siguiente página, donde se pedirá insertar una foto de 200 MB de tamaño máximo, en los formatos JPG, PNG o JPEG. La imagen se puede arrastrar directamente hasta el rectángulo de carga o se puede presionar directamente el botón de \textit{Browse files}. En la figura \ref{fig:pantalla2} se presenta un ejemplo de esta segunda página destinada para subir imágenes.
 
@@ -444,8 +445,8 @@ En las figuras \ref{fig:barra1} y \ref{fig:barra2} se muestran dichas barras con
 	\caption{Barra de confianza para el módulo de estimación de longitud.}
 	\label{fig:barra1}
 \end{figure}
-
 \newpage
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.13]{./Figures/barra2.png}

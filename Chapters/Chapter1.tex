@@ -32,18 +32,25 @@ En la  Estación Experimental Agropecuaria (EEA) de San Pedro se ha logrado secu
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=.3]{./Figures/genotipado.png}
-	\caption{Proceso para obtener los datos genómicos \cite{ARTICLE:1}.}
+	\caption{Proceso para obtener los datos genómicos \protect\footnotemark.}
 	\label{fig:genotipado}
 \end{figure}
+
 \newpage
+\footnotetext{Imagen tomada de \url{https://www.nature.com/articles/s41598-021-85815-0}}
+
 En la actualidad, las heladas primaverales son el mayor problema de los frutales a nivel mundial. Este fenómeno ocurre cuando las flores abiertas se someten a temperaturas cercanas a los -2,5 °C. Las heladas primaverales tienen una temperatura parecida a cualquier otra helada que se puede presentar en la temporada de invierno. Sin embargo, estas heladas suelen presentarse después del invierno, creando un gran impacto contra las flores y los frutos. Los productores de frutas, en general, se ven altamente afectados porque deben pagar un alto precio por estas inesperadas heladas tardías. En la figura \ref{fig:helada} se puede observar cómo este fenómeno meteorológico afecta a los frutales.
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[scale=.3]{./Figures/heladas3.jpeg}
-	\caption{Frutales afectados por las heladas primaverales \cite{WEBSITE:1}.}
+	\caption{Frutales afectados por las heladas primaverales \protect\footnotemark.}
 	\label{fig:helada}
 \end{figure}
+
+\footnotetext{Imagen tomada de \url{https://acortar.link/Ah3sFW}}
+
+\pagebreak
 
 \section{Motivación}
 
@@ -63,7 +70,7 @@ El presente trabajo permitirá automatizar la toma de datos de varetas de durazn
 		\begin{enumerate}
 			\item El sistema tomará como entrada imágenes de varetas de durazneros en formato JPG.			
 			\item El algoritmo debe detectar la presencia de las varetas de los durazneros e identificar el tipo de flor que posee.			        
-			\item El algoritmo debe identificar el estado fenológico de cada flor de duraznero en la vareta. Este estado se clasificará como flor abierta, flor cerrada, flor sinpetalos, incierto.
+			\item El algoritmo debe identificar el estado fenológico de cada flor de duraznero en la vareta. Este estado se clasificará como flor abierta, flor cerrada, flor sin pétalos, incierto.
 			\item El algoritmo debe determinar la cantidad de flores por centímetro de vareta.
 			\item El sistema debe entregar como resultado un archivo en formato CSV con los datos detectados por el algoritmo y una imagen donde se puedan visualizar las detecciones.
 			\item El sistema debe funcionar en una computadora local.
@@ -115,13 +122,13 @@ El presente trabajo contiene distintos algoritmos que, integrados, logran tomar 
 
 En la actualidad, se han desarrollado algoritmos que pueden determinar el tamaño de distintos objetos a través de imágenes usando visión por computadora. Muchos parten de encontrar un objeto de referencia al que se le conocen sus dimensiones (alto y ancho). Este objeto de referencia, normalmente se selecciona por ser fácil de detectar, por conocer sus dimensiones y por ser un objeto único. El procedimiento habitual para su detección, es pasar la imagen a escala de grises, aplicar filtros gaussianos para eliminar el ruido, utilizar detección de bordes y por último utilizar detección de contornos, tal y como se realiza en el trabajo \cite{ARTICLE:2}. Cabe destacar que usualmente el fondo es de un color blanco, lo que facilita la detección.
 
-En el presente trabajo se tienen imágenes con fondos de color naranja en su mayoría, el objeto de referencia a veces se encuentra ocluido, las imágenes se encuentran en horizontal o vertical, el objeto de referencia no siempre tiene la misma posición, etc. Por estos motivos, se utilizó un método de detección más complejo con un modelo de detección de objetos que se conoce como \textit{YOLOv8} y se considera el estado del arte a la fecha.
+En el presente trabajo se tienen imágenes con fondos de color naranja en su mayoría, el objeto de referencia a veces se encuentra ocluido, las imágenes se encuentran en horizontal o vertical, el objeto de referencia no siempre tiene la misma posición, etc. Por estos motivos, se utilizó un método de detección más complejo con un modelo de detección de objetos que se conoce como YOLOv8 y se considera el estado del arte a la fecha.
 
 \subsection{Detección de los estados fenológicos de la flor de duraznero}
  
-La detección de flores ha sido estudiada con diferentes enfoques y arquitecturas de \textit{deep learning}, como por ejemplo el estudio \cite{ARTICLE:3} que exploró la viabilidad de detección de estados fenológicos de las rosas con técnicas del contraste del color y comparando con el modelo de detección \textit{Faster R-CNN}. Sin embargo, no utilizó ninguna arquitectura de una etapa para la detección, lo que podría ser más eficiente. Por otro lado, se tienen trabajos que sí utilizaron la arquitectura de una etapa, en específico de \textit{YOLO} en sus versiones 4 y 5 como se presenta en \cite{ARTICLE:4} \cite{ARTICLE:5}, pero su enfoque fue basado para las flores de kiwi.
+La detección de flores ha sido estudiada con diferentes enfoques y arquitecturas de \textit{deep learning}, como por ejemplo el estudio \cite{ARTICLE:3} que exploró la viabilidad de detección de estados fenológicos de las rosas con técnicas del contraste del color y comparando con el modelo de detección Faster R-CNN. Sin embargo, no utilizó ninguna arquitectura de una etapa para la detección, lo que podría ser más eficiente. Por otro lado, se tienen trabajos que sí utilizaron la arquitectura de una etapa, en específico de YOLO en sus versiones 4 y 5 como se presenta en \cite{ARTICLE:4} \cite{ARTICLE:5}, pero su enfoque fue basado para las flores de kiwi.
 
-La presente memoria busca en particular los estados fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. Este último corresponde a una arquitectura \textit{YOLO} en su versión 8, que se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
+La presente memoria busca en particular los estados fenológicos de la flor de duraznero utilizando y comparando dos modelos de detección, donde el primero tiene una arquitectura de dos etapas y el segundo tiene una arquitectura de una etapa. Este último corresponde a una arquitectura YOLO en su versión 8, que se propuso para la realización efectiva y eficiente de esta tarea, además de representar el estado del arte en la actualidad.
 
 \subsection{Conteo de flores}
 

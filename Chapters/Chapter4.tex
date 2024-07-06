@@ -15,21 +15,21 @@ En este capítulo se describen los ensayos realizados y se presentan y comparan 
 Para el desarrollo del presente proyecto se utilizaron 3 bancos de pruebas, con las siguientes especificaciones técnicas:
 
 \begin{itemize}
-\item Banco de pruebas Laptop MacBook Pro - \textit{hardware} disponible:
+\item Banco de pruebas Laptop MacBook Pro - hardware disponible:
 	\begin{itemize}
 	\item OS: MacOS Sonoma 14.
 	\item CPU: Apple M1 Pro.
 	\item RAM: 32 GB.
 	\item GPU: No contiene.
 	\end{itemize}
-\item Banco de pruebas Laptop ASUS TUF GAMING F15 - \textit{hardware} disponible:
+\item Banco de pruebas Laptop ASUS TUF GAMING F15 - hardware disponible:
 	\begin{itemize}
 	\item OS: Windows 11.
 	\item CPU: Intel(R) Core(TM) i5-11260H.
 	\item RAM: 16 GB.
 	\item GPU: NVIDIA GeForce RTX 3050.
 	\end{itemize}
-\item Banco de pruebas Google Colab Pro - \textit{hardware} disponible:
+\item Banco de pruebas Google Colab Pro - hardware disponible:
 	\begin{itemize}
 	\item OS: desconocido.
 	\item CPU: desconocido.
@@ -41,7 +41,7 @@ Para el desarrollo del presente proyecto se utilizaron 3 bancos de pruebas, con 
 \section{Desempeño de modelos}
 \label{sec:desempeñoMod}
 
-Para medir el desempeño de los modelos de IA utilizados durante la ejecución de este trabajo, se decidió emplear la métrica mAP. Esta métrica evalúa tanto la clasificación del objeto como la ubicación del \textit{bounding box} a través del \textit{Avarage Precision} (AP) que se representa en la ecuación \ref{eq:AP}.
+Para medir el desempeño de los modelos de IA utilizados durante la ejecución de este trabajo, se decidió emplear la métrica mAP. Esta métrica evalúa tanto la clasificación del objeto como la ubicación del \textit{bounding box} a través del \textit{Average Precision} (AP) que se representa en la ecuación \ref{eq:AP}.
 
 \begin{equation}
     \label{eq:AP}
@@ -55,7 +55,7 @@ Donde
     \item \(\text{Rel}_{k}\) es un indicador binario que denota si el elemento en el \( k \)-ésimo punto de recuperación es relevante (\( \text{Rel}_{k} = 1 \)) o no relevante (\( \text{Rel}_{k} = 0 \)).
 \end{itemize}
 
-Luego, al promediar los valores de \textit{AP} entre todas las clases, se obtiene respectivamente el mAP y la ecuación queda como se muestra en \ref{eq:mAP}.
+Luego, al promediar los valores de AP entre todas las clases, se obtiene respectivamente el mAP y la ecuación queda como se muestra en \ref{eq:mAP}.
 
 \begin{equation}
     \label{eq:mAP}
@@ -65,12 +65,12 @@ Luego, al promediar los valores de \textit{AP} entre todas las clases, se obtien
 Donde 
 \begin{itemize}
 	\item \( C \) es el número total de clases o consultas.
-    \item \( AP \) es el \textit{Average Precision} calculado para la clase o consulta.
+    \item AP es el \textit{Average Precision} calculado para la clase o consulta.
 \end{itemize}
 
 \subsection{Desempeño del detector de regla}
 
-Como se mencionó en el capítulo anterior, el detector de la regla tiene como modelo base un \textit{YOLOv8n} y cumple una función fundamental para la estimación de la longitud de la vareta. Por otro lado, el entrenamiento de este modelo se realizó con los siguientes hiperparámetros:
+Como se mencionó en el capítulo anterior, el detector de la regla tiene como modelo base un YOLOv8n y cumple una función fundamental para la estimación de la longitud de la vareta. Por otro lado, el entrenamiento de este modelo se realizó con los siguientes hiperparámetros:
 
 \begin{itemize}
 	\item Épocas: 100.
@@ -99,7 +99,7 @@ Los resultados fueron muy buenos en general. El modelo puede detectar la regla s
 
 \subsection{Desempeño del detector de vareta}
 
-El detector de vareta destinado para el módulo de estimación de longitud, tiene como modelo base un \textit{YOLOv8n} entrenado bajo los siguientes hiperparámetros:
+El detector de vareta destinado para el módulo de estimación de longitud, tiene como modelo base un YOLOv8n entrenado bajo los siguientes hiperparámetros:
 
 \begin{itemize}
 	\item Épocas: 100.
@@ -108,7 +108,7 @@ El detector de vareta destinado para el módulo de estimación de longitud, tien
     \item \textit{Learning rate}: 0,01.
 \end{itemize}
 
-Para este modelo se hicieron dos prubas, una sin aumento de datos y otra con aumento. El aumento de datos aplicado corresponde a lo descripto en la sección \ref{aumentoDatos}.
+Para este modelo se hicieron dos pruebas, una sin aumento de datos y otra con aumento. El aumento de datos aplicado corresponde a lo descripto en la sección \ref{aumentoDatos}.
 
 Los resultados obtenidos contra el conjunto de datos de pruebas para el modelo sin aumento de datos se muestran en la tabla \ref{tab:resultadosVareta}.
 
@@ -150,9 +150,9 @@ Con esto se destaca que el aumento de datos mejoró el rendimiento del modelo de
 
 \subsection{Desempeño del detector de estados fenológicos}
 
-La detección de estados fenológicos, como se mencionó en el capítulo anterior, fue probada con dos modelos de IA que se ajustan para este caso de uso. Por un lado, se probó con un detector de dos etapas como es \textit{Faster R-CNN} y por otro lado con un detector de una etapa como \textit{YOLOv8}. Ambos casos, se probaron con y sin el uso de aumento de datos. Los resultados fueron los siguientes:
+La detección de estados fenológicos, como se mencionó en el capítulo anterior, fue probada con dos modelos de IA que se ajustan para este caso de uso. Por un lado, se probó con un detector de dos etapas como es Faster R-CNN y por otro lado con un detector de una etapa como YOLOv8. Ambos casos, se probaron con y sin el uso de aumento de datos. Los resultados fueron los siguientes:
 
-\subsubsection{\textit{Faster R-CNN} sin aumento de datos}
+\subsubsection{Faster R-CNN sin aumento de datos}
 
 El entrenamiento del modelo se hizo bajo los siguientes hiperparámentros:
 
@@ -170,7 +170,7 @@ Los resultados de detección contra el conjunto de prueba se muestra en la tabla
 
 \begin{table}[h]
 	\centering
-	\caption{Métricas de detección para \textit{Faster R-CNN} sin aumento de datos.}
+	\caption{Métricas de detección para Faster R-CNN sin aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
 		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP50}&\textbf{mAP> 50}\\
@@ -191,17 +191,17 @@ La precisión promedio de detección entre todas las clases es de un 34,9\%, lo 
 
 Por otro lado, al evaluar la precisión promedio de detección por clase, se observa que la categoría vareta es la clase a la que el modelo detecta con mejor precisión promedio con 69,5\%, seguida por flor abierta con 43,13\% y por flor sin pétalos con 37,35\%. Además, se muestra que el modelo detecta con dificultad las categorías flor cerrada con un mAP de 12,25\% e incierto con 9,42\%.
 
-Este bajo porcentaje de mAP para la clase \textit{flor cerrada} con respecto a las otras categorías presentes, se puede deber al desbalance de datos observado en la sección \ref{desbalanceAfterLabeled} y al rendimiento del modelo al intentar detectar objetos pequeños en la imagen. Adicionalmente, para la categoría \textit{incierto} no se cuenta con una cantidad de muestras significativas y consistente a través del conjunto de datos, lo que explica la baja precisión promedio obtenida para esta clase.
+Este bajo porcentaje de mAP para la clase flor cerrada con respecto a las otras categorías presentes, se puede deber al desbalance de datos observado en la sección \ref{desbalanceAfterLabeled} y al rendimiento del modelo al intentar detectar objetos pequeños en la imagen. Adicionalmente, para la categoría incierto no se cuenta con una cantidad de muestras significativas y consistente a través del conjunto de datos, lo que explica la baja precisión promedio obtenida para esta clase.
 
 Para mejorar estos resultados se implementó el aumento de datos mencionado en la sección \ref{aumentoDatos}.
 
-\subsubsection{\textit{Faster R-CNN} con aumento de datos}
+\subsubsection{Faster R-CNN con aumento de datos}
 
 El rendimiento del modelo basado en la métrica mAP, se puede observar en la tabla \ref{tab:resultadosFasterConAug}. 
 
 \begin{table}[h]
 	\centering
-	\caption{Métricas de detección para \textit{Faster R-CNN} con aumento de datos.}
+	\caption{Métricas de detección para Faster R-CNN con aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
 		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP}&\textbf{mAP50}&\textbf{mAP> 50}\\
@@ -220,11 +220,11 @@ El rendimiento del modelo basado en la métrica mAP, se puede observar en la tab
 
 Como se puede observar, se logra mejorar la precisión promedio de detección para las clases flor abierta, flor cerrada y vareta. Con esto, la métrica mAP medida entre todas las clases mejora a 37,33\%, adicionalmente también aumenta a 63,26\% cuando se fija un umbral de confianza de detección igual al 50\% y a un 37,93\% cuando el nivel de confianza en la detección es superior al 50\%.
 
-Se puede concluir que el modelo \textit{Faster R-CNN} con y sin aumento de datos es bueno para detectar la vareta y las flores en estado abierto. Este comportamiento se puede deber al tamaño de estos objetos en la imagen en comparación con el resto de las categorías que se busca en la detección. Además, la clase flor abierta es la clase más predominante en todas las imágenes según el estudio de los datos realizado en la sección \ref{desbalanceAfterLabeled}, lo que permite que el modelo pueda aprender y reconocer con mayor precisión sus características debido a la abundancia de ejemplos representativos durante el entrenamiento.
+Se puede concluir que el modelo Faster R-CNN con y sin aumento de datos es bueno para detectar la vareta y las flores en estado abierto. Este comportamiento se puede deber al tamaño de estos objetos en la imagen en comparación con el resto de las categorías que se busca en la detección. Además, la clase flor abierta es la clase más predominante en todas las imágenes según el estudio de los datos realizado en la sección \ref{desbalanceAfterLabeled}, lo que permite que el modelo pueda aprender y reconocer con mayor precisión sus características debido a la abundancia de ejemplos representativos durante el entrenamiento.
 
-\subsubsection{\textit{YOLOv8n} sin aumento de datos}
+\subsubsection{YOLOv8n sin aumento de datos}
 
-Se puede observar en la tabla \ref{tab:resultadosYoloSinAug} el resultado obtenido con \textit{YOLOv8n} sin aumento de datos, con 14 imágenes del conjunto de pruebas y bajo los siguientes parámetros de entrenamiento:
+Se puede observar en la tabla \ref{tab:resultadosYoloSinAug} el resultado obtenido con YOLOv8n sin aumento de datos, con 14 imágenes del conjunto de pruebas y bajo los siguientes parámetros de entrenamiento:
 
 \begin{itemize}
 	\item Épocas: 100.
@@ -235,7 +235,7 @@ Se puede observar en la tabla \ref{tab:resultadosYoloSinAug} el resultado obteni
 
 \begin{table}[h]
 	\centering
-	\caption{Métricas de detección para \textit{YOLOv8n} sin aumento de datos.}
+	\caption{Métricas de detección para YOLOv8n sin aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
 		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP50}&\textbf{mAP>50}\\
@@ -252,29 +252,29 @@ Se puede observar en la tabla \ref{tab:resultadosYoloSinAug} el resultado obteni
 	\label{tab:resultadosYoloSinAug}
 \end{table}
 \newpage
-Se puede observar que la precisión promedio de todas las clases obtenida por \textit{YOLOv8n} es de 64,5\% para el mAP 50. Lo que supera al mAP 50 obtenido con el modelo \textit{Faster R-CNN} con y sin aumento de datos.
+Se puede observar que la precisión promedio de todas las clases obtenida por YOLOv8n es de 64,5\% para el mAP 50. Lo que supera al mAP 50 obtenido con el modelo Faster R-CNN con y sin aumento de datos.
 
-Las clases que este modelo detecta con más precisión, son: vareta, flor abierta y flor cerrada. La diferencia y mejora contra \textit{Faster R-CNN} se puede observar también al comparar la métrica mAP obtenida para todas las clases donde este modelo se desempeñó mejor. Como ejemplo se tiene la clase vareta, donde se obtuvo un 69,5\% con \textit{Faster R-CNN}. Esta misma clase que también fue la mejor para el modelo \textit{YOLOv8n}, tuvo un 99,4\% que representa una mejora del 29,9\%.
+Las clases que este modelo detecta con más precisión, son: vareta, flor abierta y flor cerrada. La diferencia y mejora contra Faster R-CNN se puede observar también al comparar la métrica mAP obtenida para todas las clases donde este modelo se desempeñó mejor. Como ejemplo se tiene la clase vareta, donde se obtuvo un 69,5\% con Faster R-CNN. Esta misma clase que también fue la mejor para el modelo YOLOv8n, tuvo un 99,4\% que representa una mejora del 29,9\%.
 
-Por otro lado, ambos modelos  logran detectar con alta precisión la clase vareta y esto se puede deber al tamaño de este objeto en la imagen. Además, es seguida por la clase flor abierta que, como se mencionó anteriormente, contiene una cantidad de muestras representativas que ayudan al modelo a reconocer los patrones de esta clase. Por último, se destaca la categoría incierto, que tanto este modelo como \textit{Faster R-CNN} no logran reconocer durante la detección en su totalidad.
+Por otro lado, ambos modelos  logran detectar con alta precisión la clase vareta y esto se puede deber al tamaño de este objeto en la imagen. Además, es seguida por la clase flor abierta que, como se mencionó anteriormente, contiene una cantidad de muestras representativas que ayudan al modelo a reconocer los patrones de esta clase. Por último, se destaca la categoría incierto, que tanto este modelo como Faster R-CNN no logran reconocer durante la detección en su totalidad.
 
 La matriz de confusión normalizada mostrada en la figura \ref{fig:cfmatriznorm}, indica que muchas de las veces que se tiene la clase incierto, el modelo la predice como flor abierta. Esto demuestra que el modelo no logró aprender correctamente los patrones que identifican dicha clase durante el entrenamiento.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.49]{./Figures/CFMatrixnorm.png}
-	\caption{Matriz de confusión normalizada de \textit{YOLOv8n} para el conjunto de prueba.}
+	\caption{Matriz de confusión normalizada de YOLOv8n para el conjunto de prueba.}
 	\label{fig:cfmatriznorm}
 \end{figure}
 \newpage
-\subsubsection{\textit{YOLOv8n} con aumento de datos}
+\subsubsection{YOLOv8n con aumento de datos}
 \label{YOLOv8n con aumento de dato}
 
-Para mejorar los resultados de \textit{YOLOv8n} se implementó el aumento de datos descrito en la sección \ref{aumentoDatos}. Los resultados obtenidos contra el conjunto de imágenes de prueba, se observa en la tabla \ref{tab:resultadosYoloConAug}.
+Para mejorar los resultados de YOLOv8n se implementó el aumento de datos descrito en la sección \ref{aumentoDatos}. Los resultados obtenidos contra el conjunto de imágenes de prueba, se observa en la tabla \ref{tab:resultadosYoloConAug}.
 
 \begin{table}[h]
 	\centering
-	\caption{Métricas de detección para \textit{YOLOv8n} con aumento de datos.}
+	\caption{Métricas de detección para YOLOv8n con aumento de datos.}
 	\begin{tabular}{c c c c c c c}    
 		\toprule
 		\textbf{Clase}&\textbf{Imágenes}&\textbf{mAP50}&\textbf{mAP>50}\\
@@ -291,18 +291,18 @@ Para mejorar los resultados de \textit{YOLOv8n} se implementó el aumento de dat
 	\label{tab:resultadosYoloConAug}
 \end{table}
 
-La precisión promedio para un umbral de confianza igual al 50\% mejora para la clase flor cerrada en un 5,9\% y para la clase flor sin pétalos en un 1,5\%. Mientras que, se tiene una perdida para la clase flor abierta del 1,2\%. De esta forma, se observa un aumento del 1\% para el mAP 50 de todas las clases.
+La precisión promedio para un umbral de confianza igual al 50\% mejora para la clase flor cerrada en un 5,9\% y para la clase flor sin pétalos en un 1,5\%. Por otro lado, para la clase flor abierta se observa una pérdida del 1,2\%. De esta forma, se observa un aumento del 1\% para el mAP 50 de todas las clases.
 
 Se observa que el entrenamiento del modelo con aumento de datos ayudó a mejorar el reconocimiento de las clases más difíciles de detectar como son flor cerrada y flor sin pétalos. Además, mantiene el buen rendimiento para las clases flor abierta y vareta.
 
-Al comparar todos los experimentos realizados para la detección de los estados fenológicos de las flores de duraznero, el modelo con mejor rendimiento basado en la métrica mAP para dicha tarea es \textit{YOLOv8n} con aumento de datos. Por este motivo, se seleccionó este modelo para desempeñar dicha tarea. Adicionalmente, este modelo es capaz de mitigar el desbalance de clases por su mecanismo interno que hace uso del \textit{Focal Loss} \cite{ARTICLE:15} para asignar mayor peso a las clases menos frecuentes en forma automática. 
+Al comparar todos los experimentos realizados para la detección de los estados fenológicos de las flores de duraznero, el modelo con mejor rendimiento basado en la métrica mAP para dicha tarea es YOLOv8n con aumento de datos. Por este motivo, se seleccionó este modelo para desempeñar dicha tarea. Adicionalmente, este modelo es capaz de mitigar el desbalance de clases por su mecanismo interno que hace uso del \textit{Focal Loss} \cite{ARTICLE:15} para asignar mayor peso a las clases menos frecuentes en forma automática. 
 
-Por último, se aplicó \textit{Eigen-CAM} \cite{ARTICLE:17} para crear mapas de calor que permitan explicar los resultados obtenidos por el modelo. Este mapa de calor se implementó en la capa convolucional \textit{C2f}. En la figura \ref{fig:EigenCam} se observa un ejemplo de los mapas de calor generados por \textit{Eigen-CAM} en una foto perteneciente al conjunto de pruebas utilizando \textit{YOLOv8n} con aumento de datos.
+Por último, se aplicó Eigen-CAM \cite{ARTICLE:17} para crear mapas de calor que permitan explicar los resultados obtenidos por el modelo. Este mapa de calor se implementó en la capa convolucional \textit{C2f}. En la figura \ref{fig:EigenCam} se observa un ejemplo de los mapas de calor generados por Eigen-CAM en una foto perteneciente al conjunto de pruebas utilizando YOLOv8n con aumento de datos.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.55]{./Figures/EigenCamEj.png}
-	\caption{Mapa de calor con \textit{Eigen-CAM} en la capa \textit{C2f} del modelo \textit{YOLOv8n}.}
+	\caption{Mapa de calor con Eigen-CAM en la capa C2f del modelo YOLOv8n.}
 	\label{fig:EigenCam}
 \end{figure}
 

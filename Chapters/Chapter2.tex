@@ -18,15 +18,16 @@ La capa de agrupación, se encuentra normalmente entre capas sucesivas convoluci
 La capa totalmente conectada, a diferencia de las otras capas mencionadas, tiene todos los nodos de la salida conectados directamente a los nodos anteriores. El objetivo de esta última capa es realizar una clasificación, basándose en las características extraídas anteriormente. La función de activación generalmente utilizada en esta capa es la función \textit{softmax} para obtener la probabilidad de que un objeto pertenezca a una clase u otra entre un intervalo de 0 a 1.
 
 En la figura \ref{fig:cnn} se puede observar un ejemplo de cómo se estructuran dichas capas en la red neuronal convolucional.
-
+\newpage
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=.35]{./Figures/cnn-image.jpeg}
-	\caption{Ejemplo de arquitectura de red neuronal convolucional \cite{WEBSITE:2}.}
+	\caption{Ejemplo de arquitectura de red neuronal convolucional \protect\footnotemark.}
 	\label{fig:cnn}
 \end{figure}
 
+\footnotetext{Imagen tomada de \url{https://es.mathworks.com/discovery/convolutional-neural-network.html}}
 
 \section{Detección de objetos}
 
@@ -34,7 +35,7 @@ La detección de objetos es una técnica utilizada en visión por computadora pa
 
 La detección de objetos se puede implementar utilizando métodos de \textit{machine learning} clásicos o de \textit{deep learning}, dependiendo del problema a resolver \cite{WEBSITE:6}. El uso de \textit{deep learning} es más eficaz cuando se requiere tratar imágenes con muchas etiquetas, es decir, muchos objetos a detectar y que además tienen otras variaciones como cambio de brillo, rotaciones, cambio de escala, etc. Por otro lado, el uso de \textit{machine learning} clásico es favorable cuando no se tienen altas capacidades de procesamiento y el número de etiquetas distintas a identificar es menor.
 
-Algunos ejemplos de detección de objetos con \textit{machine learning} clásico son \textit{SIFT} \cite{ARTICLE:18}, \textit{template matching}, etc. En la figura \ref{fig:tempMatch} se puede observar el uso de \textit{template matching} para detectar el logo de Coca-Cola en una imagen.
+Algunos ejemplos de detección de objetos con \textit{machine learning} clásico son SIFT \cite{ARTICLE:18}, \textit{template matching}, etc. En la figura \ref{fig:tempMatch} se puede observar el uso de \textit{template matching} para detectar el logo de Coca-Cola en una imagen.
 
 \begin{figure}[ht]
 	\centering
@@ -42,60 +43,64 @@ Algunos ejemplos de detección de objetos con \textit{machine learning} clásico
 	\caption{Ejemplo de \textit{template matching} para identificar el logo de Coca-Cola.}
 	\label{fig:tempMatch}
 \end{figure}
-
-Por otro lado, se tienen métodos de \textit{deep learning} para detección de objetos más avanzados que involucran detectores de dos etapas y de una etapa como son \textit{R-CNN}, \textit{Faster R-CNN}, \textit{SSD}, \textit{YOLO}, entre otros.
+\newpage
+Por otro lado, se tienen métodos de \textit{deep learning} para detección de objetos más avanzados que involucran detectores de dos etapas y de una etapa como son R-CNN, Faster R-CNN, SSD, YOLO, entre otros.
 
 \subsection{Detectores de dos etapas}
 
-Los detectores de dos etapas como \textit{R-CNN} y sus variantes, primero extraen las características de la imagen y luego proponen una región de interés (ROI). El ROI, consiste en un \textit{bounding box} donde se presume que se encuentra el objeto a buscar. Luego, en la segunda etapa, se analizan las características encontradas en conjunto con el ROI, para seleccionar los \textit{bounding boxes} finales y calcular las probabilidades de que el objeto en las regiones pertenezca a una clase específica \cite{ARTICLE:8}. 
+Los detectores de dos etapas como R-CNN y sus variantes, primero extraen las características de la imagen y luego proponen una región de interés (ROI). El ROI, consiste en un \textit{bounding box} donde se presume que se encuentra el objeto a buscar. Luego, en la segunda etapa, se analizan las características encontradas en conjunto con el ROI, para seleccionar los \textit{bounding boxes} finales y calcular las probabilidades de que el objeto en las regiones pertenezca a una clase específica \cite{ARTICLE:8}. 
 
-Las redes neuronales de dos etapas son muy precisas al momento de detectar un objeto, sin embargo, son consideradas lentas durante la inferencia. Esta desventaja llevó a mejorar los modelos iniciales como \textit{R-CNN} a sus variantes \textit{Fast R-CNN} y \textit{Faster R-CNN}.
+Las redes neuronales de dos etapas son muy precisas al momento de detectar un objeto, sin embargo, son consideradas lentas durante la inferencia. Esta desventaja llevó a mejorar los modelos iniciales como R-CNN a sus variantes Fast R-CNN y Faster R-CNN.
 
-En la figura \ref{fig:rcnn} se puede observar la arquitectura de una red neuronal de dos etapas \textit{R-CNN}.
+En la figura \ref{fig:rcnn} se puede observar la arquitectura de una red neuronal de dos etapas R-CNN.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=.25]{./Figures/R-CNN.png}
-	\caption{Ejemplo de arquitectura de red neuronal de dos etapas \textit{R-CNN} \cite{WEBSITE:6}.}
+	\caption{Ejemplo de arquitectura de red neuronal de dos etapas R-CNN \protect\footnotemark.}
 	\label{fig:rcnn}
 \end{figure}
 
-\subsubsection{Detección de objetos con \textit{Fast R-CNN}}
+\footnotetext{Imagen tomada de \url{https://la.mathworks.com/discovery/object-detection.html}}
 
-Las mejoras adicionadas en \textit{Fast R-CNN} en comparación con \textit{R-CNN} incluyen una nueva capa llamada \textit{ROI Pooling}, que se encarga de extraer vectores de características de igual longitud de todas las regiones de interés propuestas. Por otro lado, \textit{R-CNN} contiene tres etapas como son la generación de región propuesta, la extracción de características y la clasificación usando \textit{SVM} \cite{ARTICLE:19}, mientras que \textit{Fast R-CNN} crea una red neuronal que tiene una única etapa, reduciendo así el número de etapas de su predecesor. Además, este modelo comparte cálculos computacionales a través de todas las ROIs propuestas en vez de hacerlo una a una de manera independiente. Por último, \textit{Fast R-CNN} no guarda en caché las características, lo que reduce el uso de disco de memoria \cite{ARTICLE:10}.
+\subsubsection{Detección de objetos con Fast R-CNN}
 
-\subsubsection{Detección de objetos con \textit{Faster R-CNN}}
+Las mejoras adicionadas en Fast R-CNN en comparación con R-CNN incluyen una nueva capa llamada \textit{ROI Pooling}, que se encarga de extraer vectores de características de igual longitud de todas las regiones de interés propuestas. Por otro lado, R-CNN contiene tres etapas como son la generación de región propuesta, la extracción de características y la clasificación usando \textit{SVM} \cite{ARTICLE:19}, mientras que Fast R-CNN crea una red neuronal que tiene una única etapa, reduciendo así el número de etapas de su predecesor. Además, este modelo comparte cálculos computacionales a través de todas las ROIs propuestas en vez de hacerlo una a una de manera independiente. Por último, Fast R-CNN no guarda en caché las características, lo que reduce el uso de disco de memoria \cite{ARTICLE:10}.
 
-El modelo \textit{Faster R-CNN} fue diseñado para superar muchos de los errores encontrados en sus predecesores \textit{Fast R-CNN} y \textit{R-CNN}. En general, como su nombre en inglés sugiere, sus mejoras van relacionadas a la rapidez en comparación a las otras variantes.
+\subsubsection{Detección de objetos con Faster R-CNN}
 
-\textit{Faster R-CNN} introduce mejoras a través de la incorporación de la red de región propuesta o por sus siglas en inglés RPN, que es una red completamente convolucional que produce propuestas con diferentes escalas y relaciones de aspecto. La RPN aplica la terminología de redes neuronales con atención para indicar al modelo dónde mirar.
+El modelo Faster R-CNN fue diseñado para superar muchos de los errores encontrados en sus predecesores Fast R-CNN y R-CNN. En general, como su nombre en inglés sugiere, sus mejoras van relacionadas a la rapidez en comparación a las otras variantes.
 
-En \textit{Faster R-CNN} se introduce el concepto de \textit{anchor boxes}, lo que permite detectar objetos en distintas escalas y relaciones de aspecto. Por último, se comparten cálculos computacionales a través de la RPN y \textit{Fast R-CNN}, lo que reduce el tiempo computacional \cite{ARTICLE:9}. En la figura \ref{fig:Faster-rcnn} se muestra un ejemplo de la arquitectura de \textit{Faster R-CNN}.
+Faster R-CNN introduce mejoras a través de la incorporación de la red de región propuesta o por sus siglas en inglés RPN, que es una red completamente convolucional que produce propuestas con diferentes escalas y relaciones de aspecto. La RPN aplica la terminología de redes neuronales con atención para indicar al modelo dónde mirar.
+
+En Faster R-CNN se introduce el concepto de \textit{anchor boxes}, lo que permite detectar objetos en distintas escalas y relaciones de aspecto. Por último, se comparten cálculos computacionales a través de la RPN y Fast R-CNN, lo que reduce el tiempo computacional \cite{ARTICLE:9}. En la figura \ref{fig:Faster-rcnn} se muestra un ejemplo de la arquitectura de Faster R-CNN.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=1.3]{./Figures/Faster-rcnn.png}
-	\caption{Ejemplo de arquitectura de red neuronal de dos etapas \textit{Faster R-CNN} \cite{ARTICLE:11}.}
+	\caption{Ejemplo de arquitectura de red neuronal de dos etapas Faster R-CNN \protect\footnotemark.} %\cite{ARTICLE:11}.}
 	\label{fig:Faster-rcnn}
 \end{figure}
+
+\footnotetext{Imagen tomada de \url{https://acortar.link/H5QXDB}}
 
 \subsection{Detectores de una etapa}
 
 Los detectores de una etapa son modelos que omiten la etapa de RPN y ejecutan la detección directamente en un muestreo denso de ubicaciones. Estos modelos hacen uso de \textit{grid-box} y \textit{anchor box} para localizar la región de detección y delimitar al objeto de interés. En general, se consideran más rápidos que los detectores de dos etapas, sin embargo, son menos precisos \cite{ARTICLE:12}.
 
-Algunos ejemplos de detectores de una etapa son las arquitecturas \textit{YOLO} \cite{ARTICLE:13}, \textit{SSD} \cite{ARTICLE:14}, \textit{RetinaNet} \cite{ARTICLE:15} y \textit{SqueezeDet} \cite{ARTICLE:16}. 
+Algunos ejemplos de detectores de una etapa son las arquitecturas YOLO \cite{ARTICLE:13}, SSD \cite{ARTICLE:14}, RetinaNet \cite{ARTICLE:15} y SqueezeDet \cite{ARTICLE:16}. 
 
-\subsubsection{Detección de objetos con \textit{YOLO}}
+\subsubsection{Detección de objetos con YOLO}
 
-\textit{You Only Look Once} (\textit{YOLO}) es considerado el estado del arte para la detección en tiempo real y fue introducido en el año 2015. En el paper \cite{ARTICLE:13}, los autores trataron la detección de objetos como un problema de regresión simple en vez de hacerlo como un problema de clasificación, en el que se separan espacialmente los \textit{bounding boxes} y se les asocia una probabilidad a cada detección usando una red neuronal convolucional.
+\textit{You Only Look Once} (YOLO) es considerado el estado del arte para la detección en tiempo real y fue introducido en el año 2015. En el paper \cite{ARTICLE:13}, los autores trataron la detección de objetos como un problema de regresión simple en vez de hacerlo como un problema de clasificación, en el que se separan espacialmente los \textit{bounding boxes} y se les asocia una probabilidad a cada detección usando una red neuronal convolucional.
 
 El algoritmo se basa en el uso de bloques residuales, \textit{bounding boxes} por regresión, \textit{Intersection Over Union} (IoU) y \textit{Non-Maximum Suppression}.
 
-El primer paso es el uso de bloques residuales que consiste en dividir la imagen original en celdas cuadriculadas de NxN. Cada celda en la cuadrícula es responsable de localizar y predecir la clase de objeto que cubre con su respectivo valor de confianza. Luego, se determinan los \textit{bounding boxes} con los atributos que \textit{YOLO} obtiene usando un módulo de regresión lineal. La respuesta que se recibe de este módulo es una representación vectorial de las coordenadas para cada \textit{bounding box}.
+El primer paso es el uso de bloques residuales que consiste en dividir la imagen original en celdas cuadriculadas de NxN. Cada celda en la cuadrícula es responsable de localizar y predecir la clase de objeto que cubre con su respectivo valor de confianza. Luego, se determinan los \textit{bounding boxes} con los atributos que YOLO obtiene usando un módulo de regresión lineal. La respuesta que se recibe de este módulo es una representación vectorial de las coordenadas para cada \textit{bounding box}.
 
-Por otro lado, un mismo objeto puede tener múltiples detecciones durante la predicción y no todas serán relevantes. Por este motivo, se usa \textit{Intersection Over Union} que ayuda a descartar aquellas predicciones no relevantes, dándoles un valor entre 0 y 1. En este proceso, se establece un umbral para el IoU, que posteriormente, se compara con el cálculo generado por \textit{YOLO} para cada cuadrícula y si el resultado es menor al umbral establecido, se descarta dicha predicción. Por último, se aplica \textit{Non-Maximum Suppression} para preservar solo aquellas predicciones que tengan un valor de confianza alto \cite{WEBSITE:7}.
+Por otro lado, un mismo objeto puede tener múltiples detecciones durante la predicción y no todas serán relevantes. Por este motivo, se usa \textit{Intersection Over Union} que ayuda a descartar aquellas predicciones no relevantes, dándoles un valor entre 0 y 1. En este proceso, se establece un umbral para el IoU, que posteriormente, se compara con el cálculo generado por YOLO para cada cuadrícula y si el resultado es menor al umbral establecido, se descarta dicha predicción. Por último, se aplica \textit{Non-Maximum Suppression} para preservar solo aquellas predicciones que tengan un valor de confianza alto \cite{WEBSITE:7}.
 
-\textit{YOLO} cuenta con varias versiones desde su lanzamiento donde se ha mejorado su velocidad, precisión y el uso de recursos. Estas versiones van desde la uno a la nueve, siendo la ocho la usada en la presente memoria.
+YOLO cuenta con varias versiones desde su lanzamiento donde se ha mejorado su velocidad, precisión y el uso de recursos. Estas versiones van desde la uno a la nueve, siendo la ocho la usada en la presente memoria.
 
 \section{Clasificación de imágenes}
 
