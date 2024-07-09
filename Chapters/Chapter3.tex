@@ -255,7 +255,7 @@ Cuando se detectan las varetas, se hace la conversión de píxeles a centímetro
 
 Por otro lado, cabe destacar que las detecciones de las varetas se organizan de menor a mayor recorriendo la imagen en el eje X (izquierda a derecha), si la imagen es vertical. En caso contrario, se hace de la misma forma, pero sobre el eje Y. Con esta técnica es posible identificar las varetas que se detectan y su respectiva estimación de longitud.
 
-Por último, se imprime por pantalla la imagen con las detecciones y las mediciones, además se muestra una tabla con los resultados obtenidos en este módulo. Esta tabla posteriormente se une con el resultado del módulo de detección y procesamiento. En la figura \ref{fig:modulo1} se observa un ejemplo del resultado obtenido por pantalla.
+Por último, se imprime por pantalla la imagen con las detecciones y las mediciones, además se muestra una tabla con los resultados obtenidos en este módulo. Esta tabla posteriormente se une con el resultado del módulo de detección y procesamiento. En la figura \ref{fig:modulo1} y la tabla \ref{tab:tablaestimaciones01} se muestra un ejemplo de los resultados obtenidos por pantalla.
 
 %\begin{figure}[ht]
 %	\centering
@@ -266,22 +266,27 @@ Por último, se imprime por pantalla la imagen con las detecciones y las medicio
 
 \begin{figure}[ht]
      \centering
-     \begin{subfigure}[b]{0.55\textwidth}
-         \centering
-         \includegraphics[scale=0.35]{./Figures/vareta_size.jpeg}
-         \caption{Imagen con estimaciones de dimensiones.}
-         \label{fig:1de33}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.4\textwidth}
-         \centering
-         \includegraphics[scale=.4]{./Figures/vareta_size_table.jpg}
-         \caption{Tabla con estimaciones de dimensiones.}
-         \label{fig:2de33}
-     \end{subfigure}
+        \includegraphics[scale=0.5]{./Figures/vareta_size.jpeg}
         \caption{Resultados del módulo de estimación de longitud.}
         \label{fig:modulo1}
 \end{figure}
+
+\begin{table}[h]
+	\centering
+	\caption{Tabla con estimaciones de dimensiones.}
+	\begin{tabular}{l c}    
+		\toprule
+		\textbf{Id}     & \textbf{\textit{Size}}\\
+		\midrule
+		1               &  27,98\\
+		2               & 25,07\\
+		3               & 28,20 \\
+		4               & 22,48 \\	
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tablaestimaciones01}
+\end{table} 
 \newpage
 
 \section{Módulo de detección y procesamiento}
@@ -379,32 +384,66 @@ En cada módulo se genera un diccionario de Python, que contiene el resultado de
 
 En un paso posterior, los resultados de cada algoritmo se transforman a un formato de \textit{dataframe} de Pandas para luego concatenarlos y presentar al usuario final una única tabla de resultados.
 
-En la figura \ref{fig:TablaResultados1} y la figura \ref{fig:TablaResultados2} se observa un ejemplo de la tabla resultante de cada algoritmo presentada por pantalla.
+En las tablas \ref{tab:TablaResultados1} y \ref{tab:TablaResultados2} se muestra un ejemplo de la salida de cada módulo y que luego es presentado por pantalla.
 
-\begin{figure}[ht]
+\begin{table}[h]
 	\centering
-	\includegraphics[scale= 0.35]{./Figures/Tabla1.png}
 	\caption{Ejemplo de tabla resultante del módulo de estimación de longitud.}
-	\label{fig:TablaResultados1}
-\end{figure}
+	\begin{tabular}{l c}    
+		\toprule
+		\textbf{Id}     & \textbf{\textit{Size}}\\
+		\midrule
+		4               &  31,67\\
+		3               &  22,68\\
+		2               &  18,57 \\
+		1               &  16,52 \\	
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:TablaResultados1}
+\end{table} 
 
-\begin{figure}[ht]
+\begin{table}[h]
 	\centering
-	\includegraphics[scale=0.25]{./Figures/Tabla2_2.png}
-	\caption{Ejemplo de tabla resultante del módulo de clasificación y procesamiento.}
-	\label{fig:TablaResultados2}
-\end{figure}
+	\caption{Ejemplo de tabla resultante del módulo de detección y procesamiento.}
+	\begin{tabular}{l c c c c c}    
+		\toprule
+		\textbf{Id} & \textbf{N° flores} & \textbf{Abiertas} & \textbf{Cerradas} & \textbf{Sin pétalos} & \textbf{Tipo} \\
+		\midrule
+		4    &  3 & 3 & 0 & 0 & Rosácea\\
+		3    &  9 & 8 & 1 & 0 & Rosácea\\
+		2    &  8 & 7 & 1 & 0 & Rosácea\\
+		1    &  9 & 8 & 0 & 1 & Rosácea\\
+		Total & 29\\
+		N° varetas & 4	\\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:TablaResultados2}
+\end{table} 
 
 Cabe destacar que se generaron dos botones para obtener la tabla de resultados en dos formatos distintos. El primero genera el resultado en formato CSV y el segundo produce el resultado en formato XLSX para su correcta visualización en Excel. 
 
-En la figura \ref{fig:TablaResultados3} se muestra un ejemplo de ambas tablas unificadas que representan el resultado final del sistema.
+En la tabla \ref{tab:TablaResultados3} se observa un ejemplo de ambas tablas unificadas que representan el resultado final del sistema.
 
-\begin{figure}[ht]
+\begin{table}[h]
 	\centering
-	\includegraphics[scale=0.24]{./Figures/Tabla3_5.png}
 	\caption{Ejemplo de tabla unificada.}
-	\label{fig:TablaResultados3}
-\end{figure}
+	\begin{tabular}{l c c c c c c}    
+		\toprule
+		\textbf{Id} &  \textbf{\textit{Size}} & \textbf{N° flores} & \textbf{Abiertas} & \textbf{Cerradas} & \textbf{Sin pétalos} & \textbf{Tipo} \\
+		\midrule
+		4   & 31,67 &  3 & 3 & 0 & 0 & Rosácea\\
+		3   & 22,68 &  9 & 8 & 1 & 0 & Rosácea\\
+		2   & 18,57 &  8 & 7 & 1 & 0 & Rosácea\\
+		1   & 16,52 &  9 & 8 & 0 & 1 & Rosácea\\
+		Total & - & 29\\
+		N° varetas & 4	\\	
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:TablaResultados3}
+\end{table}
 
 
 \section{Interfaz de usuario}
@@ -445,7 +484,7 @@ En las figuras \ref{fig:barra1} y \ref{fig:barra2} se muestran dichas barras con
 	\caption{Barra de confianza para el módulo de estimación de longitud.}
 	\label{fig:barra1}
 \end{figure}
-\newpage
+
 
 \begin{figure}[ht]
 	\centering
