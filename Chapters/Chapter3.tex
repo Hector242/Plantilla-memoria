@@ -368,7 +368,7 @@ El clasificador de flores de duraznero es la última fase que recorre el sistema
 	\label{tab:FlowerCNN}
 \end{table}  
 
-Esta red convolucional cuenta con un total de 97 698 parámetros entrenables. Por otro lado, se aplicaron métodos como regulación L2 \cite{WEBSITE:10} y \textit{DropOut} \cite{ARTICLE:21} para disminuir el sobreajuste. Las pruebas del rendimiento de este modelo y el sobre ajuste se explicarán con más detalle en el capítulo siguiente.
+Esta red convolucional cuenta con un total de 97 698 parámetros entrenables. Por otro lado, se aplicaron métodos como regulación L2 \cite{WEBSITE:10} y \textit{DropOut} \cite{ARTICLE:21} para disminuir el sobreajuste. Las pruebas del rendimiento de este modelo y el sobreajuste se explicarán con más detalle en el capítulo siguiente.
 
 Este modelo se integra y se ejecuta luego de encontrar y delimitar la región de interés en cada vareta. Al momento de tomar la región de interés y contar la cantidad de flores en dicha región, se filtra por aquellas detecciones que representan a las clases flor abierta y flor cerrada, para posteriormente recortar dicha detección utilizando sus coordenadas provistas por el \textit{bounding box}. Una vez recortada la imagen de la flor, se redimensiona a una resolución de 25 x 25 y se envía al clasificador. Finalmente, a través de su última capa totalmente conectada, el clasificador produce, una probabilidad para cada clase y luego se selecciona la clase con la probabilidad más alta. Este proceso se repite por cada flor abierta y cerrada encontrada en la vareta. 
 

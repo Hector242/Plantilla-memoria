@@ -306,7 +306,62 @@ Por último, se aplicó Eigen-CAM \cite{ARTICLE:17} para crear mapas de calor qu
 	\label{fig:EigenCam}
 \end{figure}
 
-Se observa que los mapas de activación están enfocados en las varetas para la capa convolucional seleccionada, lo que sugiere que el modelo pone mayor atención en este objeto al momento de realizar la detección.   
+Se observa que los mapas de activación están enfocados en las varetas para la capa convolucional seleccionada, lo que sugiere que el modelo pone mayor atención en este objeto al momento de realizar la detección. 
+
+\subsection{Desempeño del clasificador de flores}
+
+El entrenamiento del clasificador de flores se realizó con los siguientes hiperparámentros.
+
+\begin{itemize}
+	\item Épocas: 50.
+    \item Tamaño de imagen de entrada: 25 x 25.
+    \item \textit{Batch}: 4.
+    \item \textit{Learning rate}: 0,0001.
+\end{itemize}
+
+
+El clasificador de flores como se mencionó en el capítulo anterior, fue entrenado inicialmente sin ningún método de regulación, lo que terminó generando un sobreajuste a los datos de entrenamiento. En la figura \ref{fig:e1} se puede observar este sobreajuste.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{./Figures/z.drawio.png}
+	\caption{Error de entrenamiento vs validación sin métodos de regulación.}
+	\label{fig:e1}
+\end{figure}
+
+Posteriormente se utilizó regulación L2 y \textit{DropOut} para disminuir el sobreajuste. Los valores aplicados en ambos casos fueron los siguientes.
+
+\begin{itemize}
+	\item L2: 0,01.
+    \item \textit{DropOut}: 25\%.
+\end{itemize}
+
+En la figura \ref{fig:e2} se observa el resultado de aplicar ambos métodos de regulación.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{./Figures/x.drawio.png}
+	\caption{Error de entrenamiento vs validación con métodos de regulación.}
+	\label{fig:e2}
+\end{figure}
+
+Por otro lado, para evaluar el desempeño del clasificador de flores se realizaron validaciones contra el conjunto de datos de prueba. Los resultados fueron medidos con las métricas \textit{accuracy}, \textit{precision}, \textit{recall} y F1. En la tabla \ref{tab:resultadosClass007} se muestran dichos resultados.
+
+\begin{table}[h]
+	\centering
+	\caption{Métricas tomadas del clasificador de flores.}
+	\begin{tabular}{c c c c c c c}    
+		\toprule
+		\textbf{\textit{Accuracy}}&\textbf{\textit{Precision}}&\textbf{\textit{Recall}}&\textbf{F1}\\
+		\midrule
+		0,87 & 0,82 & 0,81 & 0,87\\		
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:resultadosClass007}
+\end{table}
+\newpage
+De los resultados se puede concluir que el modelo logra clasificar con muy buena precisión ambas clases, a pesar del desbalance de datos observado en el capítulo anterior.
 
 \section{Desempeño de módulos}
 \label{sec:desempeñoModulos}
@@ -323,11 +378,11 @@ En la figura \ref{fig:DempeñoEstimacionLongitud}, se observa la prueba realizad
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=0.4]{./Figures/DesempeñoMod1 (1).png}
+	\includegraphics[scale=0.35]{./Figures/DesempeñoMod1 (1).png}
 	\caption{Desempeño del módulo de estimación de longitud.}
 	\label{fig:DempeñoEstimacionLongitud}
 \end{figure}
-
+\newpage
 
 Como se puede observar, la vareta con la etiqueta número cuatro mide 26,27 centímetros según el algoritmo. Sin embargo, visualmente aparenta medir 27 centímetros aproximadamente, lo que sugiere un error de medición de 0,73 centímetros. Adicionalmente, si se observa la vareta con la etiqueta número tres, su longitud según el algoritmo es de 29,60 centímetros, pero visualmente se aproxima a 30 centímetros, por lo que se presume un error de 0,4 centímetros. 
 
@@ -345,7 +400,7 @@ En la figura \ref{fig:DesempeñoMod2}, se muestra una foto de varetas con los ce
 	\caption{Desempeño del módulo de detección y procesamiento con el uso de centroides con flores campanuláceas.}
 	\label{fig:DesempeñoMod2}
 \end{figure}
-
+\newpage
 
 \begin{table}[h]
 	\centering
